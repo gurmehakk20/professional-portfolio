@@ -15,6 +15,8 @@ type ProcessProps = {
  * side by side, joined by a hairline.
  */
 export function Process({ intro, steps, id = "approach", tone = "default" }: ProcessProps) {
+  if (steps.length === 0) return null;
+
   const headingId = `${id}-heading`;
 
   return (

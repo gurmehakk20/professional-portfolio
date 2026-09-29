@@ -8,6 +8,8 @@ import type { ValuePoint } from "@/content/types";
  * side: centred rows of three. Desktops: one row with hairline dividers.
  */
 export function ValueStrip({ items }: { items: ValuePoint[] }) {
+  if (items.length === 0) return null;
+
   return (
     <section aria-labelledby="value-strip-heading" className="border-y border-line bg-surface">
       <Container className="py-8 md:py-10">

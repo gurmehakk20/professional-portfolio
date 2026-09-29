@@ -15,6 +15,8 @@ type PrinciplesProps = {
  * beside it on wide screens. Works well with three to six principles.
  */
 export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
+  if (items.length === 0) return null;
+
   const headingId = `${id}-heading`;
 
   return (
@@ -32,8 +34,11 @@ export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
             <li key={item.title} className="relative border-t border-line pt-6">
               {/* Short accent mark on the hairline. */}
               <span aria-hidden="true" className="absolute -top-px left-0 h-px w-10 bg-accent" />
-              <Icon name={item.icon} size={24} className="text-accent" />
-              <h3 className="mt-5 text-h3 font-semibold">{item.title}</h3>
+              {/* Phones: icon beside the title. From sm up: icon above it. */}
+              <div className="flex items-center gap-3 sm:block">
+                <Icon name={item.icon} size={24} className="shrink-0 text-accent" />
+                <h3 className="text-h3 font-semibold sm:mt-5">{item.title}</h3>
+              </div>
               <p className="mt-2">{item.description}</p>
             </li>
           ))}

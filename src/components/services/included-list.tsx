@@ -8,7 +8,7 @@ export function IncludedList({ intro, items }: { intro: SectionIntro; items: str
   if (items.length === 0) return null;
 
   return (
-    <Section tone="default" id="included" labelledBy="included-heading">
+    <Section id="included" labelledBy="included-heading">
       <SectionHeader
         id="included-heading"
         eyebrow={intro.eyebrow}

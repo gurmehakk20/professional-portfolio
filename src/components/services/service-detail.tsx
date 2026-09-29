@@ -139,6 +139,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
         <div className="lg:col-span-5 lg:col-start-1 lg:row-start-2">
           <ButtonLink href={cta.href} trailingIcon="arrow-right">
             {cta.label}
+            <span className="sr-only">: {service.name}</span>
           </ButtonLink>
         </div>
       </div>

@@ -24,15 +24,16 @@ import { site } from "@/content/site";
 import { getFeaturedProjects } from "@/lib/projects";
 
 export default function HomePage() {
+  // Section backgrounds alternate; the subtle (tinted) ones are set here.
   return (
     <>
       <Hero content={hero} availability={site.availability} />
       <ValueStrip items={valuePoints} />
       <ServicesGrid intro={servicesIntro} services={services} />
-      <FeaturedWork intro={workIntro} projects={getFeaturedProjects()} />
+      <FeaturedWork intro={workIntro} projects={getFeaturedProjects()} tone="subtle" />
       <Principles intro={principlesIntro} items={principles} />
       <Process intro={processIntro} steps={processSteps} tone="subtle" />
-      <About content={about} />
+      <About content={about} name={site.name} />
       <Faq intro={faqIntro} items={faqs} tone="subtle" />
       <FinalCta content={finalCta} />
     </>

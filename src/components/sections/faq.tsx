@@ -3,6 +3,7 @@ import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { FaqItem, SectionIntro } from "@/content/types";
+import { toParagraphs } from "@/lib/text";
 
 type FaqProps = {
   intro: SectionIntro;
@@ -16,6 +17,8 @@ type FaqProps = {
  * keyboard accessible, and closed answers still show up in find-in-page.
  */
 export function Faq({ intro, items, id = "faq", tone = "default" }: FaqProps) {
+  if (items.length === 0) return null;
+
   const headingId = `${id}-heading`;
 
   return (
@@ -41,11 +44,6 @@ export function Faq({ intro, items, id = "faq", tone = "default" }: FaqProps) {
 }
 
 function FaqEntry({ item }: { item: FaqItem }) {
-  const paragraphs = item.answer
-    .split("\n\n")
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
-
   return (
     <details className="group border-b border-line">
       <summary className="group/summary flex items-start justify-between gap-5 rounded-lg py-5 font-display text-[1.0625rem] leading-relaxed font-semibold tracking-[-0.01em] text-ink md:py-6">
@@ -58,7 +56,7 @@ function FaqEntry({ item }: { item: FaqItem }) {
         </span>
       </summary>
       <div className="max-w-[65ch] space-y-4 pb-6 sm:pr-13 md:-mt-1">
-        {paragraphs.map((paragraph) => (
+        {toParagraphs(item.answer).map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
