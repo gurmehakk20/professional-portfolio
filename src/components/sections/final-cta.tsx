@@ -6,15 +6,17 @@ import { whatsappUrl } from "@/lib/links";
 type FinalCtaProps = {
   content: FinalCtaContent;
   id?: string;
+  /** Drop the top padding when the section above has the same background. */
+  flushTop?: boolean;
 };
 
 /** Closing call to action in a dark panel, shown near the end of most pages. */
-export function FinalCta({ content, id = "lets-talk" }: FinalCtaProps) {
+export function FinalCta({ content, id = "lets-talk", flushTop }: FinalCtaProps) {
   const headingId = `${id}-heading`;
-  const { title, description, primaryCta, showWhatsApp } = content;
+  const { title, description, primaryCta, whatsappLabel } = content;
 
   return (
-    <Section id={id} labelledBy={headingId}>
+    <Section id={id} labelledBy={headingId} flushTop={flushTop}>
       <div className="relative isolate overflow-hidden rounded-3xl bg-ink px-6 py-12 [--focus-ring:var(--color-accent-on-dark)] sm:px-10 md:px-14 md:py-16">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
           <div className="max-w-2xl">
@@ -37,9 +39,9 @@ export function FinalCta({ content, id = "lets-talk" }: FinalCtaProps) {
             >
               {primaryCta.label}
             </ButtonLink>
-            {showWhatsApp ? (
+            {whatsappLabel ? (
               <ButtonLink href={whatsappUrl()} variant="outline-inverse" size="lg" icon="whatsapp">
-                Chat on WhatsApp
+                {whatsappLabel}
               </ButtonLink>
             ) : null}
           </div>

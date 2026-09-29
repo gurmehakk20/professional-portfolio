@@ -65,6 +65,8 @@ export type SiteConfig = {
   locale: string;
   /** The person behind the site — used in metadata and structured data. */
   author: string;
+  /** Your role, e.g. "Web Designer & Developer". Used in structured data for search engines. */
+  jobTitle: string;
   contact: ContactDetails;
   socials: SocialLink[];
   /** Main navigation. */
@@ -123,8 +125,8 @@ export type FinalCtaContent = {
   title: string;
   description: string;
   primaryCta: CtaLink;
-  /** When true, a WhatsApp button is shown next to the primary CTA. */
-  showWhatsApp?: boolean;
+  /** Label for a WhatsApp button next to the primary CTA. Leave out to hide the button. */
+  whatsappLabel?: string;
 };
 
 /* ------------------------------------------------------------------ */
@@ -179,6 +181,11 @@ export type ProjectMedia = {
   /** Describe what the image shows — this is read aloud by screen readers. */
   alt: string;
   caption?: string;
+  /**
+   * Set to "mobile" for a portrait phone screenshot (about 1170px wide).
+   * It's shown whole inside a phone outline instead of being cropped.
+   */
+  device?: "desktop" | "mobile";
 };
 
 export type ProjectFeature = {
@@ -196,7 +203,7 @@ export type Project = {
   summary: string;
   /** Your role or services, e.g. ["UX & UI design", "Development"]. */
   services: string[];
-  /** Short labels shown on cards. */
+  /** Short labels shown on project cards (the first three are shown). */
   tags: string[];
   year?: string;
   /** Cover image used on cards and at the top of the project page. */

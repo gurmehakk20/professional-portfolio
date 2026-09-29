@@ -9,10 +9,18 @@ import type { SiteConfig } from "./types";
 
 /**
  * Canonical production URL (no trailing slash).
- * Set NEXT_PUBLIC_SITE_URL in your hosting environment (e.g. https://mehak.dev),
- * or replace the fallback here.
+ * Set NEXT_PUBLIC_SITE_URL in your hosting environment (e.g. https://mehak.dev).
+ * It's read at build time, so rebuild after changing it.
  */
-const url = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com").replace(/\/+$/, ""); // PLACEHOLDER
+const PLACEHOLDER_URL = "https://www.example.com";
+const url = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || PLACEHOLDER_URL).replace(/\/+$/, "");
+
+if (!/^https?:\/\//.test(url)) {
+  throw new Error(`NEXT_PUBLIC_SITE_URL must start with https:// (got "${url}").`);
+}
+
+/** True until the real site URL is set. While true, search engines are asked not to index the site. */
+export const isPlaceholderSiteUrl = url === PLACEHOLDER_URL;
 
 export const site: SiteConfig = {
   name: "Mehak",
@@ -23,6 +31,7 @@ export const site: SiteConfig = {
   url,
   locale: "en_GB",
   author: "Mehak",
+  jobTitle: "Web Designer & Developer",
 
   contact: {
     email: "hello@example.com", // PLACEHOLDER
@@ -59,6 +68,6 @@ export const site: SiteConfig = {
   },
 
   footer: {
-    blurb: "Professional websites for clinics, local businesses and independent professionals.",
+    blurb: "Clear, easy-to-use websites for clinics, local businesses and independent professionals.",
   },
 };

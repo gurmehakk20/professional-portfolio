@@ -23,11 +23,11 @@ export const hero: HeroContent = {
 
 /** The short strip of qualities under the hero. */
 export const valuePoints: ValuePoint[] = [
-  { title: "Mobile-first", description: "Designed for phones first", icon: "smartphone" },
-  { title: "Fast-loading", description: "Lean code, optimised images", icon: "zap" },
+  { title: "Mobile-first", description: "Planned for phones, then scaled up", icon: "smartphone" },
+  { title: "Fast-loading", description: "Light pages that open quickly", icon: "zap" },
   { title: "Responsive", description: "Right on every screen size", icon: "responsive" },
   { title: "Easy to navigate", description: "Clear paths to what matters", icon: "navigation" },
-  { title: "Business-focused", description: "Built around your goals", icon: "target" },
+  { title: "Business-focused", description: "Built for your goals", icon: "target" },
 ];
 
 export const servicesIntro: SectionIntro = {
@@ -41,7 +41,7 @@ export const workIntro: SectionIntro = {
   eyebrow: "Selected work",
   title: "Recent projects",
   description:
-    "A selection of websites I've designed and built, each one shaped around what the business needed its website to do.",
+    "A selection of websites I've designed and built, each one focused on what the business needed its website to do.",
 };
 
 export const principlesIntro: SectionIntro = {
@@ -97,5 +97,5 @@ export const finalCta: FinalCtaContent = {
   title: "Have a website in mind?",
   description: "Let's build something that works beautifully for your business.",
   primaryCta: { label: "Let's Talk", href: "/contact" },
-  showWhatsApp: true,
+  whatsappLabel: "Chat on WhatsApp", // Remove this line to hide the WhatsApp button.
 };

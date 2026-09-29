@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { HashLinkFocus } from "@/components/layout/hash-link-focus";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { JsonLd } from "@/components/seo/json-ld";
-import { site } from "@/content/site";
+import { isPlaceholderSiteUrl, site } from "@/content/site";
+import { brandColors } from "@/lib/brand";
+import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: site.title, template: `%s — ${site.name}` },
+  // e.g. "Services | Mehak — Web Design & Development"
+  title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
   applicationName: site.name,
   authors: [{ name: site.author }],
@@ -22,10 +22,12 @@ export const metadata: Metadata = {
   // filled in from those, and the image comes from opengraph-image.tsx.
   openGraph: { type: "website", siteName: site.name, locale: site.locale },
   formatDetection: { telephone: false },
+  // Keep an unconfigured deploy out of search results until NEXT_PUBLIC_SITE_URL is set.
+  ...(isPlaceholderSiteUrl ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf9f6",
+  themeColor: brandColors.canvas,
   colorScheme: "light",
 };
 
@@ -34,13 +36,14 @@ const structuredData = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: site.title,
+      name: site.name,
+      alternateName: site.title,
       url: site.url,
     },
     {
       "@type": "Person",
       name: site.author,
-      jobTitle: "Web Designer & Developer",
+      jobTitle: site.jobTitle,
       url: site.url,
       email: `mailto:${site.contact.email}`,
       sameAs: site.socials.map((social) => social.href),
@@ -50,11 +53,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${inter.variable} ${manrope.variable}`}
-    >
+    <html lang="en" data-scroll-behavior="smooth" className={fontVariables}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
@@ -67,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <HashLinkFocus />
         <JsonLd data={structuredData} />
       </body>
     </html>
