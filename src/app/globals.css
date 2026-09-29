@@ -24,7 +24,6 @@
   --color-accent: #0f766e; /* teal — links, icons, focus rings */
   --color-accent-strong: #0b5e58; /* accent hover, text on accent-soft */
   --color-accent-soft: #e7f2f0; /* tinted icon and tag backgrounds */
-  --color-on-dark: #ffffff; /* text on ink backgrounds */
   --color-on-dark-muted: #b8c0cc; /* secondary text on ink backgrounds */
   --color-accent-on-dark: #5ec4b6; /* accent on ink backgrounds */
   --color-danger: #b42318; /* form errors */
@@ -152,6 +151,11 @@
 
   summary::-webkit-details-marker {
     display: none;
+  }
+
+  /* Sections focused by in-page links don't need a visible ring. */
+  [tabindex="-1"]:focus {
+    outline: none;
   }
 
   /* Stop the page scrolling behind the open mobile menu. */

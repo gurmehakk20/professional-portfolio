@@ -21,8 +21,8 @@ export function SiteFooter() {
             <p className="mt-3 max-w-xs text-sm text-muted">{site.footer.blurb}</p>
           </div>
 
-          <nav aria-labelledby="footer-nav-heading" className="md:col-span-3">
-            <h2 id="footer-nav-heading" className="font-sans text-sm font-semibold text-ink">
+          <nav aria-label="Footer" className="md:col-span-3">
+            <h2 className="font-sans text-sm font-semibold text-ink">
               Navigation
             </h2>
             <ul className="mt-4 space-y-1">

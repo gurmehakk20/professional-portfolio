@@ -8,8 +8,8 @@ type SectionProps = {
   labelledBy?: string;
   /** "subtle" uses the slightly darker alternate background. */
   tone?: "default" | "subtle";
-  /** Wrap children in the standard <Container>. Default: true. */
-  contained?: boolean;
+  /** Drop the top padding when the section above has the same background, so the gap isn't doubled. */
+  flushTop?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -19,7 +19,7 @@ export function Section({
   id,
   labelledBy,
   tone = "default",
-  contained = true,
+  flushTop = false,
   className,
   children,
 }: SectionProps) {
@@ -27,9 +27,16 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn("py-16 md:py-20 lg:py-24", tone === "subtle" && "bg-subtle", className)}
+      // Sections with an id can receive focus from in-page links (see HashLinkFocus).
+      tabIndex={id ? -1 : undefined}
+      className={cn(
+        "outline-none",
+        flushTop ? "pb-16 md:pb-20 lg:pb-24" : "py-16 md:py-20 lg:py-24",
+        tone === "subtle" && "bg-subtle",
+        className,
+      )}
     >
-      {contained ? <Container>{children}</Container> : children}
+      <Container>{children}</Container>
     </section>
   );
 }

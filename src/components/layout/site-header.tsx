@@ -23,7 +23,7 @@ export function SiteHeader() {
           <ButtonLink
             href={site.cta.href}
             size="sm"
-            className="hidden min-[22.5rem]:inline-flex"
+            className="max-md:h-11"
           >
             {site.cta.label}
           </ButtonLink>
