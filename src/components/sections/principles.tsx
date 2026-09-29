@@ -1,0 +1,44 @@
+import { Icon } from "@/components/ui/icon";
+import { Section } from "@/components/ui/section";
+import { SectionHeader } from "@/components/ui/section-header";
+import type { Principle, SectionIntro } from "@/content/types";
+
+type PrinciplesProps = {
+  intro: SectionIntro;
+  items: Principle[];
+  id?: string;
+};
+
+/**
+ * "Why work with me" — the principles behind every website.
+ * An open list divided by hairlines (rather than cards), with the heading
+ * beside it on wide screens. Works well with three to six principles.
+ */
+export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
+  const headingId = `${id}-heading`;
+
+  return (
+    <Section id={id} labelledBy={headingId}>
+      <div className="grid gap-10 md:gap-14 xl:grid-cols-12 xl:gap-x-16">
+        <div className="xl:sticky xl:top-28 xl:col-span-5 xl:self-start">
+          <SectionHeader {...intro} id={headingId} />
+        </div>
+
+        <ul
+          role="list"
+          className="reveal grid gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 xl:col-span-7"
+        >
+          {items.map((item) => (
+            <li key={item.title} className="relative border-t border-line pt-6">
+              {/* Short accent mark on the hairline. */}
+              <span aria-hidden="true" className="absolute -top-px left-0 h-px w-10 bg-accent" />
+              <Icon name={item.icon} size={24} className="text-accent" />
+              <h3 className="mt-5 text-h3 font-semibold">{item.title}</h3>
+              <p className="mt-2">{item.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  );
+}
