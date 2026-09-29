@@ -7,6 +7,7 @@ import type { PageIntro, SectionIntro, Service } from "./types";
  * ⚠️  PLACEHOLDER: these four services, their inclusions and timelines are
  * examples to shape the layout. Replace them with your real offering.
  * Add, remove or reorder freely — the pages adapt automatically.
+ * The first FAQ in faq.ts repeats these timelines — update both together.
  *
  * Available icons are listed in src/components/ui/icon.tsx
  * (e.g. "briefcase", "stethoscope", "layout", "refresh", "panels", "rocket").
@@ -14,9 +15,9 @@ import type { PageIntro, SectionIntro, Service } from "./types";
 
 export const servicesPage: PageIntro = {
   eyebrow: "Services",
-  title: "Websites built around what your business needs",
+  title: "What I can build for your business",
   description:
-    "Every business is different, so every website is shaped around its goals. Here's what I can help with — if you need something that isn't listed, just ask.",
+    "Each service below shows who it's for, what's included and how long it usually takes. If you need something that isn't listed, just ask.",
   metaDescription:
     "Business websites, clinic websites, landing pages and website redesigns — designed and developed to be fast, responsive and easy to use.",
 };
@@ -29,12 +30,12 @@ export const includedIntro: SectionIntro = {
 };
 
 export const includedInEveryProject: string[] = [
-  "Mobile-first, responsive design",
+  "Designed for phones, tablets and desktops",
   "Fast loading and optimised images",
   "Clear structure and navigation",
-  "Basic on-page SEO setup",
-  "Accessibility best practices",
-  "Launch support",
+  "Basic search engine setup",
+  "Easy to read and use for everyone",
+  "Help getting your website live",
 ];
 
 export const services: Service[] = [
@@ -98,7 +99,7 @@ export const services: Service[] = [
     ],
     includes: [
       "One focused, well-structured page",
-      "Clear call to action and enquiry options",
+      "One clear next step, with easy ways to enquire",
       "Sections for benefits, details and FAQs",
       "Fast loading on mobile networks",
     ],
@@ -112,7 +113,7 @@ export const services: Service[] = [
     summary:
       "A modern, faster and easier-to-use version of your existing website, without losing what already works.",
     description:
-      "If your current website feels dated, is hard to update or doesn't work well on phones, a redesign gives it a clear structure, a modern look and a solid technical foundation.",
+      "If your current website feels dated, is hard to update or doesn't work well on phones, a redesign gives it a clear structure, a modern look and pages that load quickly.",
     audience: [
       "Businesses with an outdated or hard-to-use website",
       "Websites that don't work well on mobile",
@@ -122,7 +123,7 @@ export const services: Service[] = [
       "Review of your current website",
       "Improved structure and navigation",
       "Fresh, modern visual design",
-      "Content migration and redirects for existing links",
+      "Your existing content moved across, with old links still working",
     ],
     addOns: ["Copy refresh", "Photography direction", "Ongoing maintenance"],
     timeline: "Typically 3–6 weeks",

@@ -23,7 +23,7 @@ export const contactPage: ContactPageContent = {
   },
   email: {
     title: "Email",
-    description: "Best for detailed briefs or attachments.",
+    description: "Best for longer messages or sending files.",
     label: "Send an Email",
   },
 

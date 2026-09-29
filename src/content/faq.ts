@@ -14,10 +14,22 @@ export const faqIntro: SectionIntro = {
 };
 
 export const faqs: FaqItem[] = [
+  // Keep these timelines in step with `timeline` in services.ts.
   {
     question: "How long does a website take?",
     answer:
-      "It depends on the size of the website and how quickly the content is ready. A focused landing page usually takes one to two weeks, and a multi-page business website typically takes three to six weeks.\n\nYou'll get a clear timeline before any work begins.",
+      "It depends on the size of the website and how quickly the content is ready. A focused landing page usually takes one to two weeks, a business website three to five weeks, and a clinic website or redesign three to six weeks.\n\nYou'll get a clear timeline before any work begins.",
+  },
+  // If you add `pricing` to your services, you can mention it here too.
+  {
+    question: "How much does a website cost?",
+    answer:
+      "It depends on the number of pages and the features you need. After a short conversation about your business, I'll send you a clear quote with the scope and timeline, so you know what you're agreeing to before we start.",
+  },
+  {
+    question: "What do I need to provide?",
+    answer:
+      "Your logo, any photos you'd like to use and the key details about your business, such as your services, opening hours and contact information. If you're not sure what to write, I can help with the wording too.",
   },
   {
     question: "Can you redesign an existing website?",
@@ -47,6 +59,6 @@ export const faqs: FaqItem[] = [
   {
     question: "Can you build custom functionality?",
     answer:
-      "Often, yes — enquiry forms, booking flows, galleries, multi-language content and integrations with tools you already use. Tell me what you need and I'll suggest the simplest approach that works.",
+      "Often, yes — enquiry forms, appointment booking, photo galleries, pages in more than one language, and connections to tools you already use. Tell me what you need and I'll suggest the simplest approach that works.",
   },
 ];
