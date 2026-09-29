@@ -1,13 +1,28 @@
 import { site } from "@/content/site";
 
+/** True for web links to other sites (they open in a new tab). */
+export function opensInNewTab(href: string): boolean {
+  return /^(https?:)?\/\//.test(href);
+}
+
 /** True for links that leave the site (http, mailto, tel, wa.me…). */
 export function isExternalHref(href: string): boolean {
-  return /^(https?:)?\/\//.test(href) || href.startsWith("mailto:") || href.startsWith("tel:");
+  return opensInNewTab(href) || href.startsWith("mailto:") || href.startsWith("tel:");
 }
 
 /** Turns a site-relative path into an absolute URL, e.g. for metadata. */
 export function absoluteUrl(path = "/"): string {
   return new URL(path, `${site.url}/`).toString();
+}
+
+/** "https://www.arkadental.com/" → "arkadental.com", for display in a browser frame. */
+export function displayHost(url?: string): string | undefined {
+  if (!url) return undefined;
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return undefined;
+  }
 }
 
 /** WhatsApp click-to-chat link with an optional pre-filled message. */

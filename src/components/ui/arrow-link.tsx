@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { isExternalHref } from "@/lib/links";
+import { isExternalHref, opensInNewTab } from "@/lib/links";
 import { Icon } from "./icon";
 
 type ArrowLinkProps = {
@@ -13,7 +13,7 @@ type ArrowLinkProps = {
 /** Text link with a trailing arrow: "→" for pages on this site, "↗" for other sites. */
 export function ArrowLink({ href, className, children }: ArrowLinkProps) {
   const external = isExternalHref(href);
-  const opensNewTab = /^(https?:)?\/\//.test(href);
+  const opensNewTab = opensInNewTab(href);
   const classes = cn(
     "group inline-flex items-center gap-1.5 font-semibold text-ink underline-offset-4",
     "transition-colors duration-200 hover:text-accent-strong hover:underline",

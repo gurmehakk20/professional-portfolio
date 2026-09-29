@@ -9,7 +9,7 @@ export type ButtonVariant = "primary" | "secondary" | "inverse" | "outline-inver
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-lg font-semibold whitespace-nowrap " +
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-lg font-semibold whitespace-nowrap [&_svg]:shrink-0 " +
   "transition-[background-color,border-color,color] duration-200 ease-out-soft " +
   "disabled:pointer-events-none disabled:opacity-60";
 

@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 type TagProps = {
-  /** "neutral" for labels, "accent" for highlights, "placeholder" to flag example content. */
-  tone?: "neutral" | "accent" | "placeholder";
+  /** "neutral" for labels, "placeholder" to flag example content. */
+  tone?: "neutral" | "placeholder";
   className?: string;
   children: ReactNode;
 };
@@ -15,7 +15,6 @@ export function Tag({ tone = "neutral", className, children }: TagProps) {
       className={cn(
         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs leading-5 font-medium",
         tone === "neutral" && "border border-line bg-surface text-muted",
-        tone === "accent" && "bg-accent-soft text-accent-strong",
         tone === "placeholder" && "border border-dashed border-field bg-surface text-muted",
         className,
       )}

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { brandColors } from "@/lib/brand";
 
 /*
  * Home-screen icon for iPhone and iPad, drawn from icon.svg so the two always
@@ -21,7 +22,7 @@ export default function AppleIcon() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          backgroundColor: "#0f1b2d",
+          backgroundColor: brandColors.ink,
         }}
       >
         {/* ImageResponse renders to a PNG, so next/image doesn't apply here. */}

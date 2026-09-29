@@ -30,10 +30,10 @@ export default function ErrorPage({ error, retry }: ErrorPageProps) {
       />
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <button type="button" onClick={() => retry()} className={buttonStyles()}>
-          Try again
+          Try Again
         </button>
         <Link href="/" className={buttonStyles({ variant: "secondary" })}>
-          Go to Home
+          Back to Home
         </Link>
       </div>
     </Container>

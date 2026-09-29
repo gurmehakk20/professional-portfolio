@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
+import { brandColors } from "@/lib/brand";
 
 /*
  * Shared design for the Open Graph images — the preview card shown when a
@@ -22,19 +23,6 @@ const [manropeBold, interMedium, interSemiBold] = await Promise.all([
   readFile(join(fontsDir, "inter-latin-500-normal.woff")),
   readFile(join(fontsDir, "inter-latin-600-normal.woff")),
 ]);
-
-/** The site's colour tokens (see globals.css). */
-const color = {
-  canvas: "#faf9f6",
-  surface: "#ffffff",
-  ink: "#0f1b2d",
-  muted: "#5c6573",
-  line: "#e6e2da",
-  lineStrong: "#d6d0c5",
-  field: "#8a8f98",
-  accent: "#0f766e",
-  accentSoft: "#e7f2f0",
-};
 
 type OgCardProps = {
   /** Small teal label above the title, e.g. a project's category. */
@@ -75,8 +63,8 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
         display: "flex",
         width: "100%",
         height: "100%",
-        backgroundColor: color.canvas,
-        color: color.ink,
+        backgroundColor: brandColors.canvas,
+        color: brandColors.ink,
         fontFamily: "Inter",
       }}
     >
@@ -102,7 +90,7 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: color.accent,
+                  color: brandColors.accent,
                 }}
               >
                 {eyebrow}
@@ -115,11 +103,11 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
                     height: 34,
                     padding: "0 14px",
                     borderRadius: 999,
-                    border: `2px dashed ${color.field}`,
-                    backgroundColor: color.surface,
+                    border: `2px dashed ${brandColors.field}`,
+                    backgroundColor: brandColors.surface,
                     fontSize: 18,
                     fontWeight: 500,
-                    color: color.muted,
+                    color: brandColors.muted,
                   }}
                 >
                   Placeholder
@@ -139,7 +127,7 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
           >
             {title}
           </div>
-          <div style={{ marginTop: 28, fontSize: 28, fontWeight: 500, color: color.muted }}>
+          <div style={{ marginTop: 28, fontSize: 28, fontWeight: 500, color: brandColors.muted }}>
             {subtitle}
           </div>
         </div>
@@ -152,7 +140,7 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
 function Wordmark() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: color.accent }} />
+      <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: brandColors.accent }} />
       <div
         style={{
           fontFamily: "Manrope",
@@ -195,8 +183,8 @@ function BrowserHint() {
         height: 540,
         display: "flex",
         flexDirection: "column",
-        backgroundColor: color.surface,
-        border: `2px solid ${color.line}`,
+        backgroundColor: brandColors.surface,
+        border: `2px solid ${brandColors.line}`,
         borderRadius: 18,
         overflow: "hidden",
       }}
@@ -208,21 +196,21 @@ function BrowserHint() {
           gap: 8,
           height: 46,
           padding: "0 18px",
-          backgroundColor: color.canvas,
-          borderBottom: `2px solid ${color.line}`,
+          backgroundColor: brandColors.canvas,
+          borderBottom: `2px solid ${brandColors.line}`,
         }}
       >
-        <Bar width={11} height={11} fill={color.lineStrong} />
-        <Bar width={11} height={11} fill={color.lineStrong} />
-        <Bar width={11} height={11} fill={color.lineStrong} />
+        <Bar width={11} height={11} fill={brandColors.lineStrong} />
+        <Bar width={11} height={11} fill={brandColors.lineStrong} />
+        <Bar width={11} height={11} fill={brandColors.lineStrong} />
         <div
           style={{
             marginLeft: 44,
             width: 180,
             height: 22,
             borderRadius: 6,
-            border: `2px solid ${color.line}`,
-            backgroundColor: color.surface,
+            border: `2px solid ${brandColors.line}`,
+            backgroundColor: brandColors.surface,
           }}
         />
       </div>
@@ -230,31 +218,33 @@ function BrowserHint() {
       <div style={{ display: "flex", flexDirection: "column", padding: "26px 30px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: color.accent }} />
-            <Bar width={54} height={9} fill={color.ink} />
+            <div
+              style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: brandColors.accent }}
+            />
+            <Bar width={54} height={9} fill={brandColors.ink} />
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <Bar width={28} height={7} fill={color.lineStrong} />
-            <Bar width={34} height={7} fill={color.lineStrong} />
-            <Bar width={26} height={7} fill={color.lineStrong} />
-            <div style={{ width: 60, height: 24, borderRadius: 6, backgroundColor: color.ink }} />
+            <Bar width={28} height={7} fill={brandColors.lineStrong} />
+            <Bar width={34} height={7} fill={brandColors.lineStrong} />
+            <Bar width={26} height={7} fill={brandColors.lineStrong} />
+            <div style={{ width: 60, height: 24, borderRadius: 6, backgroundColor: brandColors.ink }} />
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", marginTop: 50 }}>
-          <Bar width={64} height={7} fill={color.accent} />
-          <Bar width={268} height={18} fill={color.ink} marginTop={18} />
-          <Bar width={204} height={18} fill={color.ink} marginTop={11} />
-          <Bar width={250} height={8} fill={color.lineStrong} marginTop={24} />
-          <Bar width={214} height={8} fill={color.lineStrong} marginTop={10} />
+          <Bar width={64} height={7} fill={brandColors.accent} />
+          <Bar width={268} height={18} fill={brandColors.ink} marginTop={18} />
+          <Bar width={204} height={18} fill={brandColors.ink} marginTop={11} />
+          <Bar width={250} height={8} fill={brandColors.lineStrong} marginTop={24} />
+          <Bar width={214} height={8} fill={brandColors.lineStrong} marginTop={10} />
           <div style={{ display: "flex", gap: 10, marginTop: 26 }}>
-            <div style={{ width: 90, height: 30, borderRadius: 6, backgroundColor: color.ink }} />
+            <div style={{ width: 90, height: 30, borderRadius: 6, backgroundColor: brandColors.ink }} />
             <div
               style={{
                 width: 90,
                 height: 30,
                 borderRadius: 6,
-                border: `2px solid ${color.lineStrong}`,
+                border: `2px solid ${brandColors.lineStrong}`,
               }}
             />
           </div>
@@ -271,12 +261,14 @@ function BrowserHint() {
                 flexBasis: 0,
                 padding: 14,
                 borderRadius: 10,
-                border: `2px solid ${color.line}`,
+                border: `2px solid ${brandColors.line}`,
               }}
             >
-              <div style={{ width: 26, height: 26, borderRadius: 6, backgroundColor: color.accentSoft }} />
-              <Bar width="72%" height={8} fill={color.ink} marginTop={14} />
-              <Bar width="92%" height={7} fill={color.lineStrong} marginTop={9} />
+              <div
+                style={{ width: 26, height: 26, borderRadius: 6, backgroundColor: brandColors.accentSoft }}
+              />
+              <Bar width="72%" height={8} fill={brandColors.ink} marginTop={14} />
+              <Bar width="92%" height={7} fill={brandColors.lineStrong} marginTop={9} />
             </div>
           ))}
         </div>

@@ -22,7 +22,7 @@ export default function NotFound() {
         description="The page you’re looking for doesn’t exist or may have moved."
       />
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <ButtonLink href="/">Go to Home</ButtonLink>
+        <ButtonLink href="/">Back to Home</ButtonLink>
         <ButtonLink href="/work" variant="secondary">
           View Work
         </ButtonLink>

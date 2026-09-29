@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { isExternalHref } from "@/lib/links";
+import { isExternalHref, opensInNewTab } from "@/lib/links";
 import { buttonStyles, type ButtonSize, type ButtonVariant } from "./button-styles";
 import { Icon, type IconName } from "./icon";
 
@@ -46,7 +46,7 @@ export function ButtonLink({
   );
 
   if (isExternalHref(href)) {
-    const opensNewTab = /^(https?:)?\/\//.test(href);
+    const opensNewTab = opensInNewTab(href);
     return (
       <a
         href={href}

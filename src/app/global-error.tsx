@@ -1,14 +1,12 @@
 "use client";
 
-import { Inter, Manrope } from "next/font/google";
 import Link from "next/link";
 import { useEffect } from "react";
 import { buttonStyles } from "@/components/ui/button-styles";
+import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
-// This page replaces the root layout, so it loads the site's fonts and styles itself.
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
+// This page replaces the root layout, so it applies the site's fonts and styles itself.
 
 type GlobalErrorProps = {
   error: Error & { digest?: string };
@@ -23,7 +21,7 @@ export default function GlobalError({ error, retry }: GlobalErrorProps) {
   }, [error]);
 
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en" className={fontVariables}>
       <body className="flex min-h-dvh items-center">
         <title>Something went wrong</title>
         <main className="mx-auto w-full max-w-xl px-5 py-16 text-center sm:px-8">
@@ -34,10 +32,10 @@ export default function GlobalError({ error, retry }: GlobalErrorProps) {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <button type="button" onClick={() => retry()} className={buttonStyles()}>
-              Try again
+              Try Again
             </button>
             <Link href="/" className={buttonStyles({ variant: "secondary" })}>
-              Go to Home
+              Back to Home
             </Link>
           </div>
         </main>

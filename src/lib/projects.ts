@@ -1,5 +1,18 @@
+import type { PreviewVariant } from "@/components/ui/website-preview";
 import { projects } from "@/content/projects";
 import type { Project } from "@/content/types";
+
+// Placeholder previews rotate through these layouts, so neighbouring projects look different.
+const placeholderLayouts: PreviewVariant[] = ["centered", "split", "mobile"];
+
+/** The placeholder layout for a project's cover, the same on its card, page and "Next project" link. */
+export function getPlaceholderVariant(slug: string): PreviewVariant {
+  const index = Math.max(
+    projects.findIndex((project) => project.slug === slug),
+    0,
+  );
+  return placeholderLayouts[index % placeholderLayouts.length];
+}
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
