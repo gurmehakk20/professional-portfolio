@@ -3,12 +3,6 @@ import { WebsitePreview, type PreviewVariant } from "@/components/ui/website-pre
 import type { ProjectMedia } from "@/content/types";
 import { cn } from "@/lib/cn";
 
-const aspectClasses = {
-  "16/10": "aspect-[16/10]",
-  "4/3": "aspect-[4/3]",
-  "3/2": "aspect-[3/2]",
-} as const;
-
 type ProjectImageProps = {
   media: ProjectMedia;
   /**
@@ -20,12 +14,15 @@ type ProjectImageProps = {
   priority?: boolean;
   /** Abstract layout shown while the project has no image yet. */
   placeholder?: PreviewVariant;
-  aspect?: keyof typeof aspectClasses;
   className?: string;
 };
 
+/** A phone is about 27% of the box's width, so it never needs a wide image. */
+const phoneSizes = "(min-width: 768px) 320px, 30vw";
+
 /**
- * A project screenshot in a fixed aspect-ratio box (no layout shift).
+ * A project screenshot in a fixed 16:10 box (no layout shift).
+ * Phone screenshots (`device: "mobile"`) are shown in a phone outline.
  * Falls back to an abstract website preview when `media.src` is empty.
  */
 export function ProjectImage({
@@ -33,22 +30,38 @@ export function ProjectImage({
   sizes,
   priority = false,
   placeholder = "split",
-  aspect = "16/10",
   className,
 }: ProjectImageProps) {
+  const loading = priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {};
+
   return (
-    <div className={cn("relative overflow-hidden bg-subtle", aspectClasses[aspect], className)}>
-      {media.src ? (
+    <div className={cn("relative aspect-[16/10] overflow-hidden bg-subtle", className)}>
+      {!media.src ? (
+        <WebsitePreview variant={placeholder} />
+      ) : media.device === "mobile" ? (
+        // The "mobile" placeholder's phone outline, a touch narrower so a standard
+        // 1170×2532 capture shows whole. Sized in container units.
+        <div className="absolute inset-0 flex items-center justify-center @container">
+          <div className="relative h-[54cqw] w-[25.7cqw] overflow-hidden rounded-[3.2cqw] border-[0.7cqw] border-ink bg-surface">
+            <Image
+              src={media.src}
+              alt={media.alt}
+              fill
+              sizes={phoneSizes}
+              className="object-cover object-top"
+              {...loading}
+            />
+          </div>
+        </div>
+      ) : (
         <Image
           src={media.src}
           alt={media.alt}
           fill
           sizes={sizes}
           className="object-cover object-top"
-          {...(priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {})}
+          {...loading}
         />
-      ) : (
-        <WebsitePreview variant={placeholder} />
       )}
     </div>
   );

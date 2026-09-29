@@ -1,15 +1,8 @@
 import { Container } from "@/components/ui/container";
 import type { Project } from "@/content/types";
+import { toParagraphs } from "@/lib/text";
 
 type ProjectStoryProps = Pick<Project["detail"], "overview" | "challenge" | "approach">;
-
-/** Splits plain text into paragraphs on blank lines ("\n\n"). */
-function toParagraphs(text: string): string[] {
-  return text
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
-}
 
 /** Overview, challenge and approach: heading on the left, text on the right from large screens. */
 export function ProjectStory({ overview, challenge, approach }: ProjectStoryProps) {

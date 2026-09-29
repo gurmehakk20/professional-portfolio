@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   return {
     title: project.title,
     description: project.summary,
+    // Example projects stay out of search results until they're replaced with real work.
+    ...(project.placeholder ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
@@ -35,8 +37,13 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
   const { detail } = project;
   const nextProject = getNextProject(slug);
-  // Backgrounds alternate, so "Next project" takes the opposite tone of the section above it.
+  // Backgrounds alternate: features are subtle, screenshots aren't, and "Next project"
+  // takes the opposite tone of whichever section sits above it.
   const sectionAboveIsSubtle = detail.screenshots.length === 0 && detail.features.length > 0;
+  const nextTone = sectionAboveIsSubtle ? "default" : "subtle";
+  // The closing panel sits on the plain background, so it drops its top
+  // padding when the section above it is plain too (avoids a doubled gap).
+  const lastTone = nextProject ? nextTone : sectionAboveIsSubtle ? "subtle" : "default";
 
   return (
     <>
@@ -46,16 +53,16 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         challenge={detail.challenge}
         approach={detail.approach}
       />
-      <ProjectFeatures features={detail.features} />
-      <ProjectGallery screenshots={detail.screenshots} />
+      <ProjectFeatures features={detail.features} tone="subtle" />
+      <ProjectGallery screenshots={detail.screenshots} tone="default" />
       {nextProject ? (
         <ProjectNext
           project={nextProject}
           number={getProjectNumber(nextProject.slug)}
-          tone={sectionAboveIsSubtle ? "default" : "subtle"}
+          tone={nextTone}
         />
       ) : null}
-      <FinalCta content={finalCta} />
+      <FinalCta content={finalCta} flushTop={lastTone === "default"} />
     </>
   );
 }

@@ -7,6 +7,8 @@ import { ProjectImage } from "./project-image";
 
 type ProjectGalleryProps = {
   screenshots: ProjectMedia[];
+  /** Background of the section; alternate it with the sections around it. */
+  tone?: "default" | "subtle";
 };
 
 /** Full container width, and half of it (minus the gap) from md up. */
@@ -17,19 +19,19 @@ const halfSizes =
 
 /** Abstract preview for a screenshot that hasn't been added yet: a phone for mobile shots. */
 function placeholderFor(screenshot: ProjectMedia, index: number): PreviewVariant {
-  if (/\b(phone|mobile)\b/i.test(screenshot.alt)) return "mobile";
+  if (screenshot.device === "mobile") return "mobile";
   return index % 2 === 0 ? "centered" : "split";
 }
 
 /** Screenshots in a two-column gallery. Hidden when there are none. */
-export function ProjectGallery({ screenshots }: ProjectGalleryProps) {
+export function ProjectGallery({ screenshots, tone = "default" }: ProjectGalleryProps) {
   if (screenshots.length === 0) return null;
 
   // With an odd number of screenshots, the first one runs full width.
   const firstIsWide = screenshots.length % 2 === 1;
 
   return (
-    <Section id="screenshots" labelledBy="screenshots-heading">
+    <Section id="screenshots" labelledBy="screenshots-heading" tone={tone}>
       <SectionHeader id="screenshots-heading" title="Screenshots" />
       <div className="reveal mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
         {screenshots.map((screenshot, index) => {

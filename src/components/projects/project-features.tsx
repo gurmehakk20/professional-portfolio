@@ -6,10 +6,12 @@ import { cn } from "@/lib/cn";
 
 type ProjectFeaturesProps = {
   features: ProjectFeature[];
+  /** Background of the section; alternate it with the sections around it. */
+  tone?: "default" | "subtle";
 };
 
 /** The project's key features as a grid of cards. Hidden when there are none. */
-export function ProjectFeatures({ features }: ProjectFeaturesProps) {
+export function ProjectFeatures({ features, tone = "default" }: ProjectFeaturesProps) {
   const count = features.length;
   if (count === 0) return null;
 
@@ -19,7 +21,7 @@ export function ProjectFeatures({ features }: ProjectFeaturesProps) {
   const widenLast = count > 1 && count % 2 === 1;
 
   return (
-    <Section id="features" labelledBy="features-heading" tone="subtle">
+    <Section id="features" labelledBy="features-heading" tone={tone}>
       <SectionHeader id="features-heading" title="Key features" />
       <ul
         role="list"

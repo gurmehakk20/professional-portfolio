@@ -6,6 +6,9 @@ import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
 import { Tag } from "@/components/ui/tag";
 import type { Project } from "@/content/types";
+import { cn } from "@/lib/cn";
+import { displayHost } from "@/lib/links";
+import { getPlaceholderVariant } from "@/lib/projects";
 import { ProjectImage } from "./project-image";
 
 type ProjectHeaderProps = {
@@ -18,16 +21,6 @@ type ProjectHeaderProps = {
 const coverSizes =
   "(min-width: 1216px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)";
 
-/** "https://www.example.com/page" → "example.com", for the browser frame's address bar. */
-function displayHost(url?: string): string | undefined {
-  if (!url) return undefined;
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return undefined;
-  }
-}
-
 /** Top of a project page: back link, title, key facts, links and the cover image. */
 export function ProjectHeader({ project, number }: ProjectHeaderProps) {
   const facts = [
@@ -36,6 +29,25 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
     { label: "Technologies", items: project.detail.technologies },
   ].filter((fact) => fact.items.length > 0);
   const hasLinks = Boolean(project.liveUrl || project.caseStudyUrl);
+
+  const { cover } = project;
+  const placeholder = getPlaceholderVariant(project.slug);
+  // Phone images bring their own device outline; everything else sits in a browser window.
+  const onPhone = cover.src ? cover.device === "mobile" : placeholder === "mobile";
+  // A real screenshot spans the container; a placeholder is shown smaller, on a tinted panel.
+  const frameClassName = cover.src ? "mt-10 md:mt-14" : "mx-auto max-w-3xl";
+  const image = (
+    <ProjectImage media={cover} sizes={coverSizes} priority placeholder={placeholder} />
+  );
+  const frame = onPhone ? (
+    <div className={cn("overflow-hidden rounded-xl border border-line", frameClassName)}>
+      {image}
+    </div>
+  ) : (
+    <BrowserFrame url={displayHost(project.liveUrl)} className={frameClassName}>
+      {image}
+    </BrowserFrame>
+  );
 
   return (
     <div className="pt-4 sm:pt-6 lg:pt-8">
@@ -106,9 +118,13 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
           ) : null}
         </header>
 
-        <BrowserFrame url={displayHost(project.liveUrl)} className="mt-10 md:mt-14">
-          <ProjectImage media={project.cover} sizes={coverSizes} priority placeholder="split" />
-        </BrowserFrame>
+        {cover.src ? (
+          frame
+        ) : (
+          <div className="mt-10 rounded-2xl bg-subtle px-[6%] py-[5%] md:mt-14 md:px-[12%]">
+            {frame}
+          </div>
+        )}
       </Container>
     </div>
   );

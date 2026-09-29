@@ -9,6 +9,8 @@ type FeaturedWorkProps = {
   intro: SectionIntro;
   projects: Project[];
   id?: string;
+  /** Background of the section; alternate it with the sections around it. */
+  tone?: "default" | "subtle";
 };
 
 /**
@@ -16,7 +18,12 @@ type FeaturedWorkProps = {
  * card and the rest in two columns. With an even number of projects the last
  * one is wide too (image on the other side), so the grid never ends with a gap.
  */
-export function FeaturedWork({ intro, projects, id = "work" }: FeaturedWorkProps) {
+export function FeaturedWork({
+  intro,
+  projects,
+  id = "work",
+  tone = "default",
+}: FeaturedWorkProps) {
   if (projects.length === 0) return null;
 
   const headingId = `${id}-heading`;
@@ -24,7 +31,7 @@ export function FeaturedWork({ intro, projects, id = "work" }: FeaturedWorkProps
   const lastIsWide = lastIndex > 0 && projects.length % 2 === 0;
 
   return (
-    <Section id={id} labelledBy={headingId} tone="subtle">
+    <Section id={id} labelledBy={headingId} tone={tone}>
       <SectionHeader
         id={headingId}
         eyebrow={intro.eyebrow}

@@ -2,16 +2,14 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
+import { stretchedLink } from "@/components/ui/card-styles";
 import { Icon } from "@/components/ui/icon";
 import { Tag } from "@/components/ui/tag";
-import type { PreviewVariant } from "@/components/ui/website-preview";
 import type { Project } from "@/content/types";
 import { cn } from "@/lib/cn";
-import { getProjectNumber } from "@/lib/projects";
+import { displayHost } from "@/lib/links";
+import { getPlaceholderVariant, getProjectNumber } from "@/lib/projects";
 import { ProjectImage } from "./project-image";
-
-/** Projects without a screenshot take turns between these placeholder layouts. */
-const placeholderLayouts: PreviewVariant[] = ["split", "centered", "mobile"];
 
 /** Cards show at most this many tags, so they stay tidy. */
 const maxTags = 3;
@@ -51,9 +49,11 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const wide = layout === "wide";
   const number = getProjectNumber(project.slug);
-  const placeholder = placeholderLayouts[(Number(number) - 1) % placeholderLayouts.length];
-  // The phone placeholder brings its own device frame; everything else sits in a browser window.
-  const inBrowser = Boolean(project.cover.src) || placeholder !== "mobile";
+  const placeholder = getPlaceholderVariant(project.slug);
+  // Phone images bring their own device outline; everything else sits in a browser window.
+  const inBrowser = project.cover.src
+    ? project.cover.device !== "mobile"
+    : placeholder !== "mobile";
   const tags = project.tags.slice(0, maxTags);
   const hasLinks = Boolean(project.liveUrl || project.caseStudyUrl);
 
@@ -77,7 +77,7 @@ export function ProjectCard({
       >
         {inBrowser ? (
           <div className={coverMotion}>
-            <BrowserFrame url={project.liveUrl ? getHostname(project.liveUrl) : undefined}>
+            <BrowserFrame url={displayHost(project.liveUrl)}>
               <ProjectImage
                 media={project.cover}
                 sizes={imageSizes[layout]}
@@ -110,11 +110,9 @@ export function ProjectCard({
         )}
       >
         <Heading className={cn("text-h3 font-semibold", wide && "md:text-2xl lg:text-[1.75rem]")}>
-          <Link
-            href={`/work/${project.slug}`}
-            className="rounded-sm after:absolute after:inset-0 after:z-1 after:rounded-2xl after:content-['']"
-          >
+          <Link href={`/work/${project.slug}`} className={stretchedLink}>
             {project.title}
+            <span className="sr-only">, view project</span>
           </Link>
         </Heading>
 
@@ -172,12 +170,12 @@ export function ProjectCard({
               <div className="flex flex-wrap gap-x-5 gap-y-2">
                 {project.liveUrl ? (
                   <ArrowLink href={project.liveUrl} className="relative z-10">
-                    Visit<span className="sr-only"> the {project.title}</span> website
+                    Visit website<span className="sr-only">: {project.title}</span>
                   </ArrowLink>
                 ) : null}
                 {project.caseStudyUrl ? (
                   <ArrowLink href={project.caseStudyUrl} className="relative z-10">
-                    <span className="sr-only">{project.title} </span>Case study
+                    Case study<span className="sr-only">: {project.title}</span>
                   </ArrowLink>
                 ) : null}
               </div>
@@ -187,13 +185,4 @@ export function ProjectCard({
       </div>
     </article>
   );
-}
-
-/** "https://www.arkadental.com/contact" → "arkadental.com", shown in the browser frame's address bar. */
-function getHostname(url: string): string | undefined {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return undefined;
-  }
 }

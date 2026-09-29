@@ -12,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  const hasProjects = projects.length > 0;
+
   return (
     <>
       <PageHeader
@@ -19,10 +21,13 @@ export default function WorkPage() {
         title={workPage.title}
         description={workPage.description}
       />
-      <Section>
-        <ProjectGrid projects={projects} />
-      </Section>
-      <FinalCta content={finalCta} />
+      {hasProjects ? (
+        <Section>
+          <ProjectGrid projects={projects} />
+        </Section>
+      ) : null}
+      {/* The grid shares the CTA's background, so the CTA skips its top padding. */}
+      <FinalCta content={finalCta} flushTop={hasProjects} />
     </>
   );
 }

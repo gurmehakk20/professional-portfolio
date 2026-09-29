@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { stretchedLink } from "@/components/ui/card-styles";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import type { Project } from "@/content/types";
+import { getPlaceholderVariant } from "@/lib/projects";
 import { ProjectImage } from "./project-image";
 
 type ProjectNextProps = {
@@ -42,10 +44,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
               {project.category}
             </p>
             <h3 className="mt-2 text-h2 font-semibold">
-              <Link
-                href={`/work/${project.slug}`}
-                className="after:absolute after:inset-0 after:z-10 after:rounded-2xl after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-3 focus-visible:after:outline-(--focus-ring)"
-              >
+              <Link href={`/work/${project.slug}`} className={stretchedLink}>
                 {titleStart}
                 <span className="whitespace-nowrap">
                   {titleEnd}
@@ -64,7 +63,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
           <ProjectImage
             media={project.cover}
             sizes={thumbnailSizes}
-            placeholder="split"
+            placeholder={getPlaceholderVariant(project.slug)}
             className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
           />
         </div>

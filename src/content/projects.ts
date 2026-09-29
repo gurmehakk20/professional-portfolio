@@ -12,6 +12,8 @@ import type { PageIntro, Project } from "./types";
  *   1. Put screenshots in /public/images/projects/<slug>/ (WebP or AVIF, ~2000px wide).
  *   2. Set `src` on `cover` and each screenshot, e.g. "/images/projects/arka-dental/home.webp".
  *   3. Write a short `alt` describing what the image shows.
+ *   4. For a phone screenshot (portrait, ~1170px wide), add `device: "mobile"`:
+ *      it's shown in a phone outline instead of being cropped to a wide box.
  * Leave `src` out and a neutral placeholder preview is shown instead.
  */
 
@@ -19,7 +21,7 @@ export const workPage: PageIntro = {
   eyebrow: "Work",
   title: "Selected work",
   description:
-    "Websites I've designed and developed for clinics, local businesses and professionals — each one built around what the business needed.",
+    "Websites I've designed and developed for clinics, local businesses and professionals.",
   metaDescription:
     "Selected website design and development projects for clinics, local businesses and professionals.",
 };
@@ -58,7 +60,7 @@ export const projects: Project[] = [
       screenshots: [
         { alt: "Arka Dental home page on desktop" },
         { alt: "Arka Dental treatments page" },
-        { alt: "Arka Dental website on a phone" },
+        { alt: "Arka Dental website on a phone", device: "mobile" },
       ],
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
     },
@@ -113,7 +115,10 @@ export const projects: Project[] = [
         { title: "Scannable layout", description: "Key details readable at a glance." },
         { title: "Fast on mobile", description: "Lightweight, so it loads quickly on any connection." },
       ],
-      screenshots: [{ alt: "Landing page on desktop" }, { alt: "Landing page on a phone" }],
+      screenshots: [
+        { alt: "Landing page on desktop" },
+        { alt: "Landing page on a phone", device: "mobile" },
+      ],
       technologies: ["Next.js", "Tailwind CSS"],
     },
   },
