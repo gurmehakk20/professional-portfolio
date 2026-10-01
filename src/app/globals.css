@@ -274,6 +274,28 @@
     }
   }
 
+  /* Process: each connecting line draws in, and each number lights up, as it
+     scrolls into view. Without support, both are simply shown complete. */
+  @supports (animation-timeline: view()) {
+    .process-line {
+      animation: process-line-y linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 50%;
+    }
+
+    .process-dot {
+      animation: process-dot linear both;
+      animation-timeline: view();
+      animation-range: entry 100% cover 35%;
+    }
+
+    @media (min-width: 64rem) {
+      .process-line {
+        animation-name: process-line-x;
+      }
+    }
+  }
+
   /* Smooth open/close for <details> (FAQ) where supported. */
   :root {
     interpolate-size: allow-keywords;
@@ -296,5 +318,25 @@
   from {
     opacity: 0;
     transform: translateY(1.25rem);
+  }
+}
+
+@keyframes process-line-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes process-line-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes process-dot {
+  from {
+    background-color: rgb(255 255 255 / 0.04);
+    border-color: rgb(255 255 255 / 0.2);
+    color: var(--color-accent-on-dark);
   }
 }

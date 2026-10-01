@@ -1,5 +1,5 @@
 import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
+import { Section, type SectionTone } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { Principle, SectionIntro } from "@/content/types";
 
@@ -7,6 +7,7 @@ type PrinciplesProps = {
   intro: SectionIntro;
   items: Principle[];
   id?: string;
+  tone?: SectionTone;
   /** Section number shown before the eyebrow, e.g. "03". */
   number?: string;
 };
@@ -16,13 +17,13 @@ type PrinciplesProps = {
  * An open list divided by hairlines (rather than cards), with the heading
  * beside it on wide screens. Works well with three to six principles.
  */
-export function Principles({ intro, items, id = "why", number }: PrinciplesProps) {
+export function Principles({ intro, items, id = "why", tone = "default", number }: PrinciplesProps) {
   if (items.length === 0) return null;
 
   const headingId = `${id}-heading`;
 
   return (
-    <Section id={id} labelledBy={headingId}>
+    <Section id={id} labelledBy={headingId} tone={tone}>
       <div className="grid gap-10 md:gap-14 xl:grid-cols-12 xl:gap-x-16">
         <div className="xl:sticky xl:top-28 xl:col-span-5 xl:self-start">
           <SectionHeader {...intro} id={headingId} number={number} />

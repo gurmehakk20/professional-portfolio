@@ -1,15 +1,15 @@
 import type {
   AboutContent,
-  FinalCtaContent,
+  ContactSectionContent,
   HeroContent,
   Principle,
   SectionIntro,
-  ValuePoint,
 } from "./types";
 
 /*
- * Home page copy, in the order the sections appear.
- * Services, projects, process steps and FAQs live in their own files.
+ * Home page copy, in the order the sections appear:
+ * hero → selected work → services → why work with me → process → about → FAQ → contact.
+ * Projects, services, process steps and FAQs live in their own files.
  */
 
 export const hero: HeroContent = {
@@ -22,56 +22,64 @@ export const hero: HeroContent = {
   secondaryCta: { label: "View my work", href: "/#work" },
 };
 
-/** The short strip of qualities under the hero. */
-export const valuePoints: ValuePoint[] = [
-  { title: "Mobile-first", description: "Planned for phones, then scaled up", icon: "smartphone" },
-  { title: "Fast-loading", description: "Light pages that open quickly", icon: "zap" },
-  { title: "Responsive", description: "Right on every screen size", icon: "responsive" },
-  { title: "Easy to navigate", description: "Clear paths to what matters", icon: "navigation" },
-  { title: "Business-focused", description: "Built for your goals", icon: "target" },
-];
-
-export const servicesIntro: SectionIntro = {
-  eyebrow: "What I build",
-  title: "Websites shaped around how your business works",
-  description:
-    "From a focused landing page to a complete business website — every project starts with what your visitors need to find and do.",
-};
-
 export const workIntro: SectionIntro = {
   eyebrow: "Selected work",
-  title: "Recent projects",
+  title: "Websites built for real businesses",
   description:
-    "A selection of websites I've designed and built, each one focused on what the business needed its website to do.",
+    "A closer look at recent work: what each business needed, and what I designed and built for it.",
 };
 
-export const principlesIntro: SectionIntro = {
+export const servicesIntro: SectionIntro = {
+  eyebrow: "Services",
+  title: "What I can build for you",
+  description:
+    "Four ways I help — each one designed around a business problem, not a template.",
+};
+
+export const whyIntro: SectionIntro = {
   eyebrow: "Why work with me",
-  title: "The principles behind every website",
+  title: "A practical way to get a website done well",
   description:
-    "A good website isn't decoration. It helps the right people find what they need — quickly, clearly and on any device.",
+    "Working with an independent designer-developer means fewer hand-offs, clearer decisions and a website built for your business.",
 };
 
-export const principles: Principle[] = [
+/** The differentiators in "Why work with me". */
+export const differentiators: Principle[] = [
   {
-    title: "Thoughtful UX",
-    description: "Visitors should be able to find what they need without thinking too hard.",
-    icon: "compass",
+    title: "Direct communication",
+    description:
+      "You talk to the person designing and building your site. No account managers, no hand-offs.",
+    icon: "message",
   },
   {
-    title: "Mobile-first",
-    description: "Designed for the screens people actually use.",
-    icon: "smartphone",
+    title: "Custom-built, not templated",
+    description:
+      "Every site is designed and built for your business, so it fits your content, brand and goals.",
+    icon: "pen",
   },
   {
-    title: "Performance",
-    description: "Clean implementation and optimised assets keep websites fast.",
-    icon: "gauge",
-  },
-  {
-    title: "Business-focused",
-    description: "Design decisions should support the goals of the business.",
+    title: "Business-focused design",
+    description:
+      "Layouts, headings and calls to action are planned around what you need visitors to do.",
     icon: "target",
+  },
+  {
+    title: "Responsive by default",
+    description:
+      "Designed for phones first and tested across screen sizes as standard — never an extra.",
+    icon: "responsive",
+  },
+  {
+    title: "Modern React & Next.js stack",
+    description:
+      "Fast, search-friendly sites on a modern foundation that's easy to extend as you grow.",
+    icon: "code",
+  },
+  {
+    title: "No agency bloat",
+    description:
+      "A lean process with clear steps and honest scoping. You pay for the work, not the overhead.",
+    icon: "zap",
   },
 ];
 
@@ -79,24 +87,21 @@ export const about: AboutContent = {
   eyebrow: "About",
   title: "Hi, I'm Mehak.",
   paragraphs: [
-    "I'm Gurmehak Kaur — Mehak for short — a software developer who works across design and development. I design and build websites for businesses, startups and professional services, from the first conversation to launch day.",
-    "My focus is simple: websites that look professional, load quickly, work properly on phones and make it easy for customers to take the next step. You work directly with me throughout, so nothing gets lost between a designer, a developer and an account manager. I also partner with agencies that need dependable design and development support.",
+    "I'm Gurmehak Kaur — Mehak for short — an independent web designer and developer. I design and build modern, responsive websites with React and Next.js for businesses, startups and agencies.",
+    "I care about good websites because they're often a customer's first impression. A clear, fast site helps a good business look as good online as it is in person.",
   ],
-  focusAreas: [
-    "UI/UX design",
-    "Frontend development",
-    "Responsive design",
-    "Performance",
-    "Business websites",
-  ],
+  focusAreas: ["UI/UX design", "React & Next.js", "Responsive design", "Performance", "SEO foundations"],
   // Add a portrait by placing it in /public/images/about/ and uncommenting:
   // image: { src: "/images/about/portrait.jpg", alt: "Portrait of Mehak" },
-  cta: { label: "Let's talk", href: "/contact" },
+  cta: { label: "Get in touch", href: "/contact" },
 };
 
-export const finalCta: FinalCtaContent = {
-  title: "Have a website in mind?",
-  description: "Let's build something that works beautifully for your business.",
+/** The closing contact section, shown at the end of most pages. */
+export const contactSection: ContactSectionContent = {
+  eyebrow: "Contact",
+  title: "Have a project in mind?",
+  description:
+    "Tell me a little about what you need. I'll reply with a few questions and clear next steps — no jargon, no pressure.",
   primaryCta: { label: "Start a project", href: "/contact" },
-  whatsappLabel: "Chat on WhatsApp", // Remove this line to hide the WhatsApp button.
+  methodsLabel: "Or reach me directly",
 };

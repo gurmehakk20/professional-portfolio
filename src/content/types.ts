@@ -28,18 +28,24 @@ export type SectionIntro = {
 /* Site                                                                */
 /* ------------------------------------------------------------------ */
 
+/** A profile link. Leave `href` empty ("") to hide it. */
 export type SocialLink = {
   label: string;
   href: string;
   icon: IconName;
 };
 
+/**
+ * Your contact details. Anything left empty ("") is simply not shown, so the
+ * site never displays placeholder details.
+ */
 export type ContactDetails = {
+  /** e.g. "hello@yourdomain.com". Leave empty to hide email everywhere. */
   email: string;
   whatsapp: {
-    /** Full international number, digits only — no "+", spaces or dashes. Used for wa.me links. */
+    /** Full international number, digits only — no "+", spaces or dashes. Leave empty to hide WhatsApp. */
     number: string;
-    /** How the number is shown on the page. */
+    /** How the number is shown on the page, e.g. "+91 98765 43210". */
     display: string;
     /** Pre-filled message when someone taps a WhatsApp button. */
     message: string;
@@ -100,12 +106,6 @@ export type HeroContent = {
   secondaryCta?: CtaLink;
 };
 
-export type ValuePoint = {
-  title: string;
-  description?: string;
-  icon: IconName;
-};
-
 export type Principle = {
   title: string;
   description: string;
@@ -125,12 +125,11 @@ export type AboutContent = SectionIntro & {
   cta?: CtaLink;
 };
 
-export type FinalCtaContent = {
-  title: string;
-  description: string;
+/** The closing contact section: heading, short copy, the main button and your contact methods. */
+export type ContactSectionContent = SectionIntro & {
   primaryCta: CtaLink;
-  /** Label for a WhatsApp button next to the primary CTA. Leave out to hide the button. */
-  whatsappLabel?: string;
+  /** Small heading above the list of contact methods. */
+  methodsLabel: string;
 };
 
 /* ------------------------------------------------------------------ */
@@ -140,6 +139,8 @@ export type FinalCtaContent = {
 export type ProcessStep = {
   title: string;
   description: string;
+  /** What the client has at the end of the step, e.g. "A clear plan". */
+  outcome?: string;
 };
 
 /* ------------------------------------------------------------------ */
@@ -150,12 +151,18 @@ export type Service = {
   /** URL-friendly id, used for /services#slug and the contact form. */
   slug: string;
   name: string;
-  /** One or two sentences, shown on service cards. */
+  /** What it is, in one or two sentences. */
   summary: string;
   icon: IconName;
+  /** Who it's for, in one short line (home page). */
+  bestFor: string;
+  /** The business problem it solves, in one or two sentences. */
+  problem: string;
+  /** Short deliverable labels shown as chips, e.g. "Custom UI". */
+  deliverables: string[];
   /** Longer introduction for the services page. Falls back to `summary`. */
   description?: string;
-  /** Who this service is for. */
+  /** Who this service is for (services page). */
   audience: string[];
   /** What's included. */
   includes: string[];
@@ -178,10 +185,10 @@ export type Service = {
 /* Projects                                                            */
 /* ------------------------------------------------------------------ */
 
-/** An image of a project. Leave `src` undefined to show a neutral placeholder preview. */
+/** A screenshot of a project. */
 export type ProjectMedia = {
   /** Path inside /public, e.g. "/images/projects/arka-dental/home.webp". */
-  src?: string;
+  src: string;
   /** Describe what the image shows — this is read aloud by screen readers. */
   alt: string;
   caption?: string;
@@ -201,37 +208,32 @@ export type Project = {
   /** URL-friendly id, used for /work/[slug]. */
   slug: string;
   title: string;
-  /** e.g. "Clinic website". */
+  /** e.g. "Dental clinic website". */
   category: string;
-  /** One or two sentences, shown on project cards. */
+  /** One line: what it is and who it's for. Shown on cards. */
   summary: string;
-  /** Your role or services, e.g. ["UX & UI design", "Development"]. */
-  services: string[];
-  /** Short labels shown on project cards (the first three are shown). */
-  tags: string[];
+  /** Technologies, shown as small labels where useful, e.g. ["Next.js", "Tailwind CSS"]. */
+  technologies?: string[];
+  /** Your role, e.g. ["Design", "Development"]. */
+  role?: string[];
   year?: string;
-  /** Cover image used on cards and at the top of the project page. */
-  cover: ProjectMedia;
-  /** Live website. */
+  /** Screenshot for cards and the project page. Without one, a designed cover with the project's name is shown. */
+  cover?: ProjectMedia;
+  /** Brand colour for that designed cover, e.g. "#0e7490". Defaults to the site blue. */
+  coverColor?: string;
+  /** The live website — adds a "Visit live site" link. */
   liveUrl?: string;
   /** Optional external case study (e.g. a PDF, Notion or Behance page). */
   caseStudyUrl?: string;
   /** Show on the home page. */
   featured?: boolean;
-  /**
-   * Marks example content. Placeholder projects show a small "Placeholder"
-   * label so they're never mistaken for real client work.
-   * Remove this line once the project is real.
-   */
-  placeholder?: boolean;
-  /** Content for the project detail page (/work/[slug]). */
-  detail: {
+  /** A full case study at /work/[slug]. Leave out and no project page is created. */
+  caseStudy?: {
     overview: string;
     challenge: string;
     approach: string;
     features: ProjectFeature[];
     screenshots: ProjectMedia[];
-    technologies: string[];
   };
 };
 

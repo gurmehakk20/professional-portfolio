@@ -1,44 +1,57 @@
 import { About } from "@/components/sections/about";
+import { ContactSection } from "@/components/sections/contact-section";
 import { Faq } from "@/components/sections/faq";
 import { FeaturedWork } from "@/components/sections/featured-work";
-import { FinalCta } from "@/components/sections/final-cta";
 import { Hero } from "@/components/sections/hero";
 import { Principles } from "@/components/sections/principles";
 import { Process } from "@/components/sections/process";
-import { ServicesGrid } from "@/components/sections/services-grid";
-import { ValueStrip } from "@/components/sections/value-strip";
+import { ServicesOverview } from "@/components/sections/services-overview";
 import { faqIntro, faqs } from "@/content/faq";
 import {
   about,
-  finalCta,
+  contactSection,
+  differentiators,
   hero,
-  principles,
-  principlesIntro,
   servicesIntro,
-  valuePoints,
+  whyIntro,
   workIntro,
 } from "@/content/home";
 import { processIntro, processSteps } from "@/content/process";
-import { services } from "@/content/services";
+import { projects } from "@/content/projects";
+import { services, standardDeliverables } from "@/content/services";
 import { site } from "@/content/site";
 import { getFeaturedProjects } from "@/lib/projects";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
+  const hasMoreWork = projects.length > featured.length;
 
-  // Section backgrounds alternate (default, subtle, dark) and the main
-  // sections are numbered 01–06; both are set here, in page order.
+  // The page answers a visitor's questions in order: what do you do (hero),
+  // can you do it (work), what can you build (services), why you (why), how
+  // does it work (process), who are you (about), what about… (FAQ), and how
+  // do I start (contact). Backgrounds alternate and sections are numbered here.
   return (
     <>
       <Hero content={hero} availability={site.availability} project={featured[0]} name={site.name} />
-      <ValueStrip items={valuePoints} />
-      <ServicesGrid intro={servicesIntro} services={services} number="01" />
-      <FeaturedWork intro={workIntro} projects={featured} tone="subtle" number="02" />
-      <Principles intro={principlesIntro} items={principles} number="03" />
-      <Process intro={processIntro} steps={processSteps} tone="dark" number="04" />
+      <FeaturedWork
+        intro={workIntro}
+        projects={featured}
+        tone="subtle"
+        number="01"
+        viewAllHref={hasMoreWork ? "/work" : undefined}
+        cta={contactSection.primaryCta}
+      />
+      <ServicesOverview
+        intro={servicesIntro}
+        services={services}
+        standard={standardDeliverables}
+        number="02"
+      />
+      <Principles intro={whyIntro} items={differentiators} tone="subtle" number="03" />
+      <Process intro={processIntro} steps={processSteps} number="04" />
       <About content={about} name={site.name} number="05" />
       <Faq intro={faqIntro} items={faqs} tone="subtle" number="06" />
-      <FinalCta content={finalCta} />
+      <ContactSection content={contactSection} number="07" />
     </>
   );
 }

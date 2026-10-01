@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ButtonLink } from "@/components/ui/button";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tag } from "@/components/ui/tag";
@@ -77,9 +77,7 @@ export function About({ content, name, id = "about", number }: AboutProps) {
 
           {cta ? (
             <div className="mt-10">
-              <ButtonLink href={cta.href} trailingIcon="arrow-right">
-                {cta.label}
-              </ButtonLink>
+              <ArrowLink href={cta.href}>{cta.label}</ArrowLink>
             </div>
           ) : null}
         </div>

@@ -2,15 +2,14 @@ import type { FaqItem, SectionIntro } from "./types";
 
 /*
  * Frequently asked questions — shown on the home page and the services page.
- *
- * ⚠️  PLACEHOLDER: review every answer so it matches how you actually work
- * (timelines, maintenance, hosting). Add, remove or reorder freely.
+ * Keep to questions that help someone decide to get in touch.
+ * Review every answer so it matches how you work.
  */
 
 export const faqIntro: SectionIntro = {
   eyebrow: "FAQ",
-  title: "Common questions",
-  description: "Can't find what you're looking for? Ask me directly — I'm happy to help.",
+  title: "Questions before you start",
+  description: "The things people usually ask before getting in touch. Anything else? Just ask.",
 };
 
 export const faqs: FaqItem[] = [
@@ -18,18 +17,18 @@ export const faqs: FaqItem[] = [
   {
     question: "How long does a website take?",
     answer:
-      "It depends on the size of the website and how quickly the content is ready. A focused landing page usually takes one to two weeks, a business website three to five weeks, and a clinic website or redesign three to six weeks.\n\nYou'll get a clear timeline before any work begins.",
+      "It depends on the size of the project and how quickly the content is ready. A landing page usually takes one to two weeks, a business website three to five weeks and a redesign three to six. Custom builds depend on scope.\n\nYou'll get a clear timeline before any work begins.",
   },
   // If you add `pricing` to your services, you can mention it here too.
   {
     question: "How much does a website cost?",
     answer:
-      "It depends on the number of pages and the features you need. After a short conversation about your business, I'll send you a clear quote with the scope and timeline, so you know what you're agreeing to before we start.",
+      "It depends on the pages and features you need. After a short conversation about your project, I'll send a clear quote with the scope and timeline, so you know exactly what you're agreeing to before we start.",
   },
   {
-    question: "What do I need to provide?",
+    question: "Do you work with existing designs?",
     answer:
-      "Your logo, any photos you'd like to use and the key details about your business, such as your services, opening hours and contact information. If you're not sure what to write, I can help with the wording too.",
+      "Yes. If you already have designs — in Figma, for example — I'll build them faithfully as a fast, responsive website. If you don't, I'll design it with you from scratch.",
   },
   {
     question: "Can you redesign an existing website?",
@@ -37,28 +36,23 @@ export const faqs: FaqItem[] = [
       "Yes. I'll look at what your current website does well and where it falls short, then redesign and rebuild it to be clearer, faster and easier to use — keeping the content and links that already work.",
   },
   {
-    question: "Will the website work on mobile?",
+    question: "Can you handle deployment?",
     answer:
-      "Yes. Every website is designed mobile-first and tested on phones, tablets and desktops, so it looks right and works properly on the screens your customers actually use.",
+      "Yes. I can set up hosting, connect your domain and make sure everything is secure and working before launch. Accounts stay in your name, so you're always in control of your website.",
   },
   {
-    question: "Can you integrate WhatsApp?",
+    question: "Do you work with agencies?",
     answer:
-      "Yes. I can add WhatsApp chat buttons and links with a pre-filled message, so customers can reach you in a single tap.",
+      "Yes. I can join your team as a freelance or white-label developer — building from your designs or handling design and development — and work within your process and tools.",
   },
   {
-    question: "Can you help with domain and hosting?",
+    question: "What do I need to provide?",
     answer:
-      "Yes. I can help you choose and set up a domain and reliable hosting, or work with what you already have. Accounts stay in your name, so you always remain in control of your website.",
+      "Your logo, any photos you'd like to use and the key details about your business, such as your services and contact information. If you're not sure what to write, I can help with the wording.",
   },
   {
-    question: "Do you provide website maintenance?",
+    question: "What happens after launch?",
     answer:
-      "Yes. Support after launch can cover content updates, small changes and keeping things running smoothly. We'll agree on what makes sense for your website.",
-  },
-  {
-    question: "Can you build custom functionality?",
-    answer:
-      "Often, yes — enquiry forms, appointment booking, photo galleries, pages in more than one language, and connections to tools you already use. Tell me what you need and I'll suggest the simplest approach that works.",
+      "You'll get a walkthrough of your website and everything you need to manage it. I'm also available for updates, small improvements and ongoing support — we'll agree on what makes sense for you.",
   },
 ];

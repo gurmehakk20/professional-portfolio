@@ -1,31 +1,39 @@
 import type { ProcessStep, SectionIntro } from "./types";
 
 /*
- * The "Approach" section — shown on the home page and the services page.
+ * The "Process" section — shown on the home page and the services page.
  * Step numbers (01, 02…) are added automatically from the order below.
  */
 
 export const processIntro: SectionIntro = {
-  eyebrow: "Approach",
-  title: "A clear process from first call to launch",
-  description: "Four simple stages, so you always know what's happening and what comes next.",
+  eyebrow: "Process",
+  title: "From first call to launch in four clear steps",
+  description: "You always know what's happening, what I need from you and what comes next.",
 };
 
 export const processSteps: ProcessStep[] = [
   {
     title: "Understand",
-    description: "Understand the business, audience and goals.",
+    description:
+      "We talk through your business, customers and goals, then agree on scope, timeline and cost.",
+    outcome: "A clear plan",
   },
   {
     title: "Design",
-    description: "Create the structure, visual direction and user experience.",
+    description:
+      "I plan the structure and design the key pages, then refine them with your feedback before any code is written.",
+    outcome: "Designs you've approved",
   },
   {
     title: "Build",
-    description: "Develop the responsive website with clean, maintainable code.",
+    description:
+      "I build the site with clean, fast, responsive code and share progress as it comes together.",
+    outcome: "A working site to review",
   },
   {
     title: "Launch",
-    description: "Test, optimise and prepare the website for launch.",
+    description:
+      "I test across devices, set up hosting and your domain, and hand over everything you need.",
+    outcome: "Your site, live",
   },
 ];
