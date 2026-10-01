@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { JsonLd } from "@/components/seo/json-ld";
 import { isPlaceholderSiteUrl, site } from "@/content/site";
+import { socialLinks } from "@/lib/contact";
 import { brandColors } from "@/lib/brand";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
@@ -46,8 +47,8 @@ const structuredData = {
       alternateName: site.author,
       jobTitle: site.jobTitle,
       url: site.url,
-      email: `mailto:${site.contact.email}`,
-      sameAs: site.socials.map((social) => social.href),
+      ...(site.contact.email ? { email: `mailto:${site.contact.email}` } : {}),
+      sameAs: socialLinks.map((social) => social.href),
     },
   ],
 };

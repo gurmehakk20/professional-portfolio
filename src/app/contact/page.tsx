@@ -7,6 +7,7 @@ import { contactPage } from "@/content/contact";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
+import { hasEmail, hasWhatsApp } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { form } = contactPage;
+  // The form sends through WhatsApp or email, so it needs at least one of them set up.
+  const showForm = contactPage.form.enabled && (hasWhatsApp || hasEmail);
   const serviceOptions = services.map((service) => ({ value: service.slug, label: service.name }));
 
   return (
@@ -32,7 +34,7 @@ export default function ContactPage() {
         <div
           className={cn(
             "grid gap-12 lg:grid-cols-12 lg:gap-x-12",
-            form.enabled && "lg:grid-rows-[auto_1fr]",
+            showForm && "lg:grid-rows-[auto_1fr]",
           )}
         >
           <ContactOptions
@@ -40,23 +42,23 @@ export default function ContactPage() {
             whatsapp={contactPage.whatsapp}
             email={contactPage.email}
             contact={site.contact}
-            stacked={form.enabled}
-            className={form.enabled ? "lg:col-span-5" : "lg:col-span-7"}
+            stacked={showForm}
+            className={showForm ? "lg:col-span-5" : "lg:col-span-7"}
           />
-          {form.enabled ? (
+          {showForm ? (
             <ContactForm
-              content={form}
+              content={contactPage.form}
               services={serviceOptions}
               recipientName={site.author}
-              whatsapp={site.contact.whatsapp}
-              email={site.contact.email}
+              whatsapp={hasWhatsApp ? site.contact.whatsapp : undefined}
+              email={hasEmail ? site.contact.email : undefined}
               className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1"
             />
           ) : null}
           <ContactNextSteps
             title={contactPage.nextSteps.title}
             steps={contactPage.nextSteps.steps}
-            className={form.enabled ? "lg:col-span-5" : "lg:col-span-4 lg:col-start-9"}
+            className={showForm ? "lg:col-span-5" : "lg:col-span-4 lg:col-start-9"}
           />
         </div>
       </Section>

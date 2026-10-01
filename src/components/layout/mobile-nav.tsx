@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { MailIcon, SvgIcon, WhatsAppIcon } from "@/components/ui/inline-icons";
 import type { CtaLink } from "@/content/types";
+import { cn } from "@/lib/cn";
 import { Wordmark } from "./logo";
 import { isCurrentPath } from "./nav-links";
 
@@ -13,8 +14,10 @@ type MobileNavProps = {
   name: string;
   items: CtaLink[];
   cta: CtaLink;
-  whatsappHref: string;
-  emailHref: string;
+  /** WhatsApp link, if a number is set. */
+  whatsappHref?: string;
+  /** mailto: link, if an email address is set. */
+  emailHref?: string;
 };
 
 /**
@@ -116,27 +119,33 @@ export function MobileNav({ name, items, cta, whatsappHref, emailHref }: MobileN
           >
             {cta.label}
           </Link>
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              className={buttonStyles({ variant: "secondary", className: "w-full max-xs:px-3" })}
-            >
-              <WhatsAppIcon />
-              WhatsApp
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-            <a
-              href={emailHref}
-              onClick={close}
-              className={buttonStyles({ variant: "secondary", className: "w-full max-xs:px-3" })}
-            >
-              <MailIcon />
-              Email
-            </a>
-          </div>
+          {whatsappHref || emailHref ? (
+            <div className={cn("mt-3 grid gap-3", whatsappHref && emailHref && "grid-cols-2")}>
+              {whatsappHref ? (
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={close}
+                  className={buttonStyles({ variant: "secondary", className: "w-full max-xs:px-3" })}
+                >
+                  <WhatsAppIcon />
+                  WhatsApp
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ) : null}
+              {emailHref ? (
+                <a
+                  href={emailHref}
+                  onClick={close}
+                  className={buttonStyles({ variant: "secondary", className: "w-full max-xs:px-3" })}
+                >
+                  <MailIcon />
+                  Email
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </dialog>
     </>

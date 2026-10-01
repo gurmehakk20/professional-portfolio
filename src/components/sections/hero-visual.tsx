@@ -36,7 +36,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         <div className="absolute top-0 right-0 -z-10 h-[46cqw] w-[52cqw] bg-dots fade-edges" />
         <div className="absolute inset-[8%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(37_99_235/0.2),transparent)]" />
 
-        <BrowserFrame url={displayHost(project?.liveUrl) ?? "yourbusiness.com"}>
+        <BrowserFrame url={displayHost(project?.liveUrl)}>
           {hasScreenshot && cover ? (
             <ProjectImage media={cover} sizes="(min-width: 1024px) 40vw, 90vw" priority />
           ) : (

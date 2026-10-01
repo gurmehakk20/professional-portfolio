@@ -1,8 +1,10 @@
 import { ButtonLink } from "@/components/ui/button";
+import { DevNotice } from "@/components/ui/dev-notice";
 import type { ButtonVariant } from "@/components/ui/button-styles";
 import { Icon, type IconName } from "@/components/ui/icon";
 import type { ContactChannel, ContactDetails, ContactPageContent } from "@/content/types";
 import { cn } from "@/lib/cn";
+import { hasEmail, hasWhatsApp, socialLinks } from "@/lib/contact";
 import { mailtoUrl, whatsappUrl } from "@/lib/links";
 
 type ContactOptionsProps = {
@@ -16,7 +18,10 @@ type ContactOptionsProps = {
   className?: string;
 };
 
-/** The quickest ways to get in touch (WhatsApp and email), plus reply time and location. */
+/**
+ * The quickest ways to get in touch (WhatsApp and email), plus profiles,
+ * reply time and location. Anything not set in src/content/site.ts is left out.
+ */
 export function ContactOptions({
   whatsapp,
   email,
@@ -34,29 +39,62 @@ export function ContactOptions({
       <h2 id={headingId} className="sr-only">
         Contact options
       </h2>
-      <ul
-        role="list"
-        className={cn("grid gap-4 sm:grid-cols-2 sm:gap-5", stacked && "lg:grid-cols-1")}
-      >
-        <li>
-          <ChannelCard
-            icon="whatsapp"
-            channel={whatsapp}
-            detail={contact.whatsapp.display}
-            href={whatsappUrl()}
-            variant="primary"
-          />
-        </li>
-        <li>
-          <ChannelCard
-            icon="mail"
-            channel={email}
-            detail={contact.email}
-            href={mailtoUrl()}
-            variant="secondary"
-          />
-        </li>
-      </ul>
+      {hasWhatsApp || hasEmail ? (
+        <ul
+          role="list"
+          className={cn(
+            "grid gap-4 sm:gap-5",
+            hasWhatsApp && hasEmail && "sm:grid-cols-2",
+            stacked && "lg:grid-cols-1",
+          )}
+        >
+          {hasWhatsApp ? (
+            <li>
+              <ChannelCard
+                icon="whatsapp"
+                channel={whatsapp}
+                detail={contact.whatsapp.display || `+${contact.whatsapp.number}`}
+                href={whatsappUrl()}
+                variant="primary"
+              />
+            </li>
+          ) : null}
+          {hasEmail ? (
+            <li>
+              <ChannelCard
+                icon="mail"
+                channel={email}
+                detail={contact.email}
+                href={mailtoUrl()}
+                variant={hasWhatsApp ? "secondary" : "primary"}
+              />
+            </li>
+          ) : null}
+        </ul>
+      ) : (
+        <DevNotice>
+          Add your email address and/or WhatsApp number in src/content/site.ts to show them here.
+        </DevNotice>
+      )}
+
+      {socialLinks.length > 0 ? (
+        <ul role="list" aria-label="Profiles" className="mt-6 flex flex-wrap gap-2">
+          {socialLinks.map((social) => (
+            <li key={social.href}>
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-ink transition-colors duration-200 hover:border-accent/40 hover:text-accent-strong"
+              >
+                <Icon name={social.icon} size={16} className="text-accent" />
+                {social.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       {notes.length > 0 ? (
         <div className="mt-6 space-y-2.5 text-sm text-muted">

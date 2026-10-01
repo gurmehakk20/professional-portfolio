@@ -4,7 +4,10 @@ import type { SiteConfig } from "./types";
  * Global site settings: brand, contact details, navigation, social links
  * and SEO defaults.
  *
- * ⚠️  PLACEHOLDER values are marked below — replace them before launch.
+ * ✏️  TODO before launch: fill in the fields marked TODO below.
+ * Contact details and profiles left empty ("") are hidden on the site, so
+ * nothing fake is ever shown — but people need at least an email address or
+ * a WhatsApp number to reach you. The production build warns until one is set.
  */
 
 /**
@@ -27,7 +30,7 @@ export const site: SiteConfig = {
   tagline: "Web Design & Development",
   title: "Mehak — Web Design & Development",
   description:
-    "Independent web designer and developer building modern, fast and responsive websites for businesses, startups and professional services.",
+    "Independent web designer and developer building modern, responsive, conversion-aware websites with React and Next.js for businesses, startups and agencies.",
   url,
   locale: "en_GB",
   author: "Mehak",
@@ -35,28 +38,27 @@ export const site: SiteConfig = {
   jobTitle: "Web Designer & Developer",
 
   contact: {
-    email: "hello@example.com", // PLACEHOLDER
+    email: "", // TODO: your email address, e.g. "hello@yourdomain.com"
     whatsapp: {
-      number: "910000000000", // PLACEHOLDER — country code + number, digits only
-      display: "+91 00000 00000", // PLACEHOLDER
-      message: "Hi Mehak, I'd like to talk about a website for my business.",
+      number: "", // TODO: country code + number, digits only, e.g. "919876543210"
+      display: "", // TODO: how it's shown, e.g. "+91 98765 43210"
+      message: "Hi Mehak, I'd like to talk about a website project.",
     },
-    location: "Working with clients remotely", // PLACEHOLDER — e.g. "Based in Pune · Working remotely"
-    responseTime: "I usually reply within one working day.", // PLACEHOLDER — only keep if true
+    location: "Working with clients remotely", // Optional — e.g. "Based in Pune · Working remotely"
+    responseTime: "I usually reply within one working day.", // Optional — only keep if true
   },
 
-  // PLACEHOLDER — replace with your real profiles, or remove any you don't use.
+  // Profiles shown in the footer and contact sections. Empty links are hidden.
   // Available icons: "linkedin", "github", "instagram", "dribbble", "behance", "x".
   socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile", icon: "linkedin" },
-    { label: "GitHub", href: "https://github.com/your-username", icon: "github" },
-    { label: "Instagram", href: "https://www.instagram.com/your-handle", icon: "instagram" },
+    { label: "LinkedIn", href: "", icon: "linkedin" }, // TODO: e.g. "https://www.linkedin.com/in/your-name"
+    { label: "GitHub", href: "https://github.com/gurmehakk20", icon: "github" },
   ],
 
   nav: [
-    { label: "Work", href: "/work" },
+    { label: "Work", href: "/#work" },
     { label: "Services", href: "/services" },
-    { label: "Approach", href: "/#approach" },
+    { label: "Process", href: "/#process" },
     { label: "About", href: "/#about" },
     { label: "Contact", href: "/contact" },
   ],
@@ -72,3 +74,9 @@ export const site: SiteConfig = {
     blurb: "Modern, easy-to-use websites for businesses, startups and professional services.",
   },
 };
+
+if (process.env.NODE_ENV === "production" && !site.contact.email && !site.contact.whatsapp.number) {
+  console.warn(
+    "\n⚠ No email address or WhatsApp number is set in src/content/site.ts, so visitors have no way to contact you. Add at least one before launch.\n",
+  );
+}

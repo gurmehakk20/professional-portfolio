@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { site } from "@/content/site";
+import { hasEmail, hasWhatsApp } from "@/lib/contact";
 import { mailtoUrl, whatsappUrl } from "@/lib/links";
 import { Wordmark } from "./logo";
 import { MobileNav } from "./mobile-nav";
@@ -35,8 +36,8 @@ export function SiteHeader() {
             name={site.name}
             items={site.nav}
             cta={site.cta}
-            whatsappHref={whatsappUrl()}
-            emailHref={mailtoUrl()}
+            whatsappHref={hasWhatsApp ? whatsappUrl() : undefined}
+            emailHref={hasEmail ? mailtoUrl() : undefined}
           />
         </div>
       </Container>

@@ -1,20 +1,21 @@
 import type { ContactPageContent } from "./types";
 
 /*
- * Contact page copy. Your email address and WhatsApp number live in
- * src/content/site.ts so they stay the same everywhere on the site.
+ * Contact page copy. Your email address, WhatsApp number and profiles live
+ * in src/content/site.ts so they stay the same everywhere on the site — any
+ * you leave empty there are hidden here too.
  *
- * The optional form doesn't need a server: it opens WhatsApp or the
- * visitor's email app with their message already written.
+ * The form doesn't need a server: it opens WhatsApp or the visitor's email
+ * app with their message already written.
  */
 
 export const contactPage: ContactPageContent = {
-  eyebrow: "Contact",
-  title: "Let's talk about your website",
+  eyebrow: "Start a project",
+  title: "Let's talk about your project",
   description:
-    "Tell me a little about your business and what you need. WhatsApp is the quickest way to reach me, but email works just as well.",
+    "Tell me a little about your business and what you need. I'll reply with a few questions and clear next steps.",
   metaDescription:
-    "Get in touch about a new website, a redesign or a landing page. Message on WhatsApp or send an email.",
+    "Start a website project with Mehak — business websites, landing pages, redesigns and custom web builds.",
 
   whatsapp: {
     title: "WhatsApp",
@@ -29,21 +30,21 @@ export const contactPage: ContactPageContent = {
 
   form: {
     enabled: true,
-    title: "Or send a quick message",
+    title: "Tell me about your project",
     description:
-      "Fill in a few details and your message will open in WhatsApp or your email app, ready to send. Nothing is stored on this website.",
+      "A few details are enough. Your message opens in WhatsApp or your email app, ready to send — nothing is stored on this website.",
     otherOption: "Something else",
     submitWhatsApp: "Send on WhatsApp",
     submitEmail: "Send by email",
-    emailSubject: "Website enquiry",
+    emailSubject: "New website project",
   },
 
   nextSteps: {
     title: "What happens next",
     steps: [
-      "I'll reply to learn more about your business and what you need.",
-      "We'll agree on the scope, timeline and cost before anything starts.",
-      "Work begins, and you'll see progress at every stage.",
+      "I reply with a few questions about your business and goals.",
+      "We agree on the scope, timeline and cost before anything starts.",
+      "Work begins, and you see progress at every stage.",
     ],
   },
 };
