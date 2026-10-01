@@ -2,14 +2,18 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Container } from "./container";
 
+export type SectionTone = "default" | "subtle" | "dark";
+
 type SectionProps = {
   id?: string;
   /** id of the section's heading, announced as the region's name by screen readers. */
   labelledBy?: string;
-  /** "subtle" uses the slightly darker alternate background. */
-  tone?: "default" | "subtle";
+  /** "subtle" is the light blue-grey alternate background; "dark" is the night-blue band. */
+  tone?: SectionTone;
   /** Drop the top padding when the section above has the same background, so the gap isn't doubled. */
   flushTop?: boolean;
+  /** Decorative layers (grid, glows) drawn behind the content. */
+  decor?: ReactNode;
   className?: string;
   children: ReactNode;
 };
@@ -20,6 +24,7 @@ export function Section({
   labelledBy,
   tone = "default",
   flushTop = false,
+  decor,
   className,
   children,
 }: SectionProps) {
@@ -31,11 +36,14 @@ export function Section({
       tabIndex={id ? -1 : undefined}
       className={cn(
         "outline-none",
-        flushTop ? "pb-16 md:pb-20 lg:pb-24" : "py-16 md:py-20 lg:py-24",
+        flushTop ? "pb-16 md:pb-24 lg:pb-28" : "py-16 md:py-24 lg:py-28",
         tone === "subtle" && "bg-subtle",
+        tone === "dark" && "theme-dark",
+        decor ? "relative isolate overflow-hidden" : null,
         className,
       )}
     >
+      {decor}
       <Container>{children}</Container>
     </section>
   );

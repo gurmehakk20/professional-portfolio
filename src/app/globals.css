@@ -4,6 +4,7 @@
    Design tokens
    Colours, type scale, shadows and motion live here. Change a value once
    and it updates everywhere it's used (e.g. `bg-canvas`, `text-h2`).
+   Roughly 80% neutrals, 15% blue/cyan, 5% decorative accents.
    ========================================================================== */
 
 @theme {
@@ -11,55 +12,61 @@
   --color-*: initial;
 
   --color-white: #ffffff;
-  --color-canvas: #faf9f6; /* page background, warm white */
+  --color-canvas: #f7f8fa; /* page background */
   --color-surface: #ffffff; /* cards and panels */
-  --color-subtle: #f3f1ec; /* alternate section background */
-  --color-ink: #0f1b2d; /* headings, primary buttons */
-  --color-ink-hover: #22324a; /* primary button hover */
-  --color-body: #3a4454; /* body text */
-  --color-muted: #5c6573; /* secondary text (passes AA on every light background) */
-  --color-line: #e6e2da; /* subtle borders */
-  --color-line-strong: #d6d0c5; /* dividers, hovered borders */
-  --color-field: #8a8f98; /* form field borders (3:1 against white) */
-  --color-accent: #0f766e; /* teal — links, icons, focus rings */
-  --color-accent-strong: #0b5e58; /* accent hover, text on accent-soft */
-  --color-accent-soft: #e7f2f0; /* tinted icon and tag backgrounds */
-  --color-on-dark-muted: #b8c0cc; /* secondary text on ink backgrounds */
-  --color-accent-on-dark: #5ec4b6; /* accent on ink backgrounds */
+  --color-subtle: #eff3f8; /* alternate section background */
+  --color-ink: #111318; /* headings and strong text */
+  --color-ink-hover: #262a33;
+  --color-body: #3d4350; /* body text */
+  --color-muted: #5e6573; /* secondary text (AA on every light background) */
+  --color-line: #e3e7ee; /* subtle borders */
+  --color-line-strong: #cbd2dc; /* dividers, hovered borders */
+  --color-field: #8c94a3; /* form field borders (3:1 against white) */
+  --color-accent: #2563eb; /* primary blue — buttons, links, focus rings */
+  --color-accent-strong: #1d4ed8; /* hover, and blue text on accent-soft */
+  --color-accent-soft: #e8f1ff; /* tinted tags, icon tiles, panels */
+  --color-cyan: #06b6d4; /* secondary accent — decorative only, never for text */
+  --color-cyan-strong: #0e7490; /* cyan text */
+  --color-cyan-soft: #e2f7fb;
+  --color-night: #0c1220; /* dark sections */
+  --color-on-dark-muted: #a7afbd; /* secondary text on dark sections */
+  --color-accent-on-dark: #7ab0ff; /* blue text on dark sections */
   --color-danger: #b42318; /* form errors */
 
   /* Type scale — fluid between small phones and large desktops. */
-  --text-display: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
-  --text-display--line-height: 1.08;
-  --text-display--letter-spacing: -0.03em;
+  --text-display: clamp(2.375rem, 1.2rem + 4.9vw, 4.75rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.04em;
 
-  --text-h1: clamp(2rem, 1.55rem + 2vw, 3rem);
-  --text-h1--line-height: 1.1;
-  --text-h1--letter-spacing: -0.025em;
+  --text-h1: clamp(2.25rem, 1.45rem + 3.2vw, 3.75rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.035em;
 
-  --text-h2: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-  --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: -0.02em;
+  --text-h2: clamp(1.875rem, 1.3rem + 2.3vw, 3rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.03em;
 
   --text-h3: 1.25rem;
   --text-h3--line-height: 1.35;
-  --text-h3--letter-spacing: -0.01em;
+  --text-h3--letter-spacing: -0.015em;
 
-  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
-  --text-lead--line-height: 1.65;
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem);
+  --text-lead--line-height: 1.6;
 
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1.3;
-  --text-eyebrow--letter-spacing: 0.12em;
+  --text-eyebrow--letter-spacing: 0.14em;
 
   /* Layout */
   --breakpoint-xs: 24rem; /* 384px — larger phones */
-  --container-site: 76rem; /* page width incl. side padding */
+  --container-site: 78rem; /* page width incl. side padding */
 
-  /* Restrained shadows */
-  --shadow-card: 0 1px 2px 0 rgb(15 27 45 / 0.04);
-  --shadow-lift: 0 1px 2px 0 rgb(15 27 45 / 0.04), 0 12px 32px -12px rgb(15 27 45 / 0.16);
-  --shadow-frame: 0 1px 2px 0 rgb(15 27 45 / 0.05), 0 24px 56px -24px rgb(15 27 45 / 0.24);
+  /* Shadows — neutral, with a hint of blue on raised elements. */
+  --shadow-card: 0 1px 2px 0 rgb(17 19 24 / 0.04);
+  --shadow-lift: 0 1px 2px 0 rgb(17 19 24 / 0.04), 0 18px 40px -18px rgb(37 99 235 / 0.28);
+  --shadow-float: 0 1px 2px 0 rgb(17 19 24 / 0.06), 0 14px 32px -12px rgb(17 19 24 / 0.2);
+  --shadow-frame: 0 1px 2px 0 rgb(17 19 24 / 0.05), 0 32px 64px -28px rgb(17 19 24 / 0.3);
+  --shadow-glow: 0 1px 2px 0 rgb(17 19 24 / 0.1), 0 10px 24px -10px rgb(37 99 235 / 0.6);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -73,10 +80,59 @@
   }
 }
 
-/* Fonts come from next/font (see src/app/layout.tsx). */
+/* Fonts come from next/font (see src/lib/fonts.ts). */
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   Decorative utilities — always used on aria-hidden elements.
+   ========================================================================== */
+
+/* Fine grid lines. Override --grid-line / --grid-size where needed. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line, rgb(17 19 24 / 0.055)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line, rgb(17 19 24 / 0.055)) 1px, transparent 1px);
+  background-size: var(--grid-size, 3rem) var(--grid-size, 3rem);
+}
+
+/* Small dot pattern. */
+@utility bg-dots {
+  background-image: radial-gradient(var(--dot-color, rgb(37 99 235 / 0.28)) 1px, transparent 1.5px);
+  background-size: var(--dot-size, 1.25rem) var(--dot-size, 1.25rem);
+}
+
+/* Fades a pattern out towards its edges. */
+@utility fade-edges {
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
+}
+
+/* Blue-to-cyan gradient for a short highlighted phrase in a large heading. */
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--color-accent) 15%, #0891b2 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  @media (forced-colors: active) {
+    background-image: none;
+    color: CanvasText;
+  }
+}
+
+/* Dark section: light headings, muted text, visible focus ring and grid lines. */
+@utility theme-dark {
+  background-color: var(--color-night);
+  color: var(--color-on-dark-muted);
+  --focus-ring: var(--color-accent-on-dark);
+  --grid-line: rgb(255 255 255 / 0.06);
+
+  & :where(h1, h2, h3, h4) {
+    color: var(--color-white);
+  }
 }
 
 /* ==========================================================================
@@ -109,7 +165,7 @@
     color: var(--color-body);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -161,6 +217,40 @@
   /* Stop the page scrolling behind the open mobile menu. */
   html:has(dialog[open]:modal) {
     overflow: hidden;
+  }
+}
+
+/* ==========================================================================
+   Header — transparent over the top of the page, then a solid, bordered bar
+   once you scroll. Pure CSS (scroll-driven animation); browsers without
+   support simply show the solid bar all the time.
+   ========================================================================== */
+
+.site-header {
+  background-color: rgb(247 248 250 / 0.9);
+  border-bottom: 1px solid var(--color-line);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-elevate linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 4rem;
+  }
+}
+
+@keyframes header-elevate {
+  from {
+    background-color: rgb(247 248 250 / 0);
+    border-bottom-color: rgb(227 231 238 / 0);
+    box-shadow: 0 0 0 0 rgb(17 19 24 / 0);
+  }
+  to {
+    background-color: rgb(247 248 250 / 0.9);
+    border-bottom-color: var(--color-line);
+    box-shadow: 0 10px 30px -22px rgb(17 19 24 / 0.35);
   }
 }
 

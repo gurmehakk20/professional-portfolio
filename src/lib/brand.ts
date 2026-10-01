@@ -5,13 +5,16 @@
  * src/app/icon.svg) — update all three together.
  */
 export const brandColors = {
-  canvas: "#faf9f6",
+  canvas: "#f7f8fa",
   surface: "#ffffff",
-  ink: "#0f1b2d",
-  muted: "#5c6573",
-  line: "#e6e2da",
-  lineStrong: "#d6d0c5",
-  field: "#8a8f98",
-  accent: "#0f766e",
-  accentSoft: "#e7f2f0",
+  ink: "#111318",
+  muted: "#5e6573",
+  line: "#e3e7ee",
+  lineStrong: "#cbd2dc",
+  field: "#8c94a3",
+  accent: "#2563eb",
+  accentSoft: "#e8f1ff",
+  cyan: "#06b6d4",
+  cyanSoft: "#e2f7fb",
+  night: "#0c1220",
 } as const;
