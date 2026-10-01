@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-/** The MEHAK wordmark. Wrap it in a link where needed. */
+/** The MEHAK wordmark: a small blue-to-cyan mark and the name. Wrap it in a link where needed. */
 export function Wordmark({ name, className }: { name: string; className?: string }) {
   return (
     <span
@@ -9,7 +9,10 @@ export function Wordmark({ name, className }: { name: string; className?: string
         className,
       )}
     >
-      <span aria-hidden="true" className="size-2 rounded-[2px] bg-accent" />
+      <span
+        aria-hidden="true"
+        className="size-2.5 rounded-[3px] bg-linear-135 from-accent to-cyan shadow-[0_0_0_3px_rgb(37_99_235/0.12)]"
+      />
       {name}
     </span>
   );

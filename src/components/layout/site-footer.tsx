@@ -10,7 +10,12 @@ export function SiteFooter() {
   const { contact, socials } = site;
 
   return (
-    <footer className="border-t border-line bg-canvas">
+    <footer className="relative bg-canvas">
+      {/* A thin blue-to-cyan hairline along the top. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/50 to-transparent"
+      />
       <Container className="py-12 md:py-16">
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-12 md:gap-8">
           <div className="sm:col-span-2 md:col-span-5">
@@ -30,7 +35,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="inline-flex min-h-8 items-center text-sm text-muted transition-colors duration-200 hover:text-ink"
+                    className="inline-flex min-h-8 items-center text-sm text-muted transition-colors duration-200 hover:text-accent-strong"
                   >
                     {item.label}
                   </Link>
@@ -45,7 +50,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={mailtoUrl()}
-                  className="inline-flex min-h-8 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-ink"
+                  className="inline-flex min-h-8 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-accent-strong"
                 >
                   <Icon name="mail" size={16} className="shrink-0" />
                   <span className="break-all">{contact.email}</span>
@@ -56,7 +61,7 @@ export function SiteFooter() {
                   href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-8 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-ink"
+                  className="inline-flex min-h-8 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-accent-strong"
                 >
                   <Icon name="whatsapp" size={16} className="shrink-0" />
                   <span>
@@ -75,7 +80,7 @@ export function SiteFooter() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex size-10 items-center justify-center rounded-lg border border-line bg-surface text-muted transition-colors duration-200 hover:border-line-strong hover:text-ink"
+                      className="inline-flex size-10 items-center justify-center rounded-lg border border-line bg-surface text-muted transition-colors duration-200 hover:border-accent/40 hover:text-accent"
                     >
                       <Icon name={social.icon} size={18} />
                       <span className="sr-only">{social.label} (opens in a new tab)</span>

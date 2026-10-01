@@ -7,9 +7,13 @@ import { Wordmark } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { NavLinks } from "./nav-links";
 
+/**
+ * Sticky header. It's transparent over the top of the page and becomes a
+ * solid, bordered bar once you scroll — see `.site-header` in globals.css.
+ */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas">
+    <header className="site-header sticky top-0 z-40">
       <Container className="flex h-(--header-height) items-center justify-between gap-6">
         <Link href="/" aria-label={`${site.name} — home`} className="rounded-sm">
           <Wordmark name={site.name} />
