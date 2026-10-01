@@ -112,7 +112,7 @@ export function ServicesOverview({
                   <Icon
                     name="arrow-right"
                     size={16}
-                    className="transition-transform duration-200 ease-out-soft group-hover:translate-x-0.5"
+                    className="transition-transform duration-200 ease-out-soft motion-safe:group-hover:translate-x-1"
                   />
                 </span>
               </div>

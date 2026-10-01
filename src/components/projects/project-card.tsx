@@ -51,7 +51,7 @@ export function ProjectCard({
       className={cn(
         "group/card relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card",
         cardHref &&
-          "transition duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5",
+          "transition duration-300 ease-out-soft hover:border-accent/35 hover:shadow-lift motion-safe:hover:-translate-y-1",
         wide && "lg:grid lg:grid-cols-12",
         className,
       )}
@@ -67,7 +67,12 @@ export function ProjectCard({
           wide && reverse && "lg:order-last",
         )}
       >
-        <div className="transition-transform duration-500 ease-out-soft motion-safe:group-hover/card:scale-[1.02]">
+        <div
+          className={cn(
+            "transition-transform duration-700 ease-out-soft",
+            cardHref && "motion-safe:group-hover/card:scale-[1.03]",
+          )}
+        >
           <ProjectVisual project={project} sizes={imageSizes[layout]} />
         </div>
       </div>
@@ -132,7 +137,12 @@ export function ProjectCard({
                   <Icon
                     name={caseStudyHref ? "arrow-right" : "arrow-up-right"}
                     size={16}
-                    className="transition-transform duration-200 ease-out-soft group-hover/card:translate-x-0.5"
+                    className={cn(
+                      "transition-transform duration-300 ease-out-soft",
+                      caseStudyHref
+                        ? "motion-safe:group-hover/card:translate-x-1"
+                        : "motion-safe:group-hover/card:translate-x-0.5 motion-safe:group-hover/card:-translate-y-0.5",
+                    )}
                   />
                 </span>
               ) : null}

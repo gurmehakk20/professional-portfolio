@@ -26,8 +26,8 @@ export function ArrowLink({ href, className, children }: ArrowLinkProps) {
       className={cn(
         "shrink-0 transition-transform duration-200 ease-out-soft",
         external
-          ? "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          : "group-hover:translate-x-0.5",
+          ? "motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+          : "motion-safe:group-hover:translate-x-1",
       )}
     />
   );

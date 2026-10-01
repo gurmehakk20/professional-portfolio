@@ -39,7 +39,12 @@ export function ButtonLink({
         <Icon
           name={trailingIcon}
           size={18}
-          className="transition-transform duration-200 ease-out-soft group-hover:translate-x-0.5"
+          className={cn(
+            "transition-transform duration-200 ease-out-soft",
+            trailingIcon === "arrow-up-right"
+              ? "motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+              : "motion-safe:group-hover:translate-x-1",
+          )}
         />
       ) : null}
     </>

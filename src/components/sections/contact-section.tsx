@@ -99,7 +99,11 @@ export function ContactSection({ content, id = "contact", number, flushTop }: Co
                         <Icon
                           name={method.external ? "arrow-up-right" : "arrow-right"}
                           size={18}
-                          className="shrink-0 text-on-dark-muted transition-[translate,color] duration-200 ease-out-soft group-hover:translate-x-0.5 group-hover:text-white"
+                          className={`shrink-0 text-on-dark-muted transition-[translate,color] duration-200 ease-out-soft group-hover:text-white ${
+                            method.external
+                              ? "motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                              : "motion-safe:group-hover:translate-x-1"
+                          }`}
                         />
                         {method.external ? (
                           <span className="sr-only"> (opens in a new tab)</span>

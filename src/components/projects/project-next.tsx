@@ -27,7 +27,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
 
   return (
     <Section id="next-project" labelledBy="next-project-heading" tone={tone}>
-      <div data-reveal className="group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
+      <div data-reveal className="group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-300 ease-out-soft hover:border-accent/35 hover:shadow-lift motion-safe:hover:-translate-y-1 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
         <div className="flex flex-col md:justify-between">
           <h2
             id="next-project-heading"
@@ -51,7 +51,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
                   <Icon
                     name="arrow-right"
                     size={28}
-                    className="ml-2 inline-block size-[0.7em] align-baseline text-accent transition-transform duration-200 ease-out-soft group-hover:translate-x-1"
+                    className="ml-2 inline-block size-[0.7em] align-baseline text-accent transition-transform duration-200 ease-out-soft motion-safe:group-hover:translate-x-1"
                   />
                 </span>
               </Link>
@@ -64,12 +64,12 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
             <ProjectImage
               media={project.cover}
               sizes={thumbnailSizes}
-              className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
+              className="transition-transform duration-700 ease-out-soft motion-safe:group-hover:scale-[1.03]"
             />
           ) : (
             <ProjectCover
               project={project}
-              className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
+              className="transition-transform duration-700 ease-out-soft motion-safe:group-hover:scale-[1.03]"
             />
           )}
         </div>
