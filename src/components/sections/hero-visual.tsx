@@ -35,7 +35,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
       <div className="relative pt-[13cqw] pr-[9cqw] pb-[17cqw] pl-[3cqw]">
         {/* Dots and a soft glow behind the composition. */}
         <div className="absolute top-0 right-0 -z-10 h-[46cqw] w-[52cqw] bg-dots fade-edges" />
-        <div className="absolute inset-[8%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(37_99_235/0.2),transparent)]" />
+        <div className="absolute inset-[8%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(49_105_196/0.2),transparent)]" />
 
         <BrowserFrame url={displayHost(project?.liveUrl)}>
           {hasScreenshot && cover ? (
@@ -51,7 +51,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         {project ? (
           <div className="enter absolute top-0 left-0 w-[56cqw] [--enter-delay:720ms] rounded-[2.4cqw] @lg:w-[48cqw] border border-line bg-surface p-[2.6cqw] shadow-float">
             <div className="flex items-center gap-[2.4cqw]">
-              <span className="grid size-[9cqw] shrink-0 place-items-center rounded-[1.8cqw] bg-linear-135 from-accent to-cyan font-display text-[4.2cqw] font-bold text-white">
+              <span className="grid size-[9cqw] shrink-0 place-items-center rounded-[1.8cqw] bg-linear-135 from-accent to-accent-bright font-display text-[4.2cqw] font-bold text-white">
                 {project.title.charAt(0)}
               </span>
               <span className="min-w-0">
@@ -95,7 +95,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         </div>
 
         {/* A named cursor, as in a shared design file. */}
-        <div className="enter absolute top-[46%] left-[50%] flex items-start [--enter-delay:1080ms] drop-shadow-[0_4px_8px_rgb(37_99_235/0.3)]">
+        <div className="enter absolute top-[46%] left-[50%] flex items-start [--enter-delay:1080ms] drop-shadow-[0_4px_8px_rgb(28_78_156/0.3)]">
           <svg viewBox="0 0 16 16" className="size-[4.6cqw]" fill="none">
             <path
               d="M2 1.5 14 7.2 8.6 8.6 6.6 14.5 2 1.5Z"

@@ -16,7 +16,7 @@ export function SiteFooter() {
 
   return (
     <footer className="relative bg-canvas">
-      {/* A thin blue-to-cyan hairline along the top. */}
+      {/* A thin blue hairline along the top. */}
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/50 to-transparent"

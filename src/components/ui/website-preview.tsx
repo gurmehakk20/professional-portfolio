@@ -32,7 +32,7 @@ function Nav() {
   return (
     <div className="flex items-center justify-between px-[6cqw] pt-[3.5cqw]">
       <div className="flex items-center gap-[1cqw]">
-        <span className="size-[2.2cqw] rounded-[0.5cqw] bg-linear-135 from-accent to-cyan" />
+        <span className="size-[2.2cqw] rounded-[0.5cqw] bg-linear-135 from-accent to-accent-bright" />
         <span className="h-[1.4cqw] w-[8cqw] rounded-full bg-ink" />
       </div>
       <div className="flex items-center gap-[2.6cqw]">
@@ -129,7 +129,7 @@ export function MobileScreen({ className }: { className?: string }) {
     <div aria-hidden="true" className={cn("h-full w-full bg-surface @container", className)}>
       <div className="flex items-center justify-between px-[8cqw] pt-[8cqw]">
         <div className="flex items-center gap-[3cqw]">
-          <span className="size-[7cqw] rounded-[1.6cqw] bg-linear-135 from-accent to-cyan" />
+          <span className="size-[7cqw] rounded-[1.6cqw] bg-linear-135 from-accent to-accent-bright" />
           <span className="h-[4cqw] w-[22cqw] rounded-full bg-ink" />
         </div>
         <div className="flex flex-col gap-[2.4cqw]">

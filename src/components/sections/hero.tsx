@@ -41,7 +41,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
             <p className="enter inline-flex items-center gap-2.5 rounded-full border border-accent/15 bg-surface/80 py-1.5 pr-4 pl-2.5 text-eyebrow font-semibold text-accent-strong uppercase shadow-card">
               <span
                 aria-hidden="true"
-                className="size-2 rounded-full bg-linear-135 from-accent to-cyan ring-4 ring-accent/10"
+                className="size-2 rounded-full bg-linear-135 from-accent to-accent-bright ring-4 ring-accent/10"
               />
               {eyebrow}
             </p>
@@ -97,7 +97,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
   );
 }
 
-/** Renders the title with `highlight` (if it appears in it) in the blue-to-cyan gradient. */
+/** Renders the title with `highlight` (if it appears in it) in the blue gradient. */
 function HighlightedTitle({ title, highlight }: { title: string; highlight?: string }) {
   const start = highlight ? title.indexOf(highlight) : -1;
   if (!highlight || start === -1) return title;

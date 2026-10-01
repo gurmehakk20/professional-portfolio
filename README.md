@@ -94,9 +94,12 @@ links lead to the same place, so the next step is always obvious without the pag
 ### Design system
 
 - **Colours** (`src/app/globals.css`): `canvas` page background, `surface` cards, `subtle` alternate
-  sections, `ink` headings, `accent` brand blue (buttons, links, focus), `cyan` decorative accent
-  (never for text), `accent-soft` tinted pills and tiles, `night` dark sections. Roughly 80%
-  neutrals, 15% blue/cyan, 5% decoration.
+  sections, `ink` headings, `accent` deep cobalt blue (buttons, links, focus), `accent-strong` its
+  hover shade, `accent-bright` a lighter cobalt for gradient ends, glows and blue on dark
+  backgrounds, `accent-soft` tinted pills and tiles, `night` deep-blue dark sections, and `cyan`
+  a restrained blue-teal for small details only (never for text). Roughly 75–80% neutrals,
+  15–20% blue, about 5% teal. The share images and icons use the same colours from
+  `src/lib/brand.ts` and `src/app/icon.svg`.
 - **Type**: Plus Jakarta Sans for headings, Inter for text. Sizes are fluid tokens: `text-display`
   (hero), `text-h1`, `text-h2`, `text-h3`, `text-lead`, `text-eyebrow`.
 - **Sections**: `<Section tone="default" | "subtle" | "dark">` sets the background, and

@@ -36,11 +36,11 @@ export function ContactSection({ content, id = "contact", number, flushTop }: Co
         />
         <div
           aria-hidden="true"
-          className="absolute -top-1/2 -right-[10%] -z-10 aspect-square w-[42rem] max-w-[120%] rounded-full bg-[radial-gradient(closest-side,rgb(37_99_235/0.45),transparent)]"
+          className="absolute -top-1/2 -right-[10%] -z-10 aspect-square w-[42rem] max-w-[120%] rounded-full bg-[radial-gradient(closest-side,rgb(49_105_196/0.45),transparent)]"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-2/3 left-[20%] -z-10 aspect-square w-[30rem] max-w-full rounded-full bg-[radial-gradient(closest-side,rgb(6_182_212/0.22),transparent)]"
+          className="absolute -bottom-2/3 left-[20%] -z-10 aspect-square w-[30rem] max-w-full rounded-full bg-[radial-gradient(closest-side,rgb(47_139_166/0.2),transparent)]"
         />
 
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
@@ -54,7 +54,7 @@ export function ContactSection({ content, id = "contact", number, flushTop }: Co
               description={content.description}
             />
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-              <ButtonLink href={primaryCta.href} size="lg" trailingIcon="arrow-right">
+              <ButtonLink href={primaryCta.href} variant="inverse" size="lg" trailingIcon="arrow-right">
                 {primaryCta.label}
               </ButtonLink>
               {site.contact.responseTime ? (

@@ -53,7 +53,7 @@ export const projects: Project[] = [
   //   role: ["Design", "Development"],
   //   year: "2026",
   //   cover: { src: "/images/projects/project-name/home.webp", alt: "Project Name home page" },
-  //   coverColor: "#2563eb",
+  //   coverColor: "#1c4e9c",
   //   liveUrl: "https://…",
   //   featured: true,
   //   caseStudy: {

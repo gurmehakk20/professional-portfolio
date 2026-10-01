@@ -52,11 +52,11 @@ export function Process({ intro, steps, id = "process", number }: ProcessProps) 
               aria-hidden="true"
               className="flex flex-col items-center gap-3 pb-3 lg:flex-row lg:gap-4 lg:pb-0"
             >
-              <span className="process-dot inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-accent bg-accent font-display text-sm font-semibold text-white tabular-nums shadow-[0_0_0_0_rgb(37_99_235/0)] transition-shadow duration-300 ease-out-soft group-hover:shadow-[0_0_0_6px_rgb(37_99_235/0.28)]">
+              <span className="process-dot inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-accent-bright bg-accent-bright font-display text-sm font-semibold text-white tabular-nums shadow-[0_0_0_0_rgb(49_105_196/0)] transition-shadow duration-300 ease-out-soft group-hover:shadow-[0_0_0_6px_rgb(49_105_196/0.35)]">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="relative w-px flex-1 overflow-hidden bg-white/12 group-last:hidden lg:-mr-6 lg:h-px lg:w-auto">
-                <span className="process-line absolute inset-0 origin-top bg-linear-to-b from-accent to-cyan lg:origin-left lg:bg-linear-to-r" />
+                <span className="process-line absolute inset-0 origin-top bg-linear-to-b from-accent-bright to-accent-on-dark lg:origin-left lg:bg-linear-to-r" />
               </span>
             </div>
 

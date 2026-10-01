@@ -30,7 +30,7 @@ export function DotPattern({ className }: DecorProps) {
   );
 }
 
-/** A soft blue or cyan glow. Position and size it with `className` (e.g. `-top-40 right-0 w-[32rem]`). */
+/** A soft blue or teal glow. Position and size it with `className` (e.g. `-top-40 right-0 w-[32rem]`). */
 export function Glow({ color = "blue", className }: DecorProps & { color?: "blue" | "cyan" }) {
   return (
     <div
@@ -38,8 +38,8 @@ export function Glow({ color = "blue", className }: DecorProps & { color?: "blue
       className={cn(
         "pointer-events-none absolute -z-10 aspect-square rounded-full",
         color === "blue"
-          ? "bg-[radial-gradient(closest-side,rgb(37_99_235/0.16),transparent)]"
-          : "bg-[radial-gradient(closest-side,rgb(6_182_212/0.15),transparent)]",
+          ? "bg-[radial-gradient(closest-side,rgb(49_105_196/0.16),transparent)]"
+          : "bg-[radial-gradient(closest-side,rgb(47_139_166/0.12),transparent)]",
         className,
       )}
     />

@@ -61,7 +61,7 @@ export function ProjectCard({
         className={cn(
           "relative m-2 mb-0 overflow-hidden rounded-xl",
           project.cover && project.cover.device !== "mobile"
-            ? "bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft p-[7%]"
+            ? "bg-linear-160 from-accent-soft via-[#f2f5fb] to-cyan-soft p-[7%]"
             : null,
           wide && "lg:col-span-7 lg:mb-2",
           wide && reverse && "lg:order-last",

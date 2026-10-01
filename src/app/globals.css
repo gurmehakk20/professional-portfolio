@@ -4,7 +4,7 @@
    Design tokens
    Colours, type scale, shadows and motion live here. Change a value once
    and it updates everywhere it's used (e.g. `bg-canvas`, `text-h2`).
-   Roughly 80% neutrals, 15% blue/cyan, 5% decorative accents.
+   Roughly 75–80% neutrals, 15–20% blue, and a touch of teal (~5%) for detail.
    ========================================================================== */
 
 @theme {
@@ -22,15 +22,16 @@
   --color-line: #e3e7ee; /* subtle borders */
   --color-line-strong: #cbd2dc; /* dividers, hovered borders */
   --color-field: #8c94a3; /* form field borders (3:1 against white) */
-  --color-accent: #2563eb; /* primary blue — buttons, links, focus rings */
-  --color-accent-strong: #1d4ed8; /* hover, and blue text on accent-soft */
-  --color-accent-soft: #e8f1ff; /* tinted tags, icon tiles, panels */
-  --color-cyan: #06b6d4; /* secondary accent — decorative only, never for text */
-  --color-cyan-strong: #0e7490; /* cyan text */
-  --color-cyan-soft: #e2f7fb;
-  --color-night: #0c1220; /* dark sections */
-  --color-on-dark-muted: #a7afbd; /* secondary text on dark sections */
-  --color-accent-on-dark: #7ab0ff; /* blue text on dark sections */
+  --color-accent: #1c4e9c; /* primary deep cobalt — buttons, links, focus rings */
+  --color-accent-strong: #163e7e; /* hover, and blue text on accent-soft */
+  --color-accent-bright: #3169c4; /* lighter cobalt — gradient ends, glows, blue on dark surfaces */
+  --color-accent-soft: #eaf0fa; /* tinted tags, icon tiles, panels */
+  --color-cyan: #2f8ba6; /* restrained blue-teal — small decorative details only, never for text */
+  --color-cyan-strong: #1c6478; /* teal text */
+  --color-cyan-soft: #e6f1f4;
+  --color-night: #0d1b33; /* deep blue — dark sections */
+  --color-on-dark-muted: #aab4c6; /* secondary text on dark sections */
+  --color-accent-on-dark: #8eb2ea; /* blue text on dark sections */
   --color-danger: #b42318; /* form errors */
 
   /* Type scale — fluid between small phones and large desktops. */
@@ -63,10 +64,10 @@
 
   /* Shadows — neutral, with a hint of blue on raised elements. */
   --shadow-card: 0 1px 2px 0 rgb(17 19 24 / 0.04);
-  --shadow-lift: 0 1px 2px 0 rgb(17 19 24 / 0.04), 0 18px 40px -18px rgb(37 99 235 / 0.28);
+  --shadow-lift: 0 1px 2px 0 rgb(17 19 24 / 0.04), 0 18px 40px -18px rgb(28 78 156 / 0.28);
   --shadow-float: 0 1px 2px 0 rgb(17 19 24 / 0.06), 0 14px 32px -12px rgb(17 19 24 / 0.2);
   --shadow-frame: 0 1px 2px 0 rgb(17 19 24 / 0.05), 0 32px 64px -28px rgb(17 19 24 / 0.3);
-  --shadow-glow: 0 1px 2px 0 rgb(17 19 24 / 0.1), 0 10px 24px -10px rgb(37 99 235 / 0.6);
+  --shadow-glow: 0 1px 2px 0 rgb(17 19 24 / 0.1), 0 10px 24px -10px rgb(28 78 156 / 0.55);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -101,7 +102,7 @@
 
 /* Small dot pattern. */
 @utility bg-dots {
-  background-image: radial-gradient(var(--dot-color, rgb(37 99 235 / 0.28)) 1px, transparent 1.5px);
+  background-image: radial-gradient(var(--dot-color, rgb(49 105 196 / 0.28)) 1px, transparent 1.5px);
   background-size: var(--dot-size, 1.25rem) var(--dot-size, 1.25rem);
 }
 
@@ -110,9 +111,9 @@
   mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
 }
 
-/* Blue-to-cyan gradient for a short highlighted phrase in a large heading. */
+/* Deep-to-lighter cobalt gradient for a short highlighted phrase in a large heading. */
 @utility text-gradient {
-  background-image: linear-gradient(100deg, var(--color-accent) 15%, #0891b2 95%);
+  background-image: linear-gradient(100deg, var(--color-accent) 20%, var(--color-accent-bright) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

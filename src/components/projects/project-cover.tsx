@@ -17,7 +17,7 @@ type ProjectCoverProps = {
  */
 export function ProjectCover({ project, shape = "card", className }: ProjectCoverProps) {
   const banner = shape === "banner";
-  const style = { "--project": project.coverColor ?? "#2563eb" } as CSSProperties;
+  const style = { "--project": project.coverColor ?? "#1c4e9c" } as CSSProperties;
 
   return (
     <div

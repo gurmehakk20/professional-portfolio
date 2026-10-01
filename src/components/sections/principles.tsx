@@ -37,7 +37,7 @@ export function Principles({ intro, items, id = "why", tone = "default", number 
           {items.map((item) => (
             <li key={item.title} className="relative border-t border-line pt-6">
               {/* Short accent mark on the hairline. */}
-              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 rounded-full bg-linear-to-r from-accent to-cyan" />
+              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 rounded-full bg-linear-to-r from-accent to-accent-bright" />
               {/* Phones: icon beside the title. From sm up: icon above it. */}
               <div className="flex items-center gap-3 sm:block">
                 <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-accent/10 bg-linear-135 from-accent-soft to-cyan-soft text-accent">
