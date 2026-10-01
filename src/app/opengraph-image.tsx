@@ -8,5 +8,5 @@ export const size = ogImageSize;
 export const contentType = "image/png";
 
 export default function OpengraphImage() {
-  return ogImage({ title: hero.title, subtitle: site.tagline });
+  return ogImage({ title: hero.title, highlight: hero.titleHighlight, subtitle: site.tagline });
 }

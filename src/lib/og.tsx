@@ -11,25 +11,27 @@ import { brandColors } from "@/lib/brand";
  * next/og renders this to a PNG. It only understands flexbox and inline
  * styles, and any <div> with more than one child needs `display: "flex"`.
  *
- * Fonts: Manrope and Inter (Latin subsets, via Fontsource), both licensed
+ * Fonts: Plus Jakarta Sans and Inter (Latin subsets, via Fontsource), both licensed
  * under the SIL Open Font License 1.1.
  */
 
 export const ogImageSize = { width: 1200, height: 630 };
 
 const fontsDir = join(process.cwd(), "src/assets/fonts");
-const [manropeBold, interMedium, interSemiBold] = await Promise.all([
-  readFile(join(fontsDir, "manrope-latin-700-normal.woff")),
+const [jakartaBold, interMedium, interSemiBold] = await Promise.all([
+  readFile(join(fontsDir, "plus-jakarta-sans-latin-700-normal.woff")),
   readFile(join(fontsDir, "inter-latin-500-normal.woff")),
   readFile(join(fontsDir, "inter-latin-600-normal.woff")),
 ]);
 
 type OgCardProps = {
-  /** Small teal label above the title, e.g. a project's category. */
+  /** Small blue label above the title, e.g. a project's category. */
   eyebrow?: string;
   /** Adds a "Placeholder" tag, so example projects are never mistaken for real work. */
   placeholder?: boolean;
   title: string;
+  /** Part of the title to show in blue (must match exactly). */
+  highlight?: string;
   /** "lg" suits short titles such as a project name. */
   titleSize?: "md" | "lg";
   /** Line under the title. */
@@ -41,7 +43,7 @@ export function ogImage(props: OgCardProps) {
   return new ImageResponse(<OgCard {...props} />, {
     ...ogImageSize,
     fonts: [
-      { name: "Manrope", data: manropeBold, weight: 700, style: "normal" },
+      { name: "Plus Jakarta Sans", data: jakartaBold, weight: 700, style: "normal" },
       { name: "Inter", data: interMedium, weight: 500, style: "normal" },
       { name: "Inter", data: interSemiBold, weight: 600, style: "normal" },
     ],
@@ -55,7 +57,7 @@ function getTitleFontSize(title: string, titleSize: "md" | "lg") {
   return title.length <= 28 ? 72 : 60;
 }
 
-function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgCardProps) {
+function OgCard({ eyebrow, placeholder, title, highlight, titleSize = "md", subtitle }: OgCardProps) {
   return (
     <div
       style={{
@@ -64,6 +66,9 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
         width: "100%",
         height: "100%",
         backgroundColor: brandColors.canvas,
+        // Soft blue and cyan glows, as on the site.
+        backgroundImage:
+          "radial-gradient(circle at 88% 18%, rgba(37,99,235,0.2), transparent 42%), radial-gradient(circle at 8% 105%, rgba(6,182,212,0.16), transparent 38%)",
         color: brandColors.ink,
         fontFamily: "Inter",
       }}
@@ -117,15 +122,18 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
           ) : null}
           <div
             style={{
-              fontFamily: "Manrope",
+              fontFamily: "Plus Jakarta Sans",
               fontSize: getTitleFontSize(title, titleSize),
               fontWeight: 700,
               lineHeight: titleSize === "lg" ? 1.06 : 1.12,
               letterSpacing: "-0.03em",
-              textWrap: "balance",
+              // Words are laid out one by one so part of the title can be blue.
+              display: "flex",
+              flexWrap: "wrap",
+              columnGap: "0.26em",
             }}
           >
-            {title}
+            {renderTitle(title, highlight)}
           </div>
           <div style={{ marginTop: 28, fontSize: 28, fontWeight: 500, color: brandColors.muted }}>
             {subtitle}
@@ -136,14 +144,39 @@ function OgCard({ eyebrow, placeholder, title, titleSize = "md", subtitle }: OgC
   );
 }
 
-/** The header wordmark: a teal square and the name in wide-spaced capitals. */
+/** The title as one span per word, with the words of `highlight` (if it appears in the title) in brand blue. */
+function renderTitle(title: string, highlight?: string) {
+  const start = highlight ? title.indexOf(highlight) : -1;
+  const end = highlight && start !== -1 ? start + highlight.length : -1;
+  let offset = 0;
+
+  return title.split(" ").map((word, index) => {
+    const wordStart = title.indexOf(word, offset);
+    offset = wordStart + word.length;
+    const blue = start !== -1 && wordStart >= start && wordStart < end;
+    return (
+      <span key={index} style={blue ? { color: brandColors.accent } : undefined}>
+        {word}
+      </span>
+    );
+  });
+}
+
+/** The header wordmark: a blue-to-cyan square and the name in wide-spaced capitals. */
 function Wordmark() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: brandColors.accent }} />
       <div
         style={{
-          fontFamily: "Manrope",
+          width: 16,
+          height: 16,
+          borderRadius: 4,
+          backgroundImage: `linear-gradient(135deg, ${brandColors.accent}, ${brandColors.cyan})`,
+        }}
+      />
+      <div
+        style={{
+          fontFamily: "Plus Jakarta Sans",
           fontSize: 28,
           fontWeight: 700,
           letterSpacing: "0.2em",
@@ -227,18 +260,18 @@ function BrowserHint() {
             <Bar width={28} height={7} fill={brandColors.lineStrong} />
             <Bar width={34} height={7} fill={brandColors.lineStrong} />
             <Bar width={26} height={7} fill={brandColors.lineStrong} />
-            <div style={{ width: 60, height: 24, borderRadius: 6, backgroundColor: brandColors.ink }} />
+            <div style={{ width: 60, height: 24, borderRadius: 6, backgroundColor: brandColors.accent }} />
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", marginTop: 50 }}>
-          <Bar width={64} height={7} fill={brandColors.accent} />
+          <Bar width={64} height={7} fill={brandColors.cyan} />
           <Bar width={268} height={18} fill={brandColors.ink} marginTop={18} />
           <Bar width={204} height={18} fill={brandColors.ink} marginTop={11} />
           <Bar width={250} height={8} fill={brandColors.lineStrong} marginTop={24} />
           <Bar width={214} height={8} fill={brandColors.lineStrong} marginTop={10} />
           <div style={{ display: "flex", gap: 10, marginTop: 26 }}>
-            <div style={{ width: 90, height: 30, borderRadius: 6, backgroundColor: brandColors.ink }} />
+            <div style={{ width: 90, height: 30, borderRadius: 6, backgroundColor: brandColors.accent }} />
             <div
               style={{
                 width: 90,
