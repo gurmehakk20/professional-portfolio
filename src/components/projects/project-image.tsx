@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { WebsitePreview, type PreviewVariant } from "@/components/ui/website-preview";
 import type { ProjectMedia } from "@/content/types";
 import { cn } from "@/lib/cn";
 
@@ -12,36 +11,26 @@ type ProjectImageProps = {
   sizes: string;
   /** Load straight away. Use only for the main image at the top of a page. */
   priority?: boolean;
-  /** Abstract layout shown while the project has no image yet. */
-  placeholder?: PreviewVariant;
   className?: string;
 };
 
-/** A phone is about 27% of the box's width, so it never needs a wide image. */
+/** A phone is about 26% of the box's width, so it never needs a wide image. */
 const phoneSizes = "(min-width: 768px) 320px, 30vw";
 
 /**
- * A project screenshot in a fixed 16:10 box (no layout shift).
- * Phone screenshots (`device: "mobile"`) are shown in a phone outline.
- * Falls back to an abstract website preview when `media.src` is empty.
+ * A project screenshot in a fixed 16:10 box (no layout shift), cropped from
+ * the top. Phone screenshots (`device: "mobile"`) are shown whole in a phone
+ * outline on a soft tinted backdrop.
  */
-export function ProjectImage({
-  media,
-  sizes,
-  priority = false,
-  placeholder = "split",
-  className,
-}: ProjectImageProps) {
+export function ProjectImage({ media, sizes, priority = false, className }: ProjectImageProps) {
   const loading = priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {};
 
   return (
     <div className={cn("relative aspect-[16/10] overflow-hidden bg-subtle", className)}>
-      {!media.src ? (
-        <WebsitePreview variant={placeholder} />
-      ) : media.device === "mobile" ? (
-        // The "mobile" placeholder's phone outline, a touch narrower so a standard
-        // 1170×2532 capture shows whole. Sized in container units.
-        <div className="absolute inset-0 flex items-center justify-center @container">
+      {media.device === "mobile" ? (
+        // Sized in container units, a touch narrower than 9:19.5 so a standard
+        // 1170×2532 capture shows whole.
+        <div className="absolute inset-0 flex items-center justify-center bg-linear-160 from-accent-soft to-cyan-soft @container">
           <div className="relative h-[54cqw] w-[25.7cqw] overflow-hidden rounded-[3.2cqw] border-[0.7cqw] border-ink bg-surface">
             <Image
               src={media.src}

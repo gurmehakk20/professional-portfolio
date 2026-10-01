@@ -1,45 +1,37 @@
 import Link from "next/link";
-import { Fragment } from "react";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { BrowserFrame } from "@/components/ui/browser-frame";
 import { stretchedLink } from "@/components/ui/card-styles";
 import { Icon } from "@/components/ui/icon";
 import { Tag } from "@/components/ui/tag";
 import type { Project } from "@/content/types";
 import { cn } from "@/lib/cn";
-import { displayHost } from "@/lib/links";
-import { getPlaceholderVariant, getProjectNumber } from "@/lib/projects";
-import { ProjectImage } from "./project-image";
-
-/** Cards show at most this many tags, so they stay tidy. */
-const maxTags = 3;
+import { ProjectVisual } from "./project-visual";
 
 /*
- * How wide the cover is shown at each screen size (it sits inset inside the
- * card), so browsers download a suitably sized image. Update these if you
- * change the card or grid layout.
+ * How wide the picture is shown at each screen size, so browsers download a
+ * suitably sized image. Update these if you change the card or grid layout.
  */
 const imageSizes = {
-  stacked: "(min-width: 1216px) 460px, (min-width: 768px) 38vw, 76vw",
-  wide: "(min-width: 1216px) 556px, (min-width: 1024px) 46vw, (min-width: 768px) 66vw, 76vw",
+  stacked: "(min-width: 1216px) 520px, (min-width: 768px) 42vw, 86vw",
+  wide: "(min-width: 1216px) 620px, (min-width: 1024px) 52vw, 86vw",
 } as const;
-
-/** Gentle zoom on the cover while the card is hovered. */
-const coverMotion =
-  "transition-transform duration-500 ease-out-soft motion-safe:group-hover/card:scale-[1.02]";
 
 type ProjectCardProps = {
   project: Project;
   /** Use "h2" when the card sits directly under the page's <h1>, e.g. on /work. */
   headingLevel?: "h2" | "h3";
-  /** "wide" spans the full width, with the image and text side by side on large screens. */
+  /** "wide" spans the full width, with picture and text side by side on large screens. */
   layout?: "stacked" | "wide";
-  /** Wide layout only: show the image on the right instead of the left. */
+  /** Wide layout only: show the picture on the right instead of the left. */
   reverse?: boolean;
   className?: string;
 };
 
-/** A project preview linking to its page at /work/[slug]. The whole card is clickable. */
+/**
+ * A project as proof of work: picture, category, name, one-line summary,
+ * technologies and links. The whole card links to the case study if there
+ * is one, otherwise to the live site. With neither, it's a plain card.
+ */
 export function ProjectCard({
   project,
   headingLevel: Heading = "h3",
@@ -48,140 +40,115 @@ export function ProjectCard({
   className,
 }: ProjectCardProps) {
   const wide = layout === "wide";
-  const number = getProjectNumber(project.slug);
-  const placeholder = getPlaceholderVariant(project.slug);
-  // Phone images bring their own device outline; everything else sits in a browser window.
-  const inBrowser = project.cover.src
-    ? project.cover.device !== "mobile"
-    : placeholder !== "mobile";
-  const tags = project.tags.slice(0, maxTags);
-  const hasLinks = Boolean(project.liveUrl || project.caseStudyUrl);
+  const caseStudyHref = project.caseStudy ? `/work/${project.slug}` : undefined;
+  const cardHref = caseStudyHref ?? project.liveUrl;
+  const opensNewTab = !caseStudyHref && Boolean(project.liveUrl);
+  const technologies = project.technologies ?? [];
+  const role = project.role ?? [];
 
   return (
     <article
       className={cn(
-        "group/card relative flex flex-col rounded-2xl border border-line bg-surface p-2 shadow-card",
-        "transition duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5",
+        "group/card relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card",
+        cardHref &&
+          "transition duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5",
         wide && "lg:grid lg:grid-cols-12",
         className,
       )}
     >
-      {/* The cover, presented on a tinted panel. */}
+      {/* The picture, inset on a soft panel. */}
       <div
         className={cn(
-          "relative flex flex-col justify-center rounded-xl bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft p-[8%]",
-          !inBrowser && "overflow-hidden",
-          wide && "md:px-[14%] lg:col-span-7 lg:px-[8%]",
+          "relative m-2 mb-0 overflow-hidden rounded-xl",
+          project.cover && project.cover.device !== "mobile"
+            ? "bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft p-[7%]"
+            : null,
+          wide && "lg:col-span-7 lg:mb-2",
           wide && reverse && "lg:order-last",
         )}
       >
-        {inBrowser ? (
-          <div className={coverMotion}>
-            <BrowserFrame url={displayHost(project.liveUrl)}>
-              <ProjectImage
-                media={project.cover}
-                sizes={imageSizes[layout]}
-                placeholder={placeholder}
-              />
-            </BrowserFrame>
-          </div>
-        ) : (
-          <>
-            {/* Takes up the space of a browser window, so covers line up across cards. */}
-            <div className="py-4 sm:py-4.5">
-              <div className="aspect-[16/10]" />
-            </div>
-            <div className={cn("absolute inset-0", coverMotion)}>
-              <ProjectImage
-                media={project.cover}
-                sizes={imageSizes[layout]}
-                placeholder={placeholder}
-                className="size-full"
-              />
-            </div>
-          </>
-        )}
+        <div className="transition-transform duration-500 ease-out-soft motion-safe:group-hover/card:scale-[1.02]">
+          <ProjectVisual project={project} sizes={imageSizes[layout]} />
+        </div>
       </div>
 
       <div
         className={cn(
-          "flex flex-1 flex-col px-4 pt-5 pb-4 sm:px-5 sm:pt-6 sm:pb-5",
-          wide && "lg:col-span-5 lg:self-center lg:px-10 lg:py-8",
+          "flex flex-1 flex-col px-5 pt-6 pb-6 sm:px-7 sm:pb-7",
+          wide && "lg:col-span-5 lg:justify-center lg:px-10 lg:py-10",
         )}
       >
-        <Heading className={cn("text-h3 font-semibold", wide && "md:text-2xl lg:text-[1.75rem]")}>
-          <Link href={`/work/${project.slug}`} className={stretchedLink}>
-            {project.title}
-            <span className="sr-only">, view project</span>
-          </Link>
+        <Heading
+          className={cn("text-h3 font-semibold", wide && "md:text-2xl lg:text-[2rem] lg:leading-tight")}
+        >
+          {cardHref ? (
+            <Link
+              href={cardHref}
+              className={stretchedLink}
+              {...(opensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {project.title}
+              <span className="sr-only">
+                {caseStudyHref ? ", view case study" : ", visit live site (opens in a new tab)"}
+              </span>
+            </Link>
+          ) : (
+            project.title
+          )}
         </Heading>
 
-        {/* Shown above the title, but placed after it so screen readers hear the title first. */}
-        <div className="order-first mb-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-          <span aria-hidden="true" className="font-semibold text-accent tabular-nums">
-            {number}
-          </span>
-          <span aria-hidden="true" className="h-px w-5 bg-line-strong" />
+        {/* Shown above the name, but placed after it so screen readers hear the name first. */}
+        <div className="order-first mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
           <Tag tone="accent">{project.category}</Tag>
-          {project.placeholder ? <Tag tone="placeholder">Placeholder</Tag> : null}
+          {role.length > 0 ? <span className="text-muted">{role.join(" & ")}</span> : null}
+          {project.year ? <span className="text-muted">{project.year}</span> : null}
         </div>
 
-        <p className="mt-2 max-w-prose text-muted">{project.summary}</p>
+        <p className={cn("mt-3 text-muted", wide && "lg:text-[1.0625rem]")}>{project.summary}</p>
 
-        {/* Each service stays on one line; lines only break between services. */}
-        {project.services.length > 0 ? (
-          <p className="mt-4 text-sm font-medium text-ink">
-            <span className="sr-only">Services: </span>
-            {project.services.map((service, index) => (
-              <Fragment key={service}>
-                {index > 0 ? " · " : null}
-                <span className="whitespace-nowrap">{service}</span>
-              </Fragment>
-            ))}
-          </p>
-        ) : null}
-
-        {tags.length > 0 ? (
-          <ul role="list" className="mt-4 flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <li key={tag}>
-                <Tag>{tag}</Tag>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-
-        <div className="mt-auto pt-6">
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-5">
-            {/* Visual cue only: the title link above already makes the whole card clickable. */}
-            <span
-              aria-hidden="true"
-              className="inline-flex items-center gap-1.5 font-semibold text-ink transition-colors duration-200 group-hover/card:text-accent-strong"
-            >
-              View project
-              <Icon
-                name="arrow-right"
-                size={16}
-                className="transition-transform duration-200 ease-out-soft group-hover/card:translate-x-0.5"
-              />
-            </span>
-
-            {hasLinks ? (
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {project.liveUrl ? (
-                  <ArrowLink href={project.liveUrl} className="relative z-10">
-                    Visit website<span className="sr-only">: {project.title}</span>
-                  </ArrowLink>
-                ) : null}
-                {project.caseStudyUrl ? (
-                  <ArrowLink href={project.caseStudyUrl} className="relative z-10">
-                    Case study<span className="sr-only">: {project.title}</span>
-                  </ArrowLink>
-                ) : null}
-              </div>
-            ) : null}
+        {technologies.length > 0 ? (
+          <div className="mt-5">
+            <p className="sr-only">Built with</p>
+            <ul role="list" className="flex flex-wrap gap-2">
+              {technologies.map((technology) => (
+                <li key={technology}>
+                  <Tag>{technology}</Tag>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        ) : null}
+
+        {cardHref || project.caseStudyUrl ? (
+          <div className="mt-auto pt-7">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
+              {/* Visual cue only: the name above already links the whole card. */}
+              {cardHref ? (
+                <span
+                  aria-hidden="true"
+                  className="inline-flex items-center gap-1.5 font-semibold text-accent-strong"
+                >
+                  {caseStudyHref ? "View case study" : "Visit live site"}
+                  <Icon
+                    name={caseStudyHref ? "arrow-right" : "arrow-up-right"}
+                    size={16}
+                    className="transition-transform duration-200 ease-out-soft group-hover/card:translate-x-0.5"
+                  />
+                </span>
+              ) : null}
+              {caseStudyHref && project.liveUrl ? (
+                <ArrowLink href={project.liveUrl} className="relative z-10">
+                  Visit live site<span className="sr-only">: {project.title}</span>
+                </ArrowLink>
+              ) : null}
+              {project.caseStudyUrl ? (
+                <ArrowLink href={project.caseStudyUrl} className="relative z-10">
+                  Case study<span className="sr-only">: {project.title}</span>
+                </ArrowLink>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
       </div>
     </article>
   );

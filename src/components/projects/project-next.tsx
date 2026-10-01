@@ -3,7 +3,7 @@ import { stretchedLink } from "@/components/ui/card-styles";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import type { Project } from "@/content/types";
-import { getPlaceholderVariant } from "@/lib/projects";
+import { ProjectCover } from "./project-cover";
 import { ProjectImage } from "./project-image";
 
 type ProjectNextProps = {
@@ -27,7 +27,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
 
   return (
     <Section id="next-project" labelledBy="next-project-heading" tone={tone}>
-      <div className="reveal group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-line-strong hover:shadow-lift motion-safe:hover:-translate-y-0.5 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
+      <div className="reveal group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
         <div className="flex flex-col md:justify-between">
           <h2
             id="next-project-heading"
@@ -60,12 +60,18 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
           </div>
         </div>
         <div className="overflow-hidden rounded-lg border border-line md:self-center">
-          <ProjectImage
-            media={project.cover}
-            sizes={thumbnailSizes}
-            placeholder={getPlaceholderVariant(project.slug)}
-            className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
-          />
+          {project.cover ? (
+            <ProjectImage
+              media={project.cover}
+              sizes={thumbnailSizes}
+              className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
+            />
+          ) : (
+            <ProjectCover
+              project={project}
+              className="transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.02]"
+            />
+          )}
         </div>
       </div>
     </Section>

@@ -1,9 +1,10 @@
 import { ProjectCard } from "@/components/projects/project-card";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { ButtonLink } from "@/components/ui/button";
 import { DotPattern } from "@/components/ui/decor";
-import { Section } from "@/components/ui/section";
+import { Section, type SectionTone } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { Project, SectionIntro } from "@/content/types";
+import type { CtaLink, Project, SectionIntro } from "@/content/types";
 import { cn } from "@/lib/cn";
 
 type FeaturedWorkProps = {
@@ -11,15 +12,20 @@ type FeaturedWorkProps = {
   projects: Project[];
   id?: string;
   /** Background of the section; alternate it with the sections around it. */
-  tone?: "default" | "subtle";
-  /** Section number shown before the eyebrow, e.g. "02". */
+  tone?: SectionTone;
+  /** Section number shown before the eyebrow, e.g. "01". */
   number?: string;
+  /** Adds a "View all work" link — pass it when there are more projects than shown here. */
+  viewAllHref?: string;
+  /** The prompt under the projects, e.g. "Start a project". */
+  cta?: CtaLink;
 };
 
 /**
  * Home page "Selected work". The first project is shown as a wide feature
  * card and the rest in two columns. With an even number of projects the last
- * one is wide too (image on the other side), so the grid never ends with a gap.
+ * one is wide too (picture on the other side), so the grid never ends with a gap.
+ * A short prompt underneath turns the proof into a next step.
  */
 export function FeaturedWork({
   intro,
@@ -27,6 +33,8 @@ export function FeaturedWork({
   id = "work",
   tone = "default",
   number,
+  viewAllHref,
+  cta,
 }: FeaturedWorkProps) {
   if (projects.length === 0) return null;
 
@@ -47,7 +55,7 @@ export function FeaturedWork({
         eyebrow={intro.eyebrow}
         title={intro.title}
         description={intro.description}
-        action={<ArrowLink href="/work">View all work</ArrowLink>}
+        action={viewAllHref ? <ArrowLink href={viewAllHref}>View all work</ArrowLink> : undefined}
       />
 
       <ul role="list" className="reveal mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
@@ -65,6 +73,22 @@ export function FeaturedWork({
           );
         })}
       </ul>
+
+      {cta ? (
+        <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-line bg-surface/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6 lg:mt-8 lg:px-8">
+          <div>
+            <p className="font-display text-lg font-semibold text-ink">
+              Have a project like this in mind?
+            </p>
+            <p className="mt-1 text-sm text-muted">
+              Tell me what you&apos;re planning — I&apos;ll reply with clear next steps.
+            </p>
+          </div>
+          <ButtonLink href={cta.href} variant="secondary" trailingIcon="arrow-right" className="self-start sm:self-auto">
+            {cta.label}
+          </ButtonLink>
+        </div>
+      ) : null}
     </Section>
   );
 }

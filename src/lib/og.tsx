@@ -27,8 +27,6 @@ const [jakartaBold, interMedium, interSemiBold] = await Promise.all([
 type OgCardProps = {
   /** Small blue label above the title, e.g. a project's category. */
   eyebrow?: string;
-  /** Adds a "Placeholder" tag, so example projects are never mistaken for real work. */
-  placeholder?: boolean;
   title: string;
   /** Part of the title to show in blue (must match exactly). */
   highlight?: string;
@@ -57,7 +55,7 @@ function getTitleFontSize(title: string, titleSize: "md" | "lg") {
   return title.length <= 28 ? 72 : 60;
 }
 
-function OgCard({ eyebrow, placeholder, title, highlight, titleSize = "md", subtitle }: OgCardProps) {
+function OgCard({ eyebrow, title, highlight, titleSize = "md", subtitle }: OgCardProps) {
   return (
     <div
       style={{
@@ -100,24 +98,6 @@ function OgCard({ eyebrow, placeholder, title, highlight, titleSize = "md", subt
               >
                 {eyebrow}
               </div>
-              {placeholder ? (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    height: 34,
-                    padding: "0 14px",
-                    borderRadius: 999,
-                    border: `2px dashed ${brandColors.field}`,
-                    backgroundColor: brandColors.surface,
-                    fontSize: 18,
-                    fontWeight: 500,
-                    color: brandColors.muted,
-                  }}
-                >
-                  Placeholder
-                </div>
-              ) : null}
             </div>
           ) : null}
           <div

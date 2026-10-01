@@ -1,16 +1,11 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Glow, GridPattern } from "@/components/ui/decor";
 import { Icon } from "@/components/ui/icon";
-import { Tag } from "@/components/ui/tag";
 import type { Project } from "@/content/types";
-import { cn } from "@/lib/cn";
-import { displayHost } from "@/lib/links";
-import { getPlaceholderVariant } from "@/lib/projects";
-import { ProjectImage } from "./project-image";
+import { ProjectVisual } from "./project-visual";
 
 type ProjectHeaderProps = {
   project: Project;
@@ -22,33 +17,14 @@ type ProjectHeaderProps = {
 const coverSizes =
   "(min-width: 1216px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)";
 
-/** Top of a project page: back link, title, key facts, links and the cover image. */
+/** Top of a case study: back link, title, key facts, links and the cover. */
 export function ProjectHeader({ project, number }: ProjectHeaderProps) {
   const facts = [
-    { label: "Role", items: project.services },
+    { label: "Role", items: project.role ?? [] },
     { label: "Year", items: project.year ? [project.year] : [] },
-    { label: "Technologies", items: project.detail.technologies },
+    { label: "Technologies", items: project.technologies ?? [] },
   ].filter((fact) => fact.items.length > 0);
   const hasLinks = Boolean(project.liveUrl || project.caseStudyUrl);
-
-  const { cover } = project;
-  const placeholder = getPlaceholderVariant(project.slug);
-  // Phone images bring their own device outline; everything else sits in a browser window.
-  const onPhone = cover.src ? cover.device === "mobile" : placeholder === "mobile";
-  // A real screenshot spans the container; a placeholder is shown smaller, on a tinted panel.
-  const frameClassName = cover.src ? "mt-10 md:mt-14" : "mx-auto max-w-3xl";
-  const image = (
-    <ProjectImage media={cover} sizes={coverSizes} priority placeholder={placeholder} />
-  );
-  const frame = onPhone ? (
-    <div className={cn("overflow-hidden rounded-xl border border-line", frameClassName)}>
-      {image}
-    </div>
-  ) : (
-    <BrowserFrame url={displayHost(project.liveUrl)} className={frameClassName}>
-      {image}
-    </BrowserFrame>
-  );
 
   return (
     <div className="relative isolate -mt-(--header-height) overflow-hidden pt-[calc(var(--header-height)+1rem)] sm:pt-[calc(var(--header-height)+1.5rem)] lg:pt-[calc(var(--header-height)+2rem)]">
@@ -70,16 +46,13 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
 
         <header className="mt-6 grid gap-10 md:mt-8 lg:mt-10 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <p className="flex items-center gap-2.5 text-eyebrow font-semibold text-accent uppercase">
-                <span aria-hidden="true" className="tabular-nums">
-                  {number}
-                </span>
-                <span aria-hidden="true" className="h-px w-6 bg-line-strong" />
-                {project.category}
-              </p>
-              {project.placeholder ? <Tag tone="placeholder">Placeholder</Tag> : null}
-            </div>
+            <p className="flex items-center gap-2.5 text-eyebrow font-semibold text-accent uppercase">
+              <span aria-hidden="true" className="tabular-nums">
+                {number}
+              </span>
+              <span aria-hidden="true" className="h-px w-6 bg-line-strong" />
+              {project.category}
+            </p>
             <h1 className="mt-4 text-h1 font-semibold">{project.title}</h1>
             <p className="mt-5 max-w-2xl text-lead text-muted">{project.summary}</p>
 
@@ -87,12 +60,12 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {project.liveUrl ? (
                   <ButtonLink href={project.liveUrl} trailingIcon="arrow-up-right">
-                    Visit Live Website
+                    Visit live site
                   </ButtonLink>
                 ) : null}
                 {project.caseStudyUrl ? (
                   <ButtonLink href={project.caseStudyUrl} variant="secondary" icon="file-text">
-                    Read Case Study
+                    Read the full case study
                   </ButtonLink>
                 ) : null}
               </div>
@@ -122,13 +95,7 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
           ) : null}
         </header>
 
-        {cover.src ? (
-          frame
-        ) : (
-          <div className="mt-10 rounded-2xl border border-line bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft px-[6%] py-[5%] md:mt-14 md:px-[12%]">
-            {frame}
-          </div>
-        )}
+        <ProjectVisual project={project} sizes={coverSizes} priority banner className="mt-10 md:mt-14" />
       </Container>
     </div>
   );

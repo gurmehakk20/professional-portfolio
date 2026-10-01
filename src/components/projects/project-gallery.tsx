@@ -1,6 +1,5 @@
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { PreviewVariant } from "@/components/ui/website-preview";
 import type { ProjectMedia } from "@/content/types";
 import { cn } from "@/lib/cn";
 import { ProjectImage } from "./project-image";
@@ -16,12 +15,6 @@ const fullSizes =
   "(min-width: 1216px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)";
 const halfSizes =
   "(min-width: 1216px) 564px, (min-width: 768px) calc(50vw - 44px), (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)";
-
-/** Abstract preview for a screenshot that hasn't been added yet: a phone for mobile shots. */
-function placeholderFor(screenshot: ProjectMedia, index: number): PreviewVariant {
-  if (screenshot.device === "mobile") return "mobile";
-  return index % 2 === 0 ? "centered" : "split";
-}
 
 /** Screenshots in a two-column gallery. Hidden when there are none. */
 export function ProjectGallery({ screenshots, tone = "default" }: ProjectGalleryProps) {
@@ -39,11 +32,7 @@ export function ProjectGallery({ screenshots, tone = "default" }: ProjectGallery
           return (
             <figure key={index} className={cn(wide && "md:col-span-2")}>
               <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-card">
-                <ProjectImage
-                  media={screenshot}
-                  sizes={wide ? fullSizes : halfSizes}
-                  placeholder={placeholderFor(screenshot, index)}
-                />
+                <ProjectImage media={screenshot} sizes={wide ? fullSizes : halfSizes} />
               </div>
               {screenshot.caption ? (
                 <figcaption className="mt-3 text-sm text-muted">{screenshot.caption}</figcaption>
