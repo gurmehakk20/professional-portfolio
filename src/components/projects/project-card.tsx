@@ -61,7 +61,7 @@ export function ProjectCard({
     <article
       className={cn(
         "group/card relative flex flex-col rounded-2xl border border-line bg-surface p-2 shadow-card",
-        "transition duration-200 ease-out-soft hover:border-line-strong hover:shadow-lift motion-safe:hover:-translate-y-0.5",
+        "transition duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5",
         wide && "lg:grid lg:grid-cols-12",
         className,
       )}
@@ -69,7 +69,7 @@ export function ProjectCard({
       {/* The cover, presented on a tinted panel. */}
       <div
         className={cn(
-          "relative flex flex-col justify-center rounded-lg bg-subtle p-[8%]",
+          "relative flex flex-col justify-center rounded-xl bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft p-[8%]",
           !inBrowser && "overflow-hidden",
           wide && "md:px-[14%] lg:col-span-7 lg:px-[8%]",
           wide && reverse && "lg:order-last",
@@ -122,7 +122,7 @@ export function ProjectCard({
             {number}
           </span>
           <span aria-hidden="true" className="h-px w-5 bg-line-strong" />
-          <span className="text-muted">{project.category}</span>
+          <Tag tone="accent">{project.category}</Tag>
           {project.placeholder ? <Tag tone="placeholder">Placeholder</Tag> : null}
         </div>
 

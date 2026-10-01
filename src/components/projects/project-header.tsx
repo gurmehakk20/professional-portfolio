@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Glow, GridPattern } from "@/components/ui/decor";
 import { Icon } from "@/components/ui/icon";
 import { Tag } from "@/components/ui/tag";
 import type { Project } from "@/content/types";
@@ -50,7 +51,10 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
   );
 
   return (
-    <div className="pt-4 sm:pt-6 lg:pt-8">
+    <div className="relative isolate -mt-(--header-height) overflow-hidden pt-[calc(var(--header-height)+1rem)] sm:pt-[calc(var(--header-height)+1.5rem)] lg:pt-[calc(var(--header-height)+2rem)]">
+      <GridPattern className="bottom-auto h-[36rem] [mask-image:radial-gradient(ellipse_75%_90%_at_85%_0%,black,transparent_75%)]" />
+      <Glow className="-top-48 -right-24 w-[34rem]" />
+      <Glow color="cyan" className="-top-24 right-[28%] hidden w-[22rem] md:block" />
       <Container>
         <Link
           href="/work"
@@ -71,7 +75,7 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
                 <span aria-hidden="true" className="tabular-nums">
                   {number}
                 </span>
-                <span aria-hidden="true" className="h-px w-5 bg-accent/40" />
+                <span aria-hidden="true" className="h-px w-6 bg-line-strong" />
                 {project.category}
               </p>
               {project.placeholder ? <Tag tone="placeholder">Placeholder</Tag> : null}
@@ -121,7 +125,7 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
         {cover.src ? (
           frame
         ) : (
-          <div className="mt-10 rounded-2xl bg-subtle px-[6%] py-[5%] md:mt-14 md:px-[12%]">
+          <div className="mt-10 rounded-2xl border border-line bg-linear-160 from-accent-soft via-[#f1f6fd] to-cyan-soft px-[6%] py-[5%] md:mt-14 md:px-[12%]">
             {frame}
           </div>
         )}

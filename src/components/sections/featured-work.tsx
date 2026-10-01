@@ -1,5 +1,6 @@
 import { ProjectCard } from "@/components/projects/project-card";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { DotPattern } from "@/components/ui/decor";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { Project, SectionIntro } from "@/content/types";
@@ -11,6 +12,8 @@ type FeaturedWorkProps = {
   id?: string;
   /** Background of the section; alternate it with the sections around it. */
   tone?: "default" | "subtle";
+  /** Section number shown before the eyebrow, e.g. "02". */
+  number?: string;
 };
 
 /**
@@ -23,6 +26,7 @@ export function FeaturedWork({
   projects,
   id = "work",
   tone = "default",
+  number,
 }: FeaturedWorkProps) {
   if (projects.length === 0) return null;
 
@@ -31,9 +35,15 @@ export function FeaturedWork({
   const lastIsWide = lastIndex > 0 && projects.length % 2 === 0;
 
   return (
-    <Section id={id} labelledBy={headingId} tone={tone}>
+    <Section
+      id={id}
+      labelledBy={headingId}
+      tone={tone}
+      decor={<DotPattern className="top-10 right-0 hidden h-64 w-96 md:block" />}
+    >
       <SectionHeader
         id={headingId}
+        number={number}
         eyebrow={intro.eyebrow}
         title={intro.title}
         description={intro.description}

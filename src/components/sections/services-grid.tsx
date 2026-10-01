@@ -9,10 +9,12 @@ type ServicesGridProps = {
   intro: SectionIntro;
   services: Service[];
   id?: string;
+  /** Section number shown before the eyebrow, e.g. "01". */
+  number?: string;
 };
 
 /** Home page "What I build": one card per service, each linking to /services. */
-export function ServicesGrid({ intro, services, id = "services" }: ServicesGridProps) {
+export function ServicesGrid({ intro, services, id = "services", number }: ServicesGridProps) {
   if (services.length === 0) return null;
 
   const headingId = `${id}-heading`;
@@ -25,6 +27,7 @@ export function ServicesGrid({ intro, services, id = "services" }: ServicesGridP
     <Section id={id} labelledBy={headingId}>
       <SectionHeader
         id={headingId}
+        number={number}
         eyebrow={intro.eyebrow}
         title={intro.title}
         description={intro.description}

@@ -11,9 +11,9 @@ import type { Service } from "@/content/types";
  */
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <div className="group relative grid w-full grid-cols-[auto_1fr_auto] items-center gap-x-4 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-line-strong hover:shadow-lift motion-safe:hover:-translate-y-0.5 sm:flex sm:flex-col sm:items-stretch lg:p-8">
+    <div className="group relative grid w-full grid-cols-[auto_1fr_auto] items-center gap-x-4 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5 sm:flex sm:flex-col sm:items-stretch lg:p-8">
       <div className="contents sm:flex sm:items-center sm:justify-between sm:gap-4">
-        <span className="col-start-1 row-start-1 inline-flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
+        <span className="col-start-1 row-start-1 inline-flex size-11 items-center justify-center rounded-xl border border-accent/10 bg-linear-135 from-accent-soft to-cyan-soft text-accent">
           <Icon name={service.icon} size={20} />
         </span>
         <Icon

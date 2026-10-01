@@ -33,7 +33,7 @@ export default function ServicesPage() {
       </PageHeader>
       <ServiceList services={services} />
       <IncludedList intro={includedIntro} items={includedInEveryProject} />
-      <Process intro={processIntro} steps={processSteps} tone="subtle" />
+      <Process intro={processIntro} steps={processSteps} tone="dark" />
       <Faq intro={faqIntro} items={faqs} />
       <FinalCta content={finalCta} flushTop />
     </>

@@ -7,6 +7,8 @@ type PrinciplesProps = {
   intro: SectionIntro;
   items: Principle[];
   id?: string;
+  /** Section number shown before the eyebrow, e.g. "03". */
+  number?: string;
 };
 
 /**
@@ -14,7 +16,7 @@ type PrinciplesProps = {
  * An open list divided by hairlines (rather than cards), with the heading
  * beside it on wide screens. Works well with three to six principles.
  */
-export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
+export function Principles({ intro, items, id = "why", number }: PrinciplesProps) {
   if (items.length === 0) return null;
 
   const headingId = `${id}-heading`;
@@ -23,7 +25,7 @@ export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
     <Section id={id} labelledBy={headingId}>
       <div className="grid gap-10 md:gap-14 xl:grid-cols-12 xl:gap-x-16">
         <div className="xl:sticky xl:top-28 xl:col-span-5 xl:self-start">
-          <SectionHeader {...intro} id={headingId} />
+          <SectionHeader {...intro} id={headingId} number={number} />
         </div>
 
         <ul
@@ -33,10 +35,12 @@ export function Principles({ intro, items, id = "why" }: PrinciplesProps) {
           {items.map((item) => (
             <li key={item.title} className="relative border-t border-line pt-6">
               {/* Short accent mark on the hairline. */}
-              <span aria-hidden="true" className="absolute -top-px left-0 h-px w-10 bg-accent" />
+              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 rounded-full bg-linear-to-r from-accent to-cyan" />
               {/* Phones: icon beside the title. From sm up: icon above it. */}
               <div className="flex items-center gap-3 sm:block">
-                <Icon name={item.icon} size={24} className="shrink-0 text-accent" />
+                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-accent/10 bg-linear-135 from-accent-soft to-cyan-soft text-accent">
+                  <Icon name={item.icon} size={20} />
+                </span>
                 <h3 className="text-h3 font-semibold sm:mt-5">{item.title}</h3>
               </div>
               <p className="mt-2">{item.description}</p>

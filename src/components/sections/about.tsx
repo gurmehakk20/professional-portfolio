@@ -10,10 +10,12 @@ type AboutProps = {
   /** Your name. Its first letter is shown on the stand-in card until there's a portrait. */
   name: string;
   id?: string;
+  /** Section number shown before the eyebrow, e.g. "05". */
+  number?: string;
 };
 
 /** "About" — who the client will be working with. */
-export function About({ content, name, id = "about" }: AboutProps) {
+export function About({ content, name, id = "about", number }: AboutProps) {
   const { eyebrow, title, description, paragraphs, focusAreas, image, cta } = content;
   const headingId = `${id}-heading`;
   const focusLabelId = `${id}-focus-label`;
@@ -27,6 +29,7 @@ export function About({ content, name, id = "about" }: AboutProps) {
       */}
       <div className="grid gap-8 md:grid-cols-12 md:grid-rows-[1fr_auto_auto_1fr] md:gap-x-10 md:gap-y-0 lg:gap-x-12 xl:gap-x-16">
         <SectionHeader
+          number={number}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -46,7 +49,7 @@ export function About({ content, name, id = "about" }: AboutProps) {
               />
             </div>
           ) : (
-            <MonogramCard name={name} />
+            <MonogramCard name={name} focus={focusAreas.slice(0, 2)} />
           )}
         </div>
 
@@ -65,7 +68,7 @@ export function About({ content, name, id = "about" }: AboutProps) {
               <ul role="list" aria-labelledby={focusLabelId} className="mt-3 flex flex-wrap gap-2">
                 {focusAreas.map((area) => (
                   <li key={area}>
-                    <Tag>{area}</Tag>
+                    <Tag tone="accent">{area}</Tag>
                   </li>
                 ))}
               </ul>
@@ -86,21 +89,39 @@ export function About({ content, name, id = "about" }: AboutProps) {
 }
 
 /**
- * Decorative stand-in shown while there's no portrait: your initial set large
- * on a soft tinted card. To show a photo instead, add `image` to the about
- * content in src/content/home.ts — this card is then replaced by the portrait
- * automatically.
+ * Decorative stand-in shown while there's no portrait: your initial on a
+ * blue-to-teal card with a fine grid. To show a photo instead, add `image`
+ * to the about content in src/content/home.ts — this card is then replaced
+ * by the portrait automatically.
  */
-function MonogramCard({ name }: { name: string }) {
+function MonogramCard({ name, focus }: { name: string; focus: string[] }) {
   return (
     <div
       aria-hidden="true"
-      className="relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-2xl bg-accent-soft p-6 @container sm:max-w-md sm:p-8 md:aspect-[4/5] lg:aspect-[4/3]"
+      className="relative isolate flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl bg-linear-150 from-accent to-[#0b8fb0] p-6 shadow-lift @container sm:max-w-md sm:p-8 md:aspect-[4/5] lg:aspect-[4/3]"
     >
+      <div className="absolute inset-0 -z-10 bg-grid fade-edges [--grid-line:rgb(255_255_255/0.14)] [--grid-size:2.5rem]" />
+      <div className="absolute -top-1/3 -right-1/4 -z-10 aspect-square w-3/4 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.28),transparent)]" />
+
+      {focus.length > 0 ? (
+        <div className="flex flex-wrap gap-2">
+          {focus.map((area) => (
+            <span
+              key={area}
+              className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium text-white"
+            >
+              {area}
+            </span>
+          ))}
+        </div>
+      ) : (
+        <span />
+      )}
+
       {/* The negative margin lines the letter up optically with the card's padding. */}
-      <span className="-ml-[0.06em] font-display text-[46cqw] leading-[0.8] font-semibold text-accent-strong">
+      <span className="-ml-[0.06em] font-display text-[46cqw] leading-[0.8] font-semibold tracking-[-0.04em] text-white">
         {name.charAt(0)}
-        <span className="ml-[0.04em] inline-block size-[0.12em] rounded-[0.015em] bg-accent" />
+        <span className="ml-[0.04em] inline-block size-[0.12em] rounded-[0.015em] bg-cyan-soft" />
       </span>
     </div>
   );
