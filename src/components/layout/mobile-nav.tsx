@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { MailIcon, SvgIcon, WhatsAppIcon } from "@/components/ui/inline-icons";
 import type { CtaLink } from "@/content/types";
@@ -23,7 +23,8 @@ type MobileNavProps = {
 /**
  * Full-screen menu for small screens, built on the native <dialog> element:
  * focus is kept inside while open, Escape closes it, and focus returns to
- * the menu button afterwards.
+ * the menu button afterwards. The links settle in one after another as it
+ * opens (`.menu-item` in globals.css).
  */
 export function MobileNav({ name, items, cta, whatsappHref, emailHref }: MobileNavProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -95,8 +96,12 @@ export function MobileNav({ name, items, cta, whatsappHref, emailHref }: MobileN
 
         <nav aria-label="Main" className="flex-1 overflow-y-auto px-5 py-2 sm:px-8">
           <ul>
-            {items.map((item) => (
-              <li key={item.href} className="border-b border-line">
+            {items.map((item, index) => (
+              <li
+                key={item.href}
+                className="menu-item border-b border-line"
+                style={{ "--item": index } as CSSProperties}
+              >
                 <Link
                   href={item.href}
                   onNavigate={close}
@@ -111,7 +116,10 @@ export function MobileNav({ name, items, cta, whatsappHref, emailHref }: MobileN
           </ul>
         </nav>
 
-        <div className="shrink-0 border-t border-line px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-8">
+        <div
+          className="menu-item shrink-0 border-t border-line px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-8"
+          style={{ "--item": items.length } as CSSProperties}
+        >
           <Link
             href={cta.href}
             onNavigate={close}
