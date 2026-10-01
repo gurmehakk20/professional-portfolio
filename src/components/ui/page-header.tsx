@@ -12,7 +12,7 @@ type PageHeaderProps = Pick<PageIntro, "eyebrow" | "title" | "description"> & {
 /**
  * The top of an inner page: eyebrow, <h1> and intro on a faint grid with a
  * soft glow. It slides up under the transparent header so the background
- * runs to the top of the screen.
+ * runs to the top of the screen, and fades up on load (`enter` in globals.css).
  */
 export function PageHeader({ eyebrow, title, description, children }: PageHeaderProps) {
   return (
@@ -21,8 +21,14 @@ export function PageHeader({ eyebrow, title, description, children }: PageHeader
       <Glow className="-top-48 -right-24 w-[34rem]" />
       <Glow color="cyan" className="-top-24 right-[28%] hidden w-[22rem] md:block" />
       <Container className="pt-12 pb-12 md:pt-20 md:pb-16">
-        <SectionHeader as="h1" eyebrow={eyebrow} title={title} description={description} />
-        {children ? <div className="mt-8">{children}</div> : null}
+        <SectionHeader
+          as="h1"
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          className="enter"
+        />
+        {children ? <div className="enter mt-8 [--enter-delay:120ms]">{children}</div> : null}
       </Container>
     </div>
   );

@@ -16,9 +16,12 @@ type HeroProps = {
 
 /**
  * The top of the home page: what I do, the two main actions and a showcase
- * of the featured project. Nothing here animates — it's the first thing people
- * see. The section slides up under the transparent header so its grid and
- * glow run to the top of the screen.
+ * of the featured project. The section slides up under the transparent header
+ * so its grid and glows run to the top of the screen.
+ *
+ * On load the text fades up line by line, then the showcase follows (the
+ * `enter` classes in globals.css); the glows drift very slowly behind it all.
+ * Both are pure CSS and switch off with reduced motion.
  */
 export function Hero({ content, availability, project, name }: HeroProps) {
   const { eyebrow, title, titleHighlight, description, primaryCta, secondaryCta } = content;
@@ -29,13 +32,13 @@ export function Hero({ content, availability, project, name }: HeroProps) {
       className="relative isolate -mt-(--header-height) overflow-hidden pt-(--header-height)"
     >
       <GridPattern className="[mask-image:radial-gradient(ellipse_80%_75%_at_70%_15%,black,transparent_78%)]" />
-      <Glow className="-top-40 -right-40 w-[48rem]" />
-      <Glow color="cyan" className="top-[38%] -left-56 w-[32rem]" />
+      <Glow className="ambient-drift -top-40 -right-40 w-[48rem]" />
+      <Glow color="cyan" className="ambient-drift-alt top-[38%] -left-56 w-[32rem]" />
 
       <Container className="grid items-center gap-12 pt-10 pb-16 sm:pt-14 md:pb-20 lg:grid-cols-12 lg:gap-8 lg:pt-16 lg:pb-24 xl:gap-12">
         <div className="lg:col-span-7 xl:col-span-6">
           {eyebrow ? (
-            <p className="inline-flex items-center gap-2.5 rounded-full border border-accent/15 bg-surface/80 py-1.5 pr-4 pl-2.5 text-eyebrow font-semibold text-accent-strong uppercase shadow-card">
+            <p className="enter inline-flex items-center gap-2.5 rounded-full border border-accent/15 bg-surface/80 py-1.5 pr-4 pl-2.5 text-eyebrow font-semibold text-accent-strong uppercase shadow-card">
               <span
                 aria-hidden="true"
                 className="size-2 rounded-full bg-linear-135 from-accent to-cyan ring-4 ring-accent/10"
@@ -47,14 +50,14 @@ export function Hero({ content, availability, project, name }: HeroProps) {
           <h1
             id="hero-heading"
             // Sized to its column on two-column layouts rather than to the window.
-            className="mt-6 text-display font-semibold sm:mt-7 lg:text-[clamp(3.25rem,0.9rem+4.1vw,4.5rem)]"
+            className="enter mt-6 text-display font-semibold [--enter-delay:80ms] sm:mt-7 lg:text-[clamp(3.25rem,0.9rem+4.1vw,4.5rem)]"
           >
             <HighlightedTitle title={title} highlight={titleHighlight} />
           </h1>
 
-          <p className="mt-6 max-w-xl text-lead text-body">{description}</p>
+          <p className="enter mt-6 max-w-xl text-lead text-body [--enter-delay:160ms]">{description}</p>
 
-          <div className="mt-9 flex max-w-md flex-wrap gap-3 sm:max-w-none">
+          <div className="enter mt-9 flex max-w-md flex-wrap gap-3 [--enter-delay:240ms] sm:max-w-none">
             <ButtonLink
               href={primaryCta.href}
               size="lg"
@@ -76,7 +79,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
           </div>
 
           {availability?.show ? (
-            <p className="mt-8 flex items-center gap-3 text-sm text-muted">
+            <p className="enter mt-8 flex items-center gap-3 text-sm text-muted [--enter-delay:320ms]">
               <span
                 aria-hidden="true"
                 className="ml-1 size-2 shrink-0 rounded-full bg-cyan ring-4 ring-cyan/20"
@@ -86,7 +89,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
           ) : null}
         </div>
 
-        <div className="lg:col-span-5 xl:col-span-6">
+        <div className="enter-pop [--enter-delay:400ms] lg:col-span-5 xl:col-span-6">
           <HeroVisual project={project} name={name} />
         </div>
       </Container>

@@ -23,7 +23,8 @@ const caption = "text-[clamp(0.5625rem,2.2cqw,0.6875rem)] font-semibold tracking
  * Sizes use container query units (cqw = 1% of the composition's width), so
  * it keeps its proportions from a small phone to a wide desktop. The padding
  * reserves the space the floating cards stick out into, so nothing ever
- * extends past the column.
+ * extends past the column. On load the cards settle in just after the
+ * browser window (see the hero).
  */
 export function HeroVisual({ project, name }: HeroVisualProps) {
   const cover = project?.cover;
@@ -48,7 +49,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
 
         {/* Featured project label — top left. */}
         {project ? (
-          <div className="absolute top-0 left-0 w-[56cqw] rounded-[2.4cqw] @lg:w-[48cqw] border border-line bg-surface p-[2.6cqw] shadow-float">
+          <div className="enter absolute top-0 left-0 w-[56cqw] [--enter-delay:720ms] rounded-[2.4cqw] @lg:w-[48cqw] border border-line bg-surface p-[2.6cqw] shadow-float">
             <div className="flex items-center gap-[2.4cqw]">
               <span className="grid size-[9cqw] shrink-0 place-items-center rounded-[1.8cqw] bg-linear-135 from-accent to-cyan font-display text-[4.2cqw] font-bold text-white">
                 {project.title.charAt(0)}
@@ -68,12 +69,12 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         ) : null}
 
         {/* The same site on a phone — bottom right. */}
-        <div className="absolute right-0 bottom-0 aspect-[9/19] w-[25cqw] overflow-hidden rounded-[4.2cqw] border-[length:1cqw] border-ink bg-surface shadow-frame">
+        <div className="enter absolute right-0 bottom-0 aspect-[9/19] [--enter-delay:820ms] w-[25cqw] overflow-hidden rounded-[4.2cqw] border-[length:1cqw] border-ink bg-surface shadow-frame">
           <MobileScreen />
         </div>
 
         {/* Palette and type, like a card from a design file — bottom left. */}
-        <div className="absolute bottom-0 left-0 w-[40cqw] rounded-[2.4cqw] border border-line bg-surface p-[2.6cqw] shadow-float">
+        <div className="enter absolute bottom-0 left-0 w-[40cqw] [--enter-delay:900ms] rounded-[2.4cqw] border border-line bg-surface p-[2.6cqw] shadow-float">
           <div className="flex items-end justify-between gap-[2cqw]">
             <span className="font-display text-[8cqw] leading-[0.8] font-semibold tracking-[-0.04em] text-ink">
               Aa
@@ -94,7 +95,7 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         </div>
 
         {/* A named cursor, as in a shared design file. */}
-        <div className="absolute top-[46%] left-[50%] flex items-start drop-shadow-[0_4px_8px_rgb(37_99_235/0.3)]">
+        <div className="enter absolute top-[46%] left-[50%] flex items-start [--enter-delay:1080ms] drop-shadow-[0_4px_8px_rgb(37_99_235/0.3)]">
           <svg viewBox="0 0 16 16" className="size-[4.6cqw]" fill="none">
             <path
               d="M2 1.5 14 7.2 8.6 8.6 6.6 14.5 2 1.5Z"

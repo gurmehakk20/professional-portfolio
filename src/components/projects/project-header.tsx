@@ -17,7 +17,7 @@ type ProjectHeaderProps = {
 const coverSizes =
   "(min-width: 1216px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)";
 
-/** Top of a case study: back link, title, key facts, links and the cover. */
+/** Top of a case study: back link, title, key facts, links and the cover, which fade up in turn on load. */
 export function ProjectHeader({ project, number }: ProjectHeaderProps) {
   const facts = [
     { label: "Role", items: project.role ?? [] },
@@ -45,7 +45,7 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
         </Link>
 
         <header className="mt-6 grid gap-10 md:mt-8 lg:mt-10 lg:grid-cols-12 lg:items-end lg:gap-8">
-          <div className="lg:col-span-7">
+          <div className="enter lg:col-span-7">
             <p className="flex items-center gap-2.5 text-eyebrow font-semibold text-accent uppercase">
               <span aria-hidden="true" className="tabular-nums">
                 {number}
@@ -73,7 +73,7 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
           </div>
 
           {facts.length > 0 ? (
-            <dl className="max-w-lg divide-y divide-line border-y border-line text-sm lg:col-span-4 lg:col-start-9 lg:max-w-none">
+            <dl className="enter max-w-lg divide-y divide-line border-y border-line text-sm lg:col-span-4 lg:col-start-9 lg:max-w-none [--enter-delay:100ms]">
               {facts.map((fact) => (
                 <div key={fact.label} className="grid grid-cols-[6.5rem_1fr] gap-4 py-3.5">
                   <dt className="text-muted">{fact.label}</dt>
@@ -95,7 +95,13 @@ export function ProjectHeader({ project, number }: ProjectHeaderProps) {
           ) : null}
         </header>
 
-        <ProjectVisual project={project} sizes={coverSizes} priority banner className="mt-10 md:mt-14" />
+        <ProjectVisual
+          project={project}
+          sizes={coverSizes}
+          priority
+          banner
+          className="enter mt-10 [--enter-delay:180ms] md:mt-14"
+        />
       </Container>
     </div>
   );
