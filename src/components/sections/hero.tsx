@@ -1,38 +1,60 @@
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import type { HeroContent, SiteConfig } from "@/content/types";
-import { cn } from "@/lib/cn";
+import { Glow, GridPattern } from "@/components/ui/decor";
+import type { HeroContent, Project, SiteConfig } from "@/content/types";
 import { HeroVisual } from "./hero-visual";
 
 type HeroProps = {
   content: HeroContent;
   /** Optional "Available for new projects" note shown under the buttons. */
   availability?: SiteConfig["availability"];
+  /** Featured project shown in the showcase on the right. */
+  project?: Project;
+  /** Your name, shown on the showcase's cursor tag. */
+  name: string;
 };
 
 /**
- * The top of the home page: what I do, the two main actions and an
- * illustration. Nothing here animates — it's the first thing people see.
+ * The top of the home page: what I do, the two main actions and a showcase
+ * of the featured project. Nothing here animates — it's the first thing people
+ * see. The section slides up under the transparent header so its grid and
+ * glow run to the top of the screen.
  */
-export function Hero({ content, availability }: HeroProps) {
-  const { eyebrow, title, description, primaryCta, secondaryCta } = content;
+export function Hero({ content, availability, project, name }: HeroProps) {
+  const { eyebrow, title, titleHighlight, description, primaryCta, secondaryCta } = content;
 
   return (
-    <section aria-labelledby="hero-heading">
-      <Container className="grid items-center gap-10 pt-10 pb-14 md:pt-16 lg:grid-cols-2 lg:gap-12 lg:py-20 xl:gap-16">
-        <div className="max-w-2xl">
-          {eyebrow ? (
-            <p className="text-eyebrow font-semibold text-accent uppercase">{eyebrow}</p>
-          ) : null}
-          <h1 id="hero-heading" className={cn("text-display font-semibold", eyebrow && "mt-4")}>
-            {title}
-          </h1>
-          <p className="mt-5 max-w-xl text-lead text-muted">
-            {keepHyphenatedWordsTogether(description)}
-          </p>
+    <section
+      aria-labelledby="hero-heading"
+      className="relative isolate -mt-(--header-height) overflow-hidden pt-(--header-height)"
+    >
+      <GridPattern className="[mask-image:radial-gradient(ellipse_80%_75%_at_70%_15%,black,transparent_78%)]" />
+      <Glow className="-top-40 -right-40 w-[48rem]" />
+      <Glow color="cyan" className="top-[38%] -left-56 w-[32rem]" />
 
-          {/* Phones: two equal buttons (stacked on the narrowest screens). */}
-          <div className="mt-8 flex max-w-md flex-wrap gap-3">
+      <Container className="grid items-center gap-12 pt-10 pb-16 sm:pt-14 md:pb-20 lg:grid-cols-12 lg:gap-8 lg:pt-16 lg:pb-24 xl:gap-12">
+        <div className="lg:col-span-7 xl:col-span-6">
+          {eyebrow ? (
+            <p className="inline-flex items-center gap-2.5 rounded-full border border-accent/15 bg-surface/80 py-1.5 pr-4 pl-2.5 text-eyebrow font-semibold text-accent-strong uppercase shadow-card">
+              <span
+                aria-hidden="true"
+                className="size-2 rounded-full bg-linear-135 from-accent to-cyan ring-4 ring-accent/10"
+              />
+              {eyebrow}
+            </p>
+          ) : null}
+
+          <h1
+            id="hero-heading"
+            // Sized to its column on two-column layouts rather than to the window.
+            className="mt-6 text-display font-semibold sm:mt-7 lg:text-[clamp(3.25rem,0.9rem+4.1vw,4.5rem)]"
+          >
+            <HighlightedTitle title={title} highlight={titleHighlight} />
+          </h1>
+
+          <p className="mt-6 max-w-xl text-lead text-body">{description}</p>
+
+          <div className="mt-9 flex max-w-md flex-wrap gap-3 sm:max-w-none">
             <ButtonLink
               href={primaryCta.href}
               size="lg"
@@ -54,31 +76,34 @@ export function Hero({ content, availability }: HeroProps) {
           </div>
 
           {availability?.show ? (
-            <p className="mt-6 flex items-center gap-3 text-sm text-muted">
+            <p className="mt-8 flex items-center gap-3 text-sm text-muted">
               <span
                 aria-hidden="true"
-                className="ml-1 size-2 shrink-0 rounded-full bg-accent ring-4 ring-accent/15"
+                className="ml-1 size-2 shrink-0 rounded-full bg-cyan ring-4 ring-cyan/20"
               />
               {availability.label}
             </p>
           ) : null}
         </div>
 
-        <HeroVisual />
+        <div className="lg:col-span-5 xl:col-span-6">
+          <HeroVisual project={project} name={name} />
+        </div>
       </Container>
     </section>
   );
 }
 
-/** Stops words like "business-focused" from breaking at the hyphen. */
-function keepHyphenatedWordsTogether(text: string) {
-  return text.split(/(\S+-\S+)/).map((part, index) =>
-    index % 2 === 1 ? (
-      <span key={index} className="whitespace-nowrap">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
+/** Renders the title with `highlight` (if it appears in it) in the blue-to-cyan gradient. */
+function HighlightedTitle({ title, highlight }: { title: string; highlight?: string }) {
+  const start = highlight ? title.indexOf(highlight) : -1;
+  if (!highlight || start === -1) return title;
+
+  return (
+    <>
+      {title.slice(0, start)}
+      <span className="text-gradient box-decoration-clone">{highlight}</span>
+      {title.slice(start + highlight.length)}
+    </>
   );
 }

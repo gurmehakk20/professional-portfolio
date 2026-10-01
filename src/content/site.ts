@@ -27,10 +27,11 @@ export const site: SiteConfig = {
   tagline: "Web Design & Development",
   title: "Mehak — Web Design & Development",
   description:
-    "Independent web designer and developer building fast, responsive, easy-to-use websites for clinics, local businesses and professionals.",
+    "Independent web designer and developer building modern, fast and responsive websites for businesses, startups and professional services.",
   url,
   locale: "en_GB",
   author: "Mehak",
+  fullName: "Gurmehak Kaur",
   jobTitle: "Web Designer & Developer",
 
   contact: {
@@ -60,7 +61,7 @@ export const site: SiteConfig = {
     { label: "Contact", href: "/contact" },
   ],
 
-  cta: { label: "Let's Talk", href: "/contact" },
+  cta: { label: "Let's talk", href: "/contact" },
 
   availability: {
     show: true,
@@ -68,6 +69,6 @@ export const site: SiteConfig = {
   },
 
   footer: {
-    blurb: "Clear, easy-to-use websites for clinics, local businesses and independent professionals.",
+    blurb: "Modern, easy-to-use websites for businesses, startups and professional services.",
   },
 };

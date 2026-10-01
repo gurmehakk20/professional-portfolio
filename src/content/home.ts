@@ -15,10 +15,11 @@ import type {
 export const hero: HeroContent = {
   eyebrow: "Web design & development",
   title: "Modern websites for businesses that want to be taken seriously.",
+  titleHighlight: "taken seriously.",
   description:
-    "I design and develop fast, responsive websites with clear UX, strong visual hierarchy and business-focused functionality.",
-  primaryCta: { label: "View Work", href: "/#work" },
-  secondaryCta: { label: "Let's Talk", href: "/contact" },
+    "I design and build fast, responsive websites that make your business look credible — and make it easy for customers to take the next step.",
+  primaryCta: { label: "Start a project", href: "/contact" },
+  secondaryCta: { label: "View my work", href: "/#work" },
 };
 
 /** The short strip of qualities under the hero. */
@@ -78,8 +79,8 @@ export const about: AboutContent = {
   eyebrow: "About",
   title: "Hi, I'm Mehak.",
   paragraphs: [
-    "I'm a software developer who works across design and development. I design and build websites for clinics, local businesses and independent professionals — from the first conversation to launch day.",
-    "My focus is simple: websites that look professional, load quickly, work properly on phones and make it easy for customers to take the next step. You work directly with me throughout, so nothing gets lost between a designer, a developer and an account manager.",
+    "I'm Gurmehak Kaur — Mehak for short — a software developer who works across design and development. I design and build websites for businesses, startups and professional services, from the first conversation to launch day.",
+    "My focus is simple: websites that look professional, load quickly, work properly on phones and make it easy for customers to take the next step. You work directly with me throughout, so nothing gets lost between a designer, a developer and an account manager. I also partner with agencies that need dependable design and development support.",
   ],
   focusAreas: [
     "UI/UX design",
@@ -90,12 +91,12 @@ export const about: AboutContent = {
   ],
   // Add a portrait by placing it in /public/images/about/ and uncommenting:
   // image: { src: "/images/about/portrait.jpg", alt: "Portrait of Mehak" },
-  cta: { label: "Let's Talk", href: "/contact" },
+  cta: { label: "Let's talk", href: "/contact" },
 };
 
 export const finalCta: FinalCtaContent = {
   title: "Have a website in mind?",
   description: "Let's build something that works beautifully for your business.",
-  primaryCta: { label: "Let's Talk", href: "/contact" },
+  primaryCta: { label: "Start a project", href: "/contact" },
   whatsappLabel: "Chat on WhatsApp", // Remove this line to hide the WhatsApp button.
 };

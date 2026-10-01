@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
   applicationName: site.name,
-  authors: [{ name: site.author }],
-  creator: site.author,
+  authors: [{ name: site.fullName }],
+  creator: site.fullName,
   // "./" resolves against each page's own path, so every page gets its own canonical URL.
   alternates: { canonical: "./" },
   // Pages set only `title` and `description`; Open Graph and Twitter tags are
@@ -42,7 +42,8 @@ const structuredData = {
     },
     {
       "@type": "Person",
-      name: site.author,
+      name: site.fullName,
+      alternateName: site.author,
       jobTitle: site.jobTitle,
       url: site.url,
       email: `mailto:${site.contact.email}`,

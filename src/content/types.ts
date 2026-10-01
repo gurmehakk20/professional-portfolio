@@ -65,6 +65,8 @@ export type SiteConfig = {
   locale: string;
   /** The person behind the site — used in metadata and structured data. */
   author: string;
+  /** Your full name, used in search-engine metadata. */
+  fullName: string;
   /** Your role, e.g. "Web Designer & Developer". Used in structured data for search engines. */
   jobTitle: string;
   contact: ContactDetails;
@@ -91,6 +93,8 @@ export type SiteConfig = {
 export type HeroContent = {
   eyebrow?: string;
   title: string;
+  /** Part of the title to highlight in blue, e.g. "taken seriously.". Must match the title exactly. */
+  titleHighlight?: string;
   description: string;
   primaryCta: CtaLink;
   secondaryCta?: CtaLink;
