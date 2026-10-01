@@ -107,8 +107,17 @@ links lead to the same place, so the next step is always obvious without the pag
   `theme-dark`. Use them sparingly.
 - **Hero**: the phrase in `titleHighlight` (`src/content/home.ts`) is shown in the blue gradient.
   The showcase uses your first featured project and shows its cover once you add a screenshot.
-- **Header**: transparent over the top of the page, then a solid bar once you scroll (pure CSS,
-  `.site-header` in `globals.css`).
+- **Header**: transparent over the top of the page, then a solid bar with a soft shadow once you
+  scroll (`.site-header` in `globals.css`).
+- **Motion** (the "Motion" section of `globals.css` and `src/components/layout/motion.tsx`):
+  - Entrance: add `enter` to fade something up on load, and order it with `[--enter-delay:80ms]`.
+  - Scroll reveals: `data-reveal` fades a block up as it scrolls into view, and
+    `data-reveal="group"` does the same to its children one after another. Section headers
+    already do this.
+  - The process steps light up in turn, and the hero glows drift slowly (the one ambient
+    effect).
+  - Content is never hidden without JavaScript or before the page has loaded, and everything is
+    switched off for visitors who prefer reduced motion.
 
 **Page titles** follow the pattern `Services | Mehak — Web Design & Development`: each page's
 own title, then `title` from `src/content/site.ts`. The home page uses that `title` on its own.
@@ -237,11 +246,13 @@ placeholder, every page asks search engines not to index it.
 **Accessibility:** semantic landmarks and headings, a skip link, visible keyboard focus, and a
 native `<dialog>` mobile menu that traps focus and closes with Escape. In-page links such as
 "About" move keyboard focus to that section. The FAQ uses native `<details>`, and all colour
-pairs meet WCAG AA contrast. Motion is subtle and switches off for anyone who prefers reduced
-motion.
+pairs meet WCAG AA contrast. Motion is subtle, never hides content from search engines,
+assistive technology or visitors without JavaScript, and switches off for anyone who prefers
+reduced motion.
 
 **Performance:** pages are prerendered, fonts are self-hosted through `next/font`, images go
-through `next/image`, and scroll animations are pure CSS with no animation library.
+through `next/image`, and animations are CSS (transform and opacity only) with no animation
+library. The only script is one small IntersectionObserver for scroll reveals.
 
 ### Project structure
 
@@ -250,7 +261,7 @@ src/
   app/                  Routes, layout, metadata files (sitemap, robots, OG images, icons)
   assets/fonts/         Fonts for the social preview images
   components/
-    layout/             Header, mobile menu, footer, in-page link focus helper
+    layout/             Header, mobile menu, footer, in-page link focus and motion helpers
     sections/           Home page sections (hero, services, work, process, FAQ…)
     services/           Services page building blocks
     projects/           Project cards, images and project page sections
