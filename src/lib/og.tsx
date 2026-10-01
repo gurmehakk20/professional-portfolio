@@ -64,9 +64,9 @@ function OgCard({ eyebrow, title, highlight, titleSize = "md", subtitle }: OgCar
         width: "100%",
         height: "100%",
         backgroundColor: brandColors.canvas,
-        // Soft blue and cyan glows, as on the site.
+        // Soft blue and teal glows, as on the site.
         backgroundImage:
-          "radial-gradient(circle at 88% 18%, rgba(37,99,235,0.2), transparent 42%), radial-gradient(circle at 8% 105%, rgba(6,182,212,0.16), transparent 38%)",
+          "radial-gradient(circle at 88% 18%, rgba(49,105,196,0.2), transparent 42%), radial-gradient(circle at 8% 105%, rgba(47,139,166,0.14), transparent 38%)",
         color: brandColors.ink,
         fontFamily: "Inter",
       }}
@@ -142,7 +142,7 @@ function renderTitle(title: string, highlight?: string) {
   });
 }
 
-/** The header wordmark: a blue-to-cyan square and the name in wide-spaced capitals. */
+/** The header wordmark: a cobalt-gradient square and the name in wide-spaced capitals. */
 function Wordmark() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -151,7 +151,7 @@ function Wordmark() {
           width: 16,
           height: 16,
           borderRadius: 4,
-          backgroundImage: `linear-gradient(135deg, ${brandColors.accent}, ${brandColors.cyan})`,
+          backgroundImage: `linear-gradient(135deg, ${brandColors.accent}, ${brandColors.accentBright})`,
         }}
       />
       <div

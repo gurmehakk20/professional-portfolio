@@ -22,7 +22,7 @@ export default function AppleIcon() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          backgroundImage: `linear-gradient(135deg, ${brandColors.accent}, #0891b2)`,
+          backgroundImage: `linear-gradient(135deg, ${brandColors.accent}, ${brandColors.accentBright})`,
         }}
       >
         {/* ImageResponse renders to a PNG, so next/image doesn't apply here. */}
