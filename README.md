@@ -29,15 +29,20 @@ npm run dev        # http://localhost:3000
 
 ## Before you launch
 
-Everything marked `PLACEHOLDER` in `src/content/` needs your real details.
+Fields marked `TODO` in `src/content/` need your real details. Contact details and profiles left
+empty (`""`) are simply hidden, so the site never shows placeholder information.
 
 - [ ] **Site URL** — set `NEXT_PUBLIC_SITE_URL` in your hosting environment (e.g. `https://mehak.dev`).
       It's used for canonical URLs, the sitemap and social previews. Until it's set, the build
       prints a warning and every page asks search engines not to index the site. Indexing
       switches on by itself once you set it and rebuild.
-- [ ] **Contact details** — email, WhatsApp number and location in `src/content/site.ts`.
-- [ ] **Social links** — `socials` in `src/content/site.ts` (remove any you don't use).
-- [ ] **Projects** — replace the placeholder projects in `src/content/projects.ts` and add screenshots.
+- [ ] **Contact details** — `email` and the `whatsapp` number in `src/content/site.ts`. Set at
+      least one: the build warns until you do, and the contact form only appears once there's
+      somewhere to send it. While developing, a dashed note marks where they'll appear.
+- [ ] **Profiles** — `socials` in `src/content/site.ts` (LinkedIn is waiting for its link;
+      GitHub is set).
+- [ ] **Projects** — confirm Arka Dental's details and add your other projects and screenshots in
+      `src/content/projects.ts` (see [Adding or updating a project](#adding-or-updating-a-project)).
 - [ ] **Services** — review the services, inclusions and timelines in `src/content/services.ts`.
 - [ ] **FAQ** — make sure every answer in `src/content/faq.ts` matches how you work
       (the first answer repeats the service timelines).
@@ -55,11 +60,11 @@ messages, and the 404 and error pages) are written in their components.
 | To change…                                                                 | Edit                        |
 | -------------------------------------------------------------------------- | --------------------------- |
 | Name, tagline, SEO description, contact details, social links, navigation  | `src/content/site.ts`       |
-| Header button ("Let's Talk"), availability note, footer line               | `src/content/site.ts`       |
-| Home page: hero, value strip, section headings, principles, about          | `src/content/home.ts`       |
-| Closing "Have a website in mind?" panel (every page except Contact)        | `src/content/home.ts` (`finalCta`) |
-| Services (home cards, services page, contact form options)                 | `src/content/services.ts`   |
-| Projects (home, work page, project pages)                                  | `src/content/projects.ts`   |
+| Header button ("Let's talk"), availability note, footer line               | `src/content/site.ts`       |
+| Home page: hero, section headings, "Why work with me", about               | `src/content/home.ts`       |
+| Closing "Have a project in mind?" section (every page except Contact)      | `src/content/home.ts` (`contactSection`) |
+| Services (home list, services page, contact form options)                  | `src/content/services.ts`   |
+| Projects (home, work page, case studies)                                   | `src/content/projects.ts`   |
 | The four-step process                                                      | `src/content/process.ts`    |
 | Frequently asked questions                                                 | `src/content/faq.ts`        |
 | Contact page text and form                                                 | `src/content/contact.ts`    |
@@ -75,6 +80,16 @@ icon, browser theme colour) and `src/app/icon.svg` (the site icon — replace `f
 it too) together. Fonts are loaded in
 `src/lib/fonts.ts`, with the font stacks in `globals.css`; the share images use their own font
 files in `src/assets/fonts/`.
+
+### Home page structure
+
+The home page answers a visitor's questions in order: **hero** (what do you do?) → **01 Selected
+work** (can you do it?) → **02 Services** (what can you build?) → **03 Why work with me** →
+**04 Process** (how does it work?) → **05 About** (who are you?) → **06 FAQ** → **07 Contact**
+(how do I start?). The order, background tones and numbers are set in `src/app/page.tsx`.
+
+Primary buttons are kept for the main conversion points (hero and contact). Elsewhere, smaller
+links lead to the same place, so the next step is always obvious without the page feeling pushy.
 
 ### Design system
 
@@ -106,24 +121,26 @@ Small settings that show or hide parts of the site:
   just the WhatsApp and email options.
 - `availability.show` in `src/content/site.ts` — set to `false` to hide the "Available for new
   projects" note when you're fully booked.
-- `finalCta.whatsappLabel` in `src/content/home.ts` — remove it to hide the WhatsApp button in the
-  closing panel.
+- Contact details and profiles in `src/content/site.ts` — leave any empty (`""`) to hide it
+  everywhere (header menu, contact section, contact page, footer).
 - `pricing` on a service — prices stay hidden until you add them (see [Adding prices](#adding-prices)).
 
 ### Adding or updating a project
 
-1. Add an entry to the `projects` array in `src/content/projects.ts` (copy an existing one).
+1. Add an entry to the `projects` array in `src/content/projects.ts`. There's a commented
+   template at the bottom of the file to copy.
 2. Give it a unique `slug` — this becomes the page address, e.g. `/work/arka-dental`.
-3. Fill in the card details (`title`, `category`, `summary`, `services`, `tags`) and the
-   project page details under `detail`. Cards show the first three tags.
-4. Optional fields: `liveUrl` (adds links to the live website and shows its address in the
-   browser frame), `caseStudyUrl` (a link to a PDF, Notion or Behance case study) and `year`
-   (shown on the project page).
-5. Projects are numbered 01, 02… in file order, and "Next project" follows the same order.
-   Set `featured: true` to choose which appear on the home page. If none is featured, the first
-   three appear.
-6. Remove `placeholder: true` once the content is real. Placeholder projects are labelled on the
-   site and kept out of search results and the sitemap.
+3. Fill in the card details: `title`, `category` and a one-line `summary`. `technologies`,
+   `role` and `year` are optional and appear when set.
+4. `liveUrl` adds a "Visit live site" link (and shows the address in the browser frame).
+5. `caseStudy` (overview, challenge, approach, features, screenshots) gives the project its own
+   page at `/work/<slug>`, adds it to the sitemap and makes its card link there. Without it, the
+   card links to the live site instead — or, with neither, is shown without a link.
+6. Without a `cover` screenshot, a designed cover with the project's name and category is shown.
+   Set `coverColor` (e.g. the client's brand colour) to tint it.
+7. Projects are numbered 01, 02… in file order. Set `featured: true` to choose which appear on
+   the home page (if none is featured, the first three appear). "View all work" appears on the
+   home page once there are more projects than featured ones.
 
 Only describe work and outcomes you can stand behind. Don't add invented metrics or testimonials.
 
@@ -135,7 +152,7 @@ Only describe work and outcomes you can stand behind. Don't add invented metrics
 
    ```ts
    cover: { src: "/images/projects/arka-dental/home.webp", alt: "Arka Dental home page on desktop" },
-   detail: {
+   caseStudy: {
      // …
      screenshots: [
        {
@@ -154,18 +171,21 @@ Only describe work and outcomes you can stand behind. Don't add invented metrics
 
 3. Phone screenshots: add `device: "mobile"` (a portrait capture, about 1170px wide). They're shown
    whole inside a phone outline instead of being cropped.
-4. Any image without a `src` shows a neutral placeholder preview instead.
+4. Until a project has a `cover`, its designed cover is shown instead.
 
 Next.js automatically resizes images and serves modern formats, so upload one good-quality file.
 
 ### Adding or changing a service
 
-Edit the `services` array in `src/content/services.ts`. Each service feeds the home page card,
-its section on `/services` and the "What do you need?" options in the contact form.
+Edit the `services` array in `src/content/services.ts`. Each service feeds its row on the home
+page, its section on `/services` and the "What do you need?" options in the contact form.
+Each one answers three client questions: what it is (`summary`), who it's for (`bestFor`, and
+the longer `audience` list) and what problem it solves (`problem`). `deliverables` are the short
+chips (e.g. "Custom UI"); `standardDeliverables` lists the ones every project gets.
 `addOns`, `timeline` and `pricing` are optional. Leave them out and they disappear from the page.
 If you change a timeline, update the first answer in `src/content/faq.ts` too.
 
-The "Discuss Your Project" button links to `/contact?service=<slug>`, which pre-selects that
+The "Discuss your project" button links to `/contact?service=<slug>`, which pre-selects that
 service in the contact form.
 
 ### Adding prices
