@@ -76,6 +76,25 @@ it too) together. Fonts are loaded in
 `src/lib/fonts.ts`, with the font stacks in `globals.css`; the share images use their own font
 files in `src/assets/fonts/`.
 
+### Design system
+
+- **Colours** (`src/app/globals.css`): `canvas` page background, `surface` cards, `subtle` alternate
+  sections, `ink` headings, `accent` brand blue (buttons, links, focus), `cyan` decorative accent
+  (never for text), `accent-soft` tinted pills and tiles, `night` dark sections. Roughly 80%
+  neutrals, 15% blue/cyan, 5% decoration.
+- **Type**: Plus Jakarta Sans for headings, Inter for text. Sizes are fluid tokens: `text-display`
+  (hero), `text-h1`, `text-h2`, `text-h3`, `text-lead`, `text-eyebrow`.
+- **Sections**: `<Section tone="default" | "subtle" | "dark">` sets the background, and
+  `<SectionHeader number="01">` adds the numbered label. The home page's order, tones and numbers
+  are set in `src/app/page.tsx`.
+- **Decoration**: `<GridPattern>`, `<DotPattern>` and `<Glow>` in `src/components/ui/decor.tsx`
+  (fine grid, dots and soft colour glows). Utilities: `bg-grid`, `bg-dots`, `text-gradient`,
+  `theme-dark`. Use them sparingly.
+- **Hero**: the phrase in `titleHighlight` (`src/content/home.ts`) is shown in the blue gradient.
+  The showcase uses your first featured project and shows its cover once you add a screenshot.
+- **Header**: transparent over the top of the page, then a solid bar once you scroll (pure CSS,
+  `.site-header` in `globals.css`).
+
 **Page titles** follow the pattern `Services | Mehak — Web Design & Development`: each page's
 own title, then `title` from `src/content/site.ts`. The home page uses that `title` on its own.
 
