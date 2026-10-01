@@ -32,10 +32,10 @@ export default function GlobalError({ error, retry }: GlobalErrorProps) {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <button type="button" onClick={() => retry()} className={buttonStyles()}>
-              Try Again
+              Try again
             </button>
             <Link href="/" className={buttonStyles({ variant: "secondary" })}>
-              Back to Home
+              Back to home
             </Link>
           </div>
         </main>

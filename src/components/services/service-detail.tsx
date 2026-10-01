@@ -21,7 +21,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
   const { audience, includes, timeline, pricing } = service;
   const addOns = service.addOns ?? [];
   const cta = service.cta ?? {
-    label: "Discuss Your Project",
+    label: "Discuss your project",
     href: `/contact?service=${service.slug}`,
   };
   const hasDetails = audience.length > 0 || includes.length > 0 || addOns.length > 0;

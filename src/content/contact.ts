@@ -24,7 +24,7 @@ export const contactPage: ContactPageContent = {
   email: {
     title: "Email",
     description: "Best for longer messages or sending files.",
-    label: "Send an Email",
+    label: "Send an email",
   },
 
   form: {
@@ -34,7 +34,7 @@ export const contactPage: ContactPageContent = {
       "Fill in a few details and your message will open in WhatsApp or your email app, ready to send. Nothing is stored on this website.",
     otherOption: "Something else",
     submitWhatsApp: "Send on WhatsApp",
-    submitEmail: "Send by Email",
+    submitEmail: "Send by email",
     emailSubject: "Website enquiry",
   },
 
