@@ -58,7 +58,7 @@ export function FeaturedWork({
         action={viewAllHref ? <ArrowLink href={viewAllHref}>View all work</ArrowLink> : undefined}
       />
 
-      <ul role="list" className="reveal mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
+      <ul role="list" data-reveal="group" className="mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
         {projects.map((project, index) => {
           const wide = index === 0 || (lastIsWide && index === lastIndex);
           return (

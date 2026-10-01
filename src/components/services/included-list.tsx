@@ -17,7 +17,8 @@ export function IncludedList({ intro, items }: { intro: SectionIntro; items: str
       />
       <ul
         role="list"
-        className="reveal mt-10 grid gap-3 sm:grid-cols-2 sm:gap-4 md:mt-14 lg:grid-cols-3 lg:gap-5"
+        data-reveal="group"
+        className="mt-10 grid gap-3 sm:grid-cols-2 sm:gap-4 md:mt-14 lg:grid-cols-3 lg:gap-5"
       >
         {items.map((item) => (
           <li

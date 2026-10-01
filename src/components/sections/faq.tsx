@@ -35,7 +35,8 @@ export function Faq({ intro, items, id = "faq", tone = "default", number }: FaqP
 
         <ul
           role="list"
-          className="reveal rounded-2xl border border-line bg-surface px-5 shadow-card sm:px-7 lg:col-span-7"
+          data-reveal
+          className="rounded-2xl border border-line bg-surface px-5 shadow-card sm:px-7 lg:col-span-7"
         >
           {items.map((item) => (
             <li key={item.question}>

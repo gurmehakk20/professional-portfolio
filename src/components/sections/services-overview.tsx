@@ -45,7 +45,7 @@ export function ServicesOverview({
         action={<ArrowLink href="/services">Compare services</ArrowLink>}
       />
 
-      <ol role="list" className="reveal mt-10 border-t border-line md:mt-14">
+      <ol role="list" data-reveal="group" className="mt-10 border-t border-line md:mt-14">
         {services.map((service, index) => (
           <li key={service.slug} className="group relative isolate border-b border-line">
             {/* Soft highlight behind the row on hover. */}

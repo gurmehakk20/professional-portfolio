@@ -17,7 +17,10 @@ type SectionHeaderProps = SectionIntro & {
   className?: string;
 };
 
-/** Numbered eyebrow + title + description, used at the top of sections and pages. */
+/**
+ * Numbered eyebrow + title + description, used at the top of sections and pages.
+ * Section headers fade up as they scroll into view; page titles (h1) don't.
+ */
 export function SectionHeader({
   eyebrow,
   title,
@@ -35,6 +38,7 @@ export function SectionHeader({
 
   return (
     <div
+      data-reveal={Heading === "h1" ? undefined : true}
       className={cn(
         "flex flex-col gap-6",
         centered

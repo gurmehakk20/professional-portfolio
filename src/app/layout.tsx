@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { HashLinkFocus } from "@/components/layout/hash-link-focus";
+import { Motion } from "@/components/layout/motion";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <HashLinkFocus />
+        <Motion />
         <JsonLd data={structuredData} />
       </body>
     </html>

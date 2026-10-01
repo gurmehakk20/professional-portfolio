@@ -222,13 +222,16 @@
 
 /* ==========================================================================
    Header — transparent over the top of the page, then a solid, bordered bar
-   once you scroll. Pure CSS (scroll-driven animation); browsers without
-   support simply show the solid bar all the time.
+   with a soft shadow once you scroll. Pure CSS (a scroll-driven animation)
+   where supported; elsewhere a tiny script marks the page while it's at the
+   top (see src/components/layout/motion.tsx). Without either, the header
+   simply stays solid.
    ========================================================================== */
 
 .site-header {
   background-color: rgb(247 248 250 / 0.9);
   border-bottom: 1px solid var(--color-line);
+  box-shadow: 0 10px 30px -22px rgb(17 19 24 / 0.35);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -238,6 +241,21 @@
     animation: header-elevate linear both;
     animation-timeline: scroll(root block);
     animation-range: 0 4rem;
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .site-header {
+    transition:
+      background-color 300ms var(--ease-out-soft),
+      border-color 300ms var(--ease-out-soft),
+      box-shadow 300ms var(--ease-out-soft);
+  }
+
+  html[data-at-top] .site-header {
+    background-color: rgb(247 248 250 / 0);
+    border-bottom-color: rgb(227 231 238 / 0);
+    box-shadow: 0 0 0 0 rgb(17 19 24 / 0);
   }
 }
 
@@ -255,45 +273,133 @@
 }
 
 /* ==========================================================================
-   Motion — progressive enhancement only.
-   Everything is fully visible without these rules (reduced motion, older
-   browsers), so the site never depends on animation.
+   Motion — a finishing layer, never a requirement. Content is in the HTML
+   and visible without JavaScript; only blocks the script has confirmed are
+   still below the fold are ever hidden, and only until they scroll in.
+   With reduced motion, none of this runs (smooth scrolling included).
+
+   1. Entrance — the hero and page headers fade up on load, in sequence.
+      Set the order with --enter-delay, e.g. class="enter [--enter-delay:80ms]".
+   2. Reveals — [data-reveal] fades a block up as it scrolls into view;
+      [data-reveal="group"] does the same to its children, one after another.
+      State lives in data-reveal-state: "pending" (waiting below the fold),
+      "revealed" (animating in) or "skipped" (already on screen at load).
+   3. Process — the steps appear in turn; each number lights up and the line
+      to the next step draws in.
+   4. Ambient — the hero's soft glows drift, very slowly. The one ambient
+      effect on the site.
+
+   Reveals and entrances are keyframe animations, not transitions, so they
+   never override the hover transitions of the elements they're applied to.
    ========================================================================== */
 
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  /* Smooth scrolling for in-page links — switched on by the script once the
+     page has loaded, so opening a link like /#faq jumps straight there
+     instead of gliding down from the top of the page. */
+  html[data-smooth-scroll] {
     scroll-behavior: smooth;
   }
 
-  /* Gentle fade-and-rise as a block scrolls into view. No JavaScript. */
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 10rem;
+  /* 1. Entrance. Starts from a barely-there opacity rather than 0: browsers
+     don't count fully transparent text as painted, which would hold back the
+     page's Largest Contentful Paint until the fade had begun. */
+  .enter,
+  .enter-pop {
+    --rise-opacity: 0.01;
+  }
+
+  .enter {
+    animation: rise 700ms var(--ease-out-soft) backwards;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  .enter-pop {
+    --rise-scale: 0.97;
+    animation: rise 900ms var(--ease-out-soft) backwards;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  /* 2. Reveals */
+  [data-reveal-state="pending"]:not([data-reveal="group"]),
+  [data-reveal="group"][data-reveal-state="pending"] > * {
+    opacity: 0;
+  }
+
+  [data-reveal-state="revealed"]:not([data-reveal="group"]),
+  [data-reveal="group"][data-reveal-state="revealed"] > * {
+    --rise-distance: 1.25rem;
+    animation: rise 700ms var(--ease-out-soft) backwards;
+    animation-delay: calc(var(--reveal-index, 0) * var(--reveal-stagger, 90ms));
+  }
+
+  /* Position within a group, capped so long lists don't keep you waiting. */
+  [data-reveal="group"] > :nth-child(2) {
+    --reveal-index: 1;
+  }
+  [data-reveal="group"] > :nth-child(3) {
+    --reveal-index: 2;
+  }
+  [data-reveal="group"] > :nth-child(4) {
+    --reveal-index: 3;
+  }
+  [data-reveal="group"] > :nth-child(5) {
+    --reveal-index: 4;
+  }
+  [data-reveal="group"] > :nth-child(n + 6) {
+    --reveal-index: 5;
+  }
+
+  /* 3. Process — the list is a reveal group with a slower stagger. */
+  .process-steps {
+    --reveal-stagger: 180ms;
+  }
+
+  /* Pending: numbers unlit and lines undrawn, applied instantly. The
+     transitions only exist once revealed, so nothing animates on the way in
+     to the pending state. */
+  [data-reveal-state="pending"] .process-dot {
+    border-color: rgb(255 255 255 / 0.2);
+    background-color: rgb(255 255 255 / 0.04);
+    color: var(--color-accent-on-dark);
+  }
+
+  [data-reveal-state="revealed"] .process-dot {
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: 500ms, 500ms, 500ms, 300ms;
+    transition-timing-function: var(--ease-out-soft);
+    /* Lights up just after its step appears; the hover glow isn't delayed. */
+    transition-delay:
+      calc(var(--reveal-index, 0) * var(--reveal-stagger) + 250ms),
+      calc(var(--reveal-index, 0) * var(--reveal-stagger) + 250ms),
+      calc(var(--reveal-index, 0) * var(--reveal-stagger) + 250ms),
+      0ms;
+  }
+
+  [data-reveal-state="revealed"] .process-line {
+    transition: transform 800ms var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-index, 0) * var(--reveal-stagger) + 400ms);
+  }
+
+  [data-reveal-state="pending"] .process-line {
+    transform: scaleY(0);
+  }
+
+  @media (min-width: 64rem) {
+    [data-reveal-state="pending"] .process-line {
+      transform: scaleX(0);
     }
   }
 
-  /* Process: each connecting line draws in, and each number lights up, as it
-     scrolls into view. Without support, both are simply shown complete. */
-  @supports (animation-timeline: view()) {
-    .process-line {
-      animation: process-line-y linear both;
-      animation-timeline: view();
-      animation-range: entry 40% cover 50%;
-    }
+  /* 4. Ambient — transform only, so it runs on the compositor and costs next
+     to nothing; browsers pause it when the hero is off screen or the tab is
+     in the background. */
+  .ambient-drift {
+    animation: drift 28s ease-in-out infinite alternate;
+  }
 
-    .process-dot {
-      animation: process-dot linear both;
-      animation-timeline: view();
-      animation-range: entry 100% cover 35%;
-    }
-
-    @media (min-width: 64rem) {
-      .process-line {
-        animation-name: process-line-x;
-      }
-    }
+  .ambient-drift-alt {
+    animation: drift-alt 36s ease-in-out infinite alternate;
   }
 
   /* Smooth open/close for <details> (FAQ) where supported. */
@@ -312,31 +418,40 @@
   details[open]::details-content {
     height: auto;
   }
-}
 
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(1.25rem);
+  /* Mobile menu: links settle in one after another as the menu opens.
+     Set --item on each (0, 1, 2…). */
+  dialog[open] .menu-item {
+    --rise-distance: 0.5rem;
+    animation: rise 400ms var(--ease-out-soft) backwards;
+    animation-delay: calc(80ms + var(--item, 0) * 40ms);
   }
 }
 
-@keyframes process-line-y {
-  from {
-    transform: scaleY(0);
+/* Printed pages show everything. */
+@media print {
+  [data-reveal-state],
+  [data-reveal-state] > * {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }
 
-@keyframes process-line-x {
+@keyframes rise {
   from {
-    transform: scaleX(0);
+    opacity: var(--rise-opacity, 0);
+    transform: translateY(var(--rise-distance, 1rem)) scale(var(--rise-scale, 1));
   }
 }
 
-@keyframes process-dot {
-  from {
-    background-color: rgb(255 255 255 / 0.04);
-    border-color: rgb(255 255 255 / 0.2);
-    color: var(--color-accent-on-dark);
+@keyframes drift {
+  to {
+    transform: translate3d(-8%, 6%, 0) scale(1.08);
+  }
+}
+
+@keyframes drift-alt {
+  to {
+    transform: translate3d(10%, -7%, 0) scale(1.12);
   }
 }

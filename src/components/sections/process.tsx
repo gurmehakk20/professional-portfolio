@@ -15,9 +15,10 @@ type ProcessProps = {
 /**
  * "Process" — the stages of a project on a night-blue band, numbered
  * automatically (01, 02…). Phones and tablets show a vertical timeline; large
- * screens show the steps side by side. As you scroll, each connecting line
- * draws in and each number lights up (see `.process-line` / `.process-dot` in
- * globals.css); with reduced motion everything is simply shown complete.
+ * screens show the steps side by side. As the list scrolls into view the steps
+ * appear in turn, each number lights up and the line to the next step draws
+ * in (see `.process-steps` in globals.css); with reduced motion everything is
+ * simply shown complete.
  */
 export function Process({ intro, steps, id = "process", number }: ProcessProps) {
   if (steps.length === 0) return null;
@@ -39,7 +40,11 @@ export function Process({ intro, steps, id = "process", number }: ProcessProps) 
     >
       <SectionHeader {...intro} id={headingId} number={number} tone="dark" />
 
-      <ol role="list" className="mt-12 md:mt-16 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:gap-x-6">
+      <ol
+        role="list"
+        data-reveal="group"
+        className="process-steps mt-12 md:mt-16 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:gap-x-6"
+      >
         {steps.map((step, index) => (
           <li key={step.title} className="group grid grid-cols-[auto_1fr] gap-x-5 lg:flex lg:flex-col">
             {/* The number, and the line that joins it to the next step. */}

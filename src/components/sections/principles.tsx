@@ -31,7 +31,8 @@ export function Principles({ intro, items, id = "why", tone = "default", number 
 
         <ul
           role="list"
-          className="reveal grid gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 xl:col-span-7"
+          data-reveal="group"
+          className="grid gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 xl:col-span-7"
         >
           {items.map((item) => (
             <li key={item.title} className="relative border-t border-line pt-6">

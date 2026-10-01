@@ -37,7 +37,7 @@ export function About({ content, name, id = "about", number }: AboutProps) {
           className="md:col-span-7 md:col-start-6 md:row-start-2"
         />
 
-        <div className="reveal md:col-span-5 md:col-start-1 md:row-span-4 md:row-start-1 md:self-center">
+        <div data-reveal className="md:col-span-5 md:col-start-1 md:row-span-4 md:row-start-1 md:self-center">
           {image ? (
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-subtle sm:max-w-md md:aspect-[4/5] md:max-w-none">
               <Image

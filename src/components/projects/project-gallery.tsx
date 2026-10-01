@@ -26,7 +26,7 @@ export function ProjectGallery({ screenshots, tone = "default" }: ProjectGallery
   return (
     <Section id="screenshots" labelledBy="screenshots-heading" tone={tone}>
       <SectionHeader id="screenshots-heading" title="Screenshots" />
-      <div className="reveal mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
+      <div data-reveal="group" className="mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2 lg:gap-6">
         {screenshots.map((screenshot, index) => {
           const wide = firstIsWide && index === 0;
           return (

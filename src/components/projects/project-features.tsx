@@ -25,8 +25,9 @@ export function ProjectFeatures({ features, tone = "default" }: ProjectFeaturesP
       <SectionHeader id="features-heading" title="Key features" />
       <ul
         role="list"
+        data-reveal="group"
         className={cn(
-          "reveal mt-10 grid gap-4 sm:gap-5 md:mt-14 lg:gap-6",
+          "mt-10 grid gap-4 sm:gap-5 md:mt-14 lg:gap-6",
           count === 1 ? "max-w-xl" : "sm:grid-cols-2",
           count > 1 && threeColumns && "lg:grid-cols-3",
         )}

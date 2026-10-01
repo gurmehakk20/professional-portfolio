@@ -27,7 +27,7 @@ export function ProjectNext({ project, number, tone = "subtle" }: ProjectNextPro
 
   return (
     <Section id="next-project" labelledBy="next-project-heading" tone={tone}>
-      <div className="reveal group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
+      <div data-reveal className="group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 shadow-card transition-[translate,border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/30 hover:shadow-lift motion-safe:hover:-translate-y-0.5 md:grid-cols-2 md:gap-10 md:p-8 lg:p-10">
         <div className="flex flex-col md:justify-between">
           <h2
             id="next-project-heading"
