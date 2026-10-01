@@ -1,41 +1,40 @@
 import type { PageIntro, SectionIntro, Service } from "./types";
 
 /*
- * Services — used for the "What I build" cards on the home page,
- * the /services page and the contact form's "What do you need?" options.
+ * Services — used on the home page, the /services page and the contact
+ * form's "What do you need?" options.
  *
- * ⚠️  PLACEHOLDER: these four services, their inclusions and timelines are
- * examples to shape the layout. Replace them with your real offering.
+ * Each service answers three questions for a client: what it is (`summary`),
+ * who it's for (`bestFor` / `audience`) and what problem it solves (`problem`).
  * Add, remove or reorder freely — the pages adapt automatically.
- * The first FAQ in faq.ts repeats these timelines — update both together.
+ * The first FAQ in faq.ts repeats the timelines — update both together.
  *
  * Available icons are listed in src/components/ui/icon.tsx
- * (e.g. "briefcase", "stethoscope", "layout", "refresh", "panels", "rocket").
+ * (e.g. "briefcase", "layout", "refresh", "code", "layers", "rocket").
  */
 
 export const servicesPage: PageIntro = {
   eyebrow: "Services",
-  title: "What I can build for your business",
+  title: "Four ways I can help your business",
   description:
-    "Each service below shows who it's for, what's included and how long it usually takes. If you need something that isn't listed, just ask.",
+    "Each service shows who it's for, the problem it solves and what's included. Not sure which you need? Ask — I'll point you in the right direction.",
   metaDescription:
-    "Business websites, clinic websites, landing pages and website redesigns — designed and developed to be fast, responsive and easy to use.",
+    "Business websites, landing pages, website redesigns and custom web experiences — designed and built with React and Next.js.",
 };
 
-/** Shown once on the services page, so it doesn't need repeating in every service. */
+/** Deliverables that come with every service, shown once rather than repeated per service. */
 export const includedIntro: SectionIntro = {
-  eyebrow: "The essentials",
-  title: "Included in every project",
-  description: "Whichever service you choose, these come as standard.",
+  eyebrow: "Included as standard",
+  title: "Every project includes",
+  description: "Whichever service you choose, these are built in.",
 };
 
-export const includedInEveryProject: string[] = [
-  "Designed for phones, tablets and desktops",
-  "Fast loading and optimised images",
-  "Clear structure and navigation",
-  "Basic search engine setup",
-  "Easy to read and use for everyone",
-  "Help getting your website live",
+export const standardDeliverables: string[] = [
+  "Responsive design",
+  "Mobile optimisation",
+  "Performance basics",
+  "SEO foundations",
+  "Deployment",
 ];
 
 export const services: Service[] = [
@@ -44,58 +43,43 @@ export const services: Service[] = [
     name: "Business Websites",
     icon: "briefcase",
     summary:
-      "Multi-page websites that explain what you do, build trust and make it easy for customers to get in touch.",
+      "A complete multi-page website that explains what you do, shows why people should trust you and makes it easy to get in touch.",
+    bestFor: "Small businesses, clinics and professional services",
+    problem:
+      "Customers look you up before they call. A dated or confusing website quietly sends them elsewhere — a clear one earns their trust.",
+    deliverables: ["Custom UI", "Contact & WhatsApp integration", "Post-launch support"],
     description:
-      "A complete website for your business: clear pages for what you offer, who you are and how to reach you — designed to feel professional and work smoothly on every device.",
+      "Clear pages for what you offer, who you are and how to reach you — designed around your brand and built to work smoothly on every device.",
     audience: [
-      "Local businesses and service providers",
-      "Consultants and independent professionals",
+      "Small businesses and local services",
+      "Clinics, consultancies and professional practices",
       "Businesses with an outdated website — or none at all",
     ],
     includes: [
       "Home, about, services and contact pages",
-      "Custom design based on your brand",
-      "Contact form, WhatsApp and click-to-call buttons",
+      "Design tailored to your brand",
+      "Enquiry form, WhatsApp and click-to-call",
       "Google Maps and business details",
     ],
-    addOns: ["Copywriting support", "Blog or news section", "Analytics setup", "Ongoing maintenance"],
+    addOns: ["Copywriting support", "Blog or news section", "Analytics setup"],
     timeline: "Typically 3–5 weeks",
     // pricing: { label: "From ₹XX,XXX", note: "Final quote depends on scope." },
-  },
-  {
-    slug: "clinic-websites",
-    name: "Clinic Websites",
-    icon: "stethoscope",
-    summary:
-      "Calm, clear websites for clinics and practices, with treatments, timings and appointment enquiries easy to find.",
-    description:
-      "Patients want to know three things quickly: what you treat, where you are and how to book. A clinic website puts that information front and centre, with a calm design that builds confidence.",
-    audience: [
-      "Dental, skin, physiotherapy and medical clinics",
-      "Specialists and individual practitioners",
-      "Practices with more than one location",
-    ],
-    includes: [
-      "Treatment and service pages",
-      "Doctor and team profiles",
-      "Timings, location and directions",
-      "Appointment enquiries via WhatsApp, phone or form",
-    ],
-    addOns: ["Online booking integration", "Patient FAQs and resources", "Multi-location support"],
-    timeline: "Typically 3–6 weeks",
   },
   {
     slug: "landing-pages",
     name: "Landing Pages",
     icon: "layout",
-    summary:
-      "Focused single pages for a service, campaign or launch, built around one clear action.",
+    summary: "A single, focused page built around one offer and one clear next step.",
+    bestFor: "Launches, campaigns, startups and paid ads",
+    problem:
+      "Sending people to a busy homepage loses them. A focused page keeps them on one message and one action.",
+    deliverables: ["Custom UI", "Contact & WhatsApp integration"],
     description:
-      "A single, focused page that explains one offer and guides visitors towards one action — ideal for promoting a new service, a campaign or an event.",
+      "One page that explains one offer and guides visitors towards one action — ideal for a new service, a product launch, a campaign or an event.",
     audience: [
       "Businesses promoting a single service or offer",
-      "Campaigns, launches and events",
-      "Ads that need a dedicated destination",
+      "Startups launching a product",
+      "Campaigns and ads that need a dedicated destination",
     ],
     includes: [
       "One focused, well-structured page",
@@ -111,9 +95,13 @@ export const services: Service[] = [
     name: "Website Redesigns",
     icon: "refresh",
     summary:
-      "A modern, faster and easier-to-use version of your existing website, without losing what already works.",
+      "A modern, faster version of your existing website — keeping the content and links that already work.",
+    bestFor: "Websites that look dated, load slowly or struggle on phones",
+    problem:
+      "An outdated site makes a good business look behind the times. A redesign brings your website up to the standard of your work.",
+    deliverables: ["Custom UI", "Content migration", "Post-launch support"],
     description:
-      "If your current website feels dated, is hard to update or doesn't work well on phones, a redesign gives it a clear structure, a modern look and pages that load quickly.",
+      "A fresh structure, a modern look and pages that load quickly on phones — without starting from zero or losing what already works.",
     audience: [
       "Businesses with an outdated or hard-to-use website",
       "Websites that don't work well on mobile",
@@ -125,7 +113,32 @@ export const services: Service[] = [
       "Fresh, modern visual design",
       "Your existing content moved across, with old links still working",
     ],
-    addOns: ["Copy refresh", "Photography direction", "Ongoing maintenance"],
+    addOns: ["Copy refresh", "Photography direction"],
     timeline: "Typically 3–6 weeks",
+  },
+  {
+    slug: "custom-web-experiences",
+    name: "Custom Web Experiences",
+    icon: "code",
+    summary:
+      "Interactive, product-style web builds in React and Next.js — from booking flows to bespoke marketing sites.",
+    bestFor: "Startups, product teams and agencies",
+    problem:
+      "When a template can't do what you need, it has to be built properly: fast, reliable and easy to extend later.",
+    deliverables: ["Custom UI", "React & Next.js", "Post-launch support"],
+    description:
+      "Custom functionality and interactive interfaces, built with React and Next.js. I can work from your designs or design it with you, and I'm happy to work white-label for agencies.",
+    audience: [
+      "Startups building a product or marketing site",
+      "Agencies looking for a freelance or white-label developer",
+      "Businesses that need features a template can't handle",
+    ],
+    includes: [
+      "Front-end development in React and Next.js",
+      "Integrations with the tools and services you use",
+      "Clean, maintainable code that's easy to hand over",
+      "Deployment and handover",
+    ],
+    addOns: ["White-label delivery for agencies", "Ongoing development support"],
   },
 ];

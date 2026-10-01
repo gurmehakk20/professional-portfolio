@@ -35,7 +35,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
       <div className="grid gap-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-12">
         <div className="lg:col-span-5">
           <div className="flex items-center gap-4">
-            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
+            <span className="inline-flex size-11 items-center justify-center rounded-xl border border-accent/10 bg-linear-135 from-accent-soft to-cyan-soft text-accent">
               <Icon name={service.icon} size={20} />
             </span>
             <span
@@ -51,6 +51,28 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
           <p className="mt-4 max-w-2xl text-lead text-muted">
             {service.description ?? service.summary}
           </p>
+
+          <p className="mt-6 max-w-xl border-l-2 border-accent pl-4">
+            <span className="font-semibold text-ink">The problem it solves: </span>
+            {service.problem}
+          </p>
+
+          {service.deliverables.length > 0 ? (
+            <ul
+              role="list"
+              aria-label={`${service.name} includes`}
+              className="mt-6 flex flex-wrap gap-2"
+            >
+              {service.deliverables.map((deliverable) => (
+                <li key={deliverable}>
+                  <Tag tone="accent">
+                    <Icon name="check" size={12} strokeWidth={2.5} className="mr-1 -ml-0.5" />
+                    {deliverable}
+                  </Tag>
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           {timeline || pricing ? (
             <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6">

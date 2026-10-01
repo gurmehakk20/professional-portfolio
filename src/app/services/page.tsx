@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
+import { ContactSection } from "@/components/sections/contact-section";
 import { Faq } from "@/components/sections/faq";
-import { FinalCta } from "@/components/sections/final-cta";
 import { Process } from "@/components/sections/process";
 import { IncludedList } from "@/components/services/included-list";
 import { ServiceJumpLinks } from "@/components/services/service-jump-links";
 import { ServiceList } from "@/components/services/service-list";
 import { PageHeader } from "@/components/ui/page-header";
 import { faqIntro, faqs } from "@/content/faq";
-import { finalCta } from "@/content/home";
+import { contactSection } from "@/content/home";
 import { processIntro, processSteps } from "@/content/process";
 import {
-  includedInEveryProject,
   includedIntro,
   services,
   servicesPage,
+  standardDeliverables,
 } from "@/content/services";
 
 export const metadata: Metadata = {
@@ -32,10 +32,11 @@ export default function ServicesPage() {
         <ServiceJumpLinks services={services} />
       </PageHeader>
       <ServiceList services={services} />
-      <IncludedList intro={includedIntro} items={includedInEveryProject} />
-      <Process intro={processIntro} steps={processSteps} tone="dark" />
+      <IncludedList intro={includedIntro} items={standardDeliverables} />
+      <Process intro={processIntro} steps={processSteps} />
       <Faq intro={faqIntro} items={faqs} />
-      <FinalCta content={finalCta} flushTop />
+      {/* The FAQ shares the contact section's background, so it skips its top padding. */}
+      <ContactSection content={contactSection} flushTop />
     </>
   );
 }
