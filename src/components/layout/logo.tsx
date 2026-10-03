@@ -1,11 +1,11 @@
 import { cn } from "@/lib/cn";
 
-/** The MEHAK wordmark: a small cobalt-gradient mark and the name. Wrap it in a link where needed. */
+/** The GURMEHAK wordmark: a small cobalt-gradient mark and the name. Wrap it in a link where needed. */
 export function Wordmark({ name, className }: { name: string; className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2.5 font-display text-[1.0625rem] leading-none font-bold tracking-[0.2em] text-ink uppercase",
+        "inline-flex items-center gap-2.5 font-display text-[1.0625rem] leading-none font-bold tracking-[0.2em] text-ink uppercase max-xs:tracking-[0.12em]",
         className,
       )}
     >

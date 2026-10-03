@@ -85,14 +85,14 @@ export const differentiators: Principle[] = [
 
 export const about: AboutContent = {
   eyebrow: "About",
-  title: "Hi, I'm Mehak.",
+  title: "Hi, I'm Gurmehak.",
   paragraphs: [
-    "I'm Gurmehak Kaur — Mehak for short — an independent web designer and developer. I design and build modern, responsive websites with React and Next.js for businesses, startups and agencies.",
+    "I'm Gurmehak Kaur, an independent web designer and developer. I design and build modern, responsive websites with React and Next.js for businesses, startups and agencies.",
     "I care about good websites because they're often a customer's first impression. A clear, fast site helps a good business look as good online as it is in person.",
   ],
   focusAreas: ["UI/UX design", "React & Next.js", "Responsive design", "Performance", "SEO foundations"],
   // Add a portrait by placing it in /public/images/about/ and uncommenting:
-  // image: { src: "/images/about/portrait.jpg", alt: "Portrait of Mehak" },
+  // image: { src: "/images/about/portrait.jpg", alt: "Portrait of Gurmehak" },
   cta: { label: "Get in touch", href: "/contact" },
 };
 

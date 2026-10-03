@@ -12,7 +12,7 @@ import type { SiteConfig } from "./types";
 
 /**
  * Canonical production URL (no trailing slash).
- * Set NEXT_PUBLIC_SITE_URL in your hosting environment (e.g. https://mehak.dev).
+ * Set NEXT_PUBLIC_SITE_URL in your hosting environment (e.g. https://gurmehak.dev).
  * It's read at build time, so rebuild after changing it.
  */
 const PLACEHOLDER_URL = "https://www.example.com";
@@ -26,14 +26,14 @@ if (!/^https?:\/\//.test(url)) {
 export const isPlaceholderSiteUrl = url === PLACEHOLDER_URL;
 
 export const site: SiteConfig = {
-  name: "Mehak",
+  name: "Gurmehak",
   tagline: "Web Design & Development",
-  title: "Mehak — Web Design & Development",
+  title: "Gurmehak — Web Design & Development",
   description:
     "Independent web designer and developer building modern, responsive, conversion-aware websites with React and Next.js for businesses, startups and agencies.",
   url,
   locale: "en_GB",
-  author: "Mehak",
+  author: "Gurmehak",
   fullName: "Gurmehak Kaur",
   jobTitle: "Web Designer & Developer",
 
@@ -42,7 +42,7 @@ export const site: SiteConfig = {
     whatsapp: {
       number: "", // TODO: country code + number, digits only, e.g. "919876543210"
       display: "", // TODO: how it's shown, e.g. "+91 98765 43210"
-      message: "Hi Mehak, I'd like to talk about a website project.",
+      message: "Hi Gurmehak, I'd like to talk about a website project.",
     },
     location: "Working with clients remotely", // Optional — e.g. "Based in Pune · Working remotely"
     responseTime: "I usually reply within one working day.", // Optional — only keep if true

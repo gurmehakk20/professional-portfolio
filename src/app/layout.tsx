@@ -12,7 +12,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  // e.g. "Services | Mehak — Web Design & Development"
+  // e.g. "Services | Gurmehak — Web Design & Development"
   title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
   applicationName: site.name,

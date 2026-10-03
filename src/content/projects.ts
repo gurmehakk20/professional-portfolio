@@ -21,7 +21,7 @@ export const workPage: PageIntro = {
   description:
     "Websites I've designed and built — and what each business needed them to do.",
   metaDescription:
-    "Selected website design and development projects by Mehak, an independent web designer and developer.",
+    "Selected website design and development projects by Gurmehak, an independent web designer and developer.",
 };
 
 export const projects: Project[] = [

@@ -15,7 +15,7 @@ import { NavLinks } from "./nav-links";
 export function SiteHeader() {
   return (
     <header className="site-header sticky top-0 z-40">
-      <Container className="flex h-(--header-height) items-center justify-between gap-6">
+      <Container className="flex h-(--header-height) items-center justify-between gap-3 xs:gap-6">
         <Link href="/" aria-label={`${site.name} — home`} className="rounded-sm">
           <Wordmark name={site.name} />
         </Link>

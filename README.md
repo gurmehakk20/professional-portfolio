@@ -1,4 +1,4 @@
-# Mehak — Web Design & Development
+# Gurmehak — Web Design & Development
 
 Portfolio and sales website for an independent web design and development service.
 Built with **Next.js 16** (App Router), **TypeScript** and **Tailwind CSS 4**. Every page is
@@ -32,7 +32,7 @@ npm run dev        # http://localhost:3000
 Fields marked `TODO` in `src/content/` need your real details. Contact details and profiles left
 empty (`""`) are simply hidden, so the site never shows placeholder information.
 
-- [ ] **Site URL** — set `NEXT_PUBLIC_SITE_URL` in your hosting environment (e.g. `https://mehak.dev`).
+- [ ] **Site URL** — set `NEXT_PUBLIC_SITE_URL` in your hosting environment (e.g. `https://gurmehak.dev`).
       It's used for canonical URLs, the sitemap and social previews. Until it's set, the build
       prints a warning and every page asks search engines not to index the site. Indexing
       switches on by itself once you set it and rebuild.
@@ -122,7 +122,7 @@ links lead to the same place, so the next step is always obvious without the pag
   - Content is never hidden without JavaScript or before the page has loaded, and everything is
     switched off for visitors who prefer reduced motion.
 
-**Page titles** follow the pattern `Services | Mehak — Web Design & Development`: each page's
+**Page titles** follow the pattern `Services | Gurmehak — Web Design & Development`: each page's
 own title, then `title` from `src/content/site.ts`. The home page uses that `title` on its own.
 
 ### Switches
@@ -214,7 +214,7 @@ Put the photo in `public/images/about/`, then set `image` in the `about` section
 `src/content/home.ts`:
 
 ```ts
-image: { src: "/images/about/portrait.jpg", alt: "Portrait of Mehak" },
+image: { src: "/images/about/portrait.jpg", alt: "Portrait of Gurmehak" },
 ```
 
 ### Adding a page

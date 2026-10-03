@@ -15,7 +15,7 @@ export const contactPage: ContactPageContent = {
   description:
     "Tell me a little about your business and what you need. I'll reply with a few questions and clear next steps.",
   metaDescription:
-    "Start a website project with Mehak — business websites, landing pages, redesigns and custom web builds.",
+    "Start a website project with Gurmehak — business websites, landing pages, redesigns and custom web builds.",
 
   whatsapp: {
     title: "WhatsApp",

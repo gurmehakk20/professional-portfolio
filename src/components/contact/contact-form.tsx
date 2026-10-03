@@ -11,7 +11,7 @@ type ContactFormProps = {
   content: ContactPageContent["form"];
   /** Options for "What do you need?", e.g. your services. */
   services: { value: string; label: string }[];
-  /** Name used to greet you at the start of every message ("Hi Mehak, …"). */
+  /** Name used to greet you at the start of every message ("Hi Gurmehak, …"). */
   recipientName: string;
   /** Pass to offer "Send on WhatsApp". */
   whatsapp?: Pick<ContactDetails["whatsapp"], "number" | "display">;
