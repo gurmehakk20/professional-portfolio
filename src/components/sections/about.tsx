@@ -88,7 +88,7 @@ export function About({ content, name, id = "about", number }: AboutProps) {
 
 /**
  * Decorative stand-in shown while there's no portrait: your initial on a
- * blue-to-teal card with a fine grid. To show a photo instead, add `image`
+ * deep-to-lighter blue card with a fine grid. To show a photo instead, add `image`
  * to the about content in src/content/home.ts — this card is then replaced
  * by the portrait automatically.
  */
@@ -96,7 +96,7 @@ function MonogramCard({ name, focus }: { name: string; focus: string[] }) {
   return (
     <div
       aria-hidden="true"
-      className="relative isolate flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl bg-linear-150 from-accent to-[#0b8fb0] p-6 shadow-lift @container sm:max-w-md sm:p-8 md:aspect-[4/5] lg:aspect-[4/3]"
+      className="relative isolate flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl bg-linear-150 from-accent to-accent-bright p-6 shadow-lift @container sm:max-w-md sm:p-8 md:aspect-[4/5] lg:aspect-[4/3]"
     >
       <div className="absolute inset-0 -z-10 bg-grid fade-edges [--grid-line:rgb(255_255_255/0.14)] [--grid-size:2.5rem]" />
       <div className="absolute -top-1/3 -right-1/4 -z-10 aspect-square w-3/4 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.28),transparent)]" />
