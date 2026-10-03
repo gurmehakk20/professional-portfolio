@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProjectGrid } from "@/components/projects/project-grid";
+import { ProjectShowcase } from "@/components/projects/project-showcase";
 import { ContactSection } from "@/components/sections/contact-section";
 import { PageHeader } from "@/components/ui/page-header";
 import { Section } from "@/components/ui/section";
@@ -23,10 +23,10 @@ export default function WorkPage() {
       />
       {hasProjects ? (
         <Section>
-          <ProjectGrid projects={projects} />
+          <ProjectShowcase projects={projects} headingLevel="h2" />
         </Section>
       ) : null}
-      {/* The grid shares the contact section's background, so it skips its top padding. */}
+      {/* The projects share the contact section's background, so it skips its top padding. */}
       <ContactSection content={contactSection} flushTop={hasProjects} />
     </>
   );

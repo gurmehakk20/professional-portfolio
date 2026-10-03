@@ -24,9 +24,9 @@ export const hero: HeroContent = {
 
 export const workIntro: SectionIntro = {
   eyebrow: "Selected work",
-  title: "Websites built for real businesses",
+  title: "Websites and web apps I've designed and built",
   description:
-    "A closer look at recent work: what each business needed, and what I designed and built for it.",
+    "Clinic and healthcare websites, a library management system and an online flower shop. Each one opens live in a new tab.",
 };
 
 export const servicesIntro: SectionIntro = {
