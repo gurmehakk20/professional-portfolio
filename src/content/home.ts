@@ -87,7 +87,7 @@ export const about: AboutContent = {
   eyebrow: "About",
   title: "Hi, I'm Gurmehak.",
   paragraphs: [
-    "I'm Gurmehak Kaur, an independent web designer and developer. I design and build modern, responsive websites with React and Next.js for businesses, startups and agencies.",
+    "I'm Gurmehak, an independent web designer and developer. I design and build modern, responsive websites with React and Next.js for businesses, startups and agencies.",
     "I care about good websites because they're often a customer's first impression. A clear, fast site helps a good business look as good online as it is in person.",
   ],
   focusAreas: ["UI/UX design", "React & Next.js", "Responsive design", "Performance", "SEO foundations"],

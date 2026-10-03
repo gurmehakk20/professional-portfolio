@@ -33,7 +33,7 @@ export const site: SiteConfig = {
   url,
   locale: "en_GB",
   author: "Gurmehak",
-  fullName: "Gurmehak Kaur",
+  fullName: "Gurmehak",
   jobTitle: "Web Designer & Developer",
 
   contact: {
