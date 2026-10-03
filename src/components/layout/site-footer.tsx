@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BreakableText } from "@/components/ui/breakable-text";
 import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
 import { site } from "@/content/site";
@@ -45,7 +46,8 @@ export function SiteFooter() {
           </nav>
 
           {hasEmail || hasWhatsApp || socialLinks.length > 0 ? (
-            <div className="md:col-span-4">
+            // Full width on the smallest phones, so the email address has room.
+            <div className="max-xs:col-span-2 md:col-span-4">
               <h2 className="font-sans text-sm font-semibold text-ink">Get in touch</h2>
               {hasEmail || hasWhatsApp ? (
                 <ul className="mt-4 space-y-1">
@@ -53,7 +55,9 @@ export function SiteFooter() {
                     <li>
                       <a href={mailtoUrl()} className={linkClasses}>
                         <Icon name="mail" size={16} className="shrink-0" />
-                        <span className="break-all">{contact.email}</span>
+                        <span className="wrap-anywhere">
+                          <BreakableText text={contact.email} />
+                        </span>
                       </a>
                     </li>
                   ) : null}

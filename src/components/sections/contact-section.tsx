@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/button";
 import { DevNotice } from "@/components/ui/dev-notice";
+import { BreakableText } from "@/components/ui/breakable-text";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -43,7 +44,7 @@ export function ContactSection({ content, id = "contact", number, flushTop }: Co
           className="absolute -bottom-2/3 left-[20%] -z-10 aspect-square w-[30rem] max-w-full rounded-full bg-[radial-gradient(closest-side,rgb(47_139_166/0.2),transparent)]"
         />
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
           <div className="lg:col-span-7">
             <SectionHeader
               id={headingId}
@@ -92,14 +93,15 @@ export function ContactSection({ content, id = "contact", number, flushTop }: Co
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block text-sm">{method.label}</span>
-                          <span className="block truncate font-semibold text-white">
-                            {method.value}
+                          <span className="block font-semibold text-white wrap-anywhere">
+                            <BreakableText text={method.value} />
                           </span>
                         </span>
                         <Icon
                           name={method.external ? "arrow-up-right" : "arrow-right"}
                           size={18}
-                          className={`shrink-0 text-on-dark-muted transition-[translate,color] duration-200 ease-out-soft group-hover:text-white ${
+                          // Hidden on the smallest phones to leave room for the address.
+                          className={`shrink-0 text-on-dark-muted transition-[translate,color] max-xs:hidden duration-200 ease-out-soft group-hover:text-white ${
                             method.external
                               ? "motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
                               : "motion-safe:group-hover:translate-x-1"

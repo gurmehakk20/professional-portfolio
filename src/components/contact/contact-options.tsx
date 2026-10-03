@@ -1,3 +1,4 @@
+import { BreakableText } from "@/components/ui/breakable-text";
 import { ButtonLink } from "@/components/ui/button";
 import { DevNotice } from "@/components/ui/dev-notice";
 import type { ButtonVariant } from "@/components/ui/button-styles";
@@ -132,7 +133,7 @@ function ChannelCard({ icon, channel, detail, href, variant }: ChannelCardProps)
         </div>
       </div>
       <p className="mt-5 font-display text-lg font-semibold tracking-[-0.01em] text-ink wrap-anywhere">
-        {detail}
+        <BreakableText text={detail} />
       </p>
       <div className="mt-auto pt-4">
         <ButtonLink href={href} variant={variant} className="w-full sm:w-auto">
