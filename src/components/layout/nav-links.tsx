@@ -24,7 +24,7 @@ export function NavLinks({ items }: { items: CtaLink[] }) {
             <Link
               href={item.href}
               aria-current={current ? "page" : undefined}
-              className="relative inline-flex h-10 items-center rounded-full px-3 text-[0.9375rem] font-medium text-body transition-colors duration-200 hover:bg-ink/[0.045] hover:text-ink lg:px-3.5 aria-[current=page]:text-ink aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3.5 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-linear-to-r aria-[current=page]:after:from-accent aria-[current=page]:after:to-accent-bright"
+              className="relative inline-flex h-11 items-center rounded-full px-3 lg:h-10 text-[0.9375rem] font-medium text-body transition-colors duration-200 hover:bg-ink/[0.045] hover:text-ink lg:px-3.5 aria-[current=page]:text-ink aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3.5 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-linear-to-r aria-[current=page]:after:from-accent aria-[current=page]:after:to-accent-bright"
             >
               {item.label}
             </Link>

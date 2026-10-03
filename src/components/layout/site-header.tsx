@@ -16,7 +16,11 @@ export function SiteHeader() {
   return (
     <header className="site-header sticky top-0 z-40">
       <Container className="flex h-(--header-height) items-center justify-between gap-3 xs:gap-6">
-        <Link href="/" aria-label={`${site.name} — home`} className="rounded-sm">
+        <Link
+          href="/"
+          aria-label={`${site.name} — home`}
+          className="inline-flex min-h-11 items-center rounded-sm"
+        >
           <Wordmark name={site.name} />
         </Link>
 

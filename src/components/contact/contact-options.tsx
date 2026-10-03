@@ -86,7 +86,7 @@ export function ContactOptions({
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-ink transition-colors duration-200 hover:border-accent/40 hover:text-accent-strong"
+                className="inline-flex h-11 items-center gap-2 rounded-full md:h-10 border border-line bg-surface px-4 text-sm font-medium text-ink transition-colors duration-200 hover:border-accent/40 hover:text-accent-strong"
               >
                 <Icon name={social.icon} size={16} className="text-accent" />
                 {social.label}

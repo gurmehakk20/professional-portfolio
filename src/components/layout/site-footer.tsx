@@ -7,8 +7,9 @@ import { hasEmail, hasWhatsApp, socialLinks } from "@/lib/contact";
 import { mailtoUrl, whatsappUrl } from "@/lib/links";
 import { Wordmark } from "./logo";
 
+/** Full-width 44px rows on phones for comfortable tapping; compact 32px links from md up. */
 const linkClasses =
-  "inline-flex min-h-8 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-accent-strong";
+  "flex min-h-11 items-center gap-2.5 text-sm text-muted transition-colors duration-200 hover:text-accent-strong md:inline-flex md:min-h-8";
 
 /** Site footer. Contact details and profiles appear only once they're filled in (src/content/site.ts). */
 export function SiteFooter() {
@@ -25,7 +26,7 @@ export function SiteFooter() {
       <Container className="py-12 md:py-16">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-12 md:gap-8">
           <div className="col-span-2 md:col-span-5">
-            <Link href="/" aria-label={`${site.name} — home`} className="inline-block rounded-sm">
+            <Link href="/" aria-label={`${site.name} — home`} className="inline-flex min-h-11 items-center rounded-sm">
               <Wordmark name={site.name} />
             </Link>
             <p className="mt-3 text-sm font-medium text-ink">{site.tagline}</p>
@@ -34,7 +35,7 @@ export function SiteFooter() {
 
           <nav aria-label="Footer" className="md:col-span-3">
             <h2 className="font-sans text-sm font-semibold text-ink">Navigation</h2>
-            <ul className="mt-4 space-y-1">
+            <ul className="mt-3 md:mt-4 md:space-y-1">
               {site.nav.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={linkClasses}>
@@ -50,7 +51,7 @@ export function SiteFooter() {
             <div className="max-xs:col-span-2 md:col-span-4">
               <h2 className="font-sans text-sm font-semibold text-ink">Get in touch</h2>
               {hasEmail || hasWhatsApp ? (
-                <ul className="mt-4 space-y-1">
+                <ul className="mt-3 md:mt-4 md:space-y-1">
                   {hasEmail ? (
                     <li>
                       <a href={mailtoUrl()} className={linkClasses}>
@@ -91,7 +92,7 @@ export function SiteFooter() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex size-10 items-center justify-center rounded-lg border border-line bg-surface text-muted transition-colors duration-200 hover:border-accent/40 hover:text-accent"
+                        className="inline-flex size-11 items-center justify-center rounded-lg border md:size-10 border-line bg-surface text-muted transition-colors duration-200 hover:border-accent/40 hover:text-accent"
                       >
                         <Icon name={social.icon} size={18} />
                         <span className="sr-only">{social.label} (opens in a new tab)</span>

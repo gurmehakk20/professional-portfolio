@@ -81,7 +81,12 @@ export function MobileNav({ name, items, cta, whatsappHref, emailHref }: MobileN
         className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none border-0 bg-canvas p-0 text-body backdrop:bg-transparent open:flex open:flex-col motion-safe:open:animate-menu-in"
       >
         <div className="flex h-(--header-height) shrink-0 items-center justify-between border-b border-line px-5 sm:px-8">
-          <Link href="/" onNavigate={close} aria-label={`${name} — home`} className="rounded-sm">
+          <Link
+            href="/"
+            onNavigate={close}
+            aria-label={`${name} — home`}
+            className="inline-flex min-h-11 items-center rounded-sm"
+          >
             <Wordmark name={name} />
           </Link>
           <button

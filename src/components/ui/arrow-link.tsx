@@ -15,7 +15,8 @@ export function ArrowLink({ href, className, children }: ArrowLinkProps) {
   const external = isExternalHref(href);
   const opensNewTab = opensInNewTab(href);
   const classes = cn(
-    "group inline-flex items-center gap-1.5 font-semibold text-ink underline-offset-4",
+    // The padding and matching negative margin give a 44px tap area without changing the layout.
+    "group -my-2.5 inline-flex items-center gap-1.5 py-2.5 font-semibold text-ink underline-offset-4",
     "transition-colors duration-200 hover:text-accent-strong hover:underline",
     className,
   );

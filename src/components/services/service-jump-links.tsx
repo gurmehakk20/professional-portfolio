@@ -12,7 +12,7 @@ export function ServiceJumpLinks({ services }: { services: Service[] }) {
           <li key={service.slug}>
             <a
               href={`#${service.slug}`}
-              className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-surface px-3.5 text-sm font-medium text-ink transition-colors duration-200 ease-out-soft hover:border-line-strong"
+              className="inline-flex h-11 items-center gap-2 rounded-full md:h-10 border border-line bg-surface px-3.5 text-sm font-medium text-ink transition-colors duration-200 ease-out-soft hover:border-line-strong"
             >
               <Icon name={service.icon} size={16} className="shrink-0 text-accent" />
               {service.name}
