@@ -212,6 +212,8 @@ export type Project = {
   category: string;
   /** One line: what it is and who it's for. Shown on cards. */
   summary: string;
+  /** What the work covered, shown under the summary, e.g. ["UI/UX", "Web design", "Next.js"]. */
+  tags?: string[];
   /** Technologies, shown as small labels where useful, e.g. ["Next.js", "Tailwind CSS"]. */
   technologies?: string[];
   /** Your role, e.g. ["Design", "Development"]. */
@@ -219,6 +221,15 @@ export type Project = {
   year?: string;
   /** Screenshot for cards and the project page. Without one, a designed cover with the project's name is shown. */
   cover?: ProjectMedia;
+  /** Optional phone screenshot (portrait, ~780px wide), shown in a phone beside the cover. */
+  mobileCover?: ProjectMedia;
+  /**
+   * Show the live site inside the preview frame on desktop, once it scrolls
+   * into view (the screenshot shows until then, and on phones). Only set
+   * this if the site allows being embedded — sites that send
+   * `X-Frame-Options` or a `frame-ancestors` policy would show an error page.
+   */
+  embed?: boolean;
   /** Brand colour for that designed cover, e.g. "#0e7490". Defaults to the site blue. */
   coverColor?: string;
   /** The live website — adds a "Visit live site" link. */

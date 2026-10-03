@@ -3,25 +3,27 @@ import type { PageIntro, Project } from "./types";
 /*
  * Projects — used on the home page ("Selected work"), the /work page and,
  * for projects with a `caseStudy`, their own page at /work/[slug].
+ * They're numbered 01, 02… in the order listed here.
  *
  * Only describe work you can stand behind — never add invented results,
  * metrics or testimonials.
  *
- * Images:
- *   1. Put screenshots in /public/images/projects/<slug>/ (WebP or AVIF, ~2000px wide).
- *   2. Set `cover` (and any case-study screenshots), e.g.
- *      cover: { src: "/images/projects/arka-dental/home.webp", alt: "Arka Dental home page" }
- *   3. For a phone screenshot (portrait, ~1170px wide), add `device: "mobile"`.
+ * Images (in /public/images/projects/<slug>/):
+ *   - `cover`: the desktop home page, 16:10 (e.g. a 1440×900 capture at 1.5× = 2160×1350), WebP.
+ *   - `mobileCover`: the same page on a phone, portrait (e.g. 390×844 at 2× = 780×1688), WebP.
  * Without a cover, a designed cover with the project's name and category is shown.
+ *
+ * `embed: true` shows the live site in the preview on desktop — only for sites
+ * that allow embedding (Libra doesn't: it sends X-Frame-Options: DENY).
  */
 
 export const workPage: PageIntro = {
   eyebrow: "Work",
   title: "Selected work",
   description:
-    "Websites I've designed and built — and what each business needed them to do.",
+    "Websites and web apps I've designed and built — each one opens live in a new tab.",
   metaDescription:
-    "Selected website design and development projects by Gurmehak, an independent web designer and developer.",
+    "Selected website design and development projects by Gurmehak: clinic and healthcare websites, a library management system and an online flower shop.",
 };
 
 export const projects: Project[] = [
@@ -29,15 +31,75 @@ export const projects: Project[] = [
     slug: "arka-dental",
     title: "Arka Dental",
     category: "Dental clinic website",
-    // TODO: confirm this one-line description.
     summary:
-      "A calm, mobile-friendly clinic website that puts treatments, timings and appointment enquiries one tap away.",
-    role: ["Design", "Development"],
-    // TODO: add the stack you used, e.g. technologies: ["Next.js", "Tailwind CSS"],
-    // TODO: add the live site to show a "Visit live site" link:
-    // liveUrl: "https://…",
-    // TODO: add a screenshot to replace the designed cover:
-    // cover: { src: "/images/projects/arka-dental/home.webp", alt: "Arka Dental home page" },
+      "A conversion-focused dental clinic website designed to make treatments, doctors, fees, location and appointment enquiries easy to find.",
+    tags: ["UI/UX", "Web design", "Development", "Next.js", "Responsive design"],
+    liveUrl: "https://arkadental.vercel.app/",
+    cover: {
+      src: "/images/projects/arka-dental/desktop.webp",
+      alt: "Arka Dental home page: “Careful dentistry, clearly explained.” with a Book an appointment button",
+    },
+    mobileCover: {
+      src: "/images/projects/arka-dental/mobile.webp",
+      alt: "Arka Dental home page on a phone, with call, WhatsApp and booking buttons along the bottom",
+    },
+    embed: true,
+    featured: true,
+  },
+  {
+    slug: "aarogya-care",
+    title: "Aarogya Care",
+    category: "Healthcare website",
+    summary:
+      "A modern healthcare website focused on clear service discovery, trust, accessibility and a simple patient-facing experience.",
+    tags: ["UI/UX", "Healthcare", "Web design", "Responsive design"],
+    liveUrl: "https://aarogya-care-gamma.vercel.app/",
+    cover: {
+      src: "/images/projects/aarogya-care/desktop.webp",
+      alt: "Aarogya Care home page: “Quality healthcare, booked in seconds” with a search by speciality, location and date",
+    },
+    mobileCover: {
+      src: "/images/projects/aarogya-care/mobile.webp",
+      alt: "Aarogya Care home page on a phone, with the doctor search stacked in one column",
+    },
+    embed: true,
+    featured: true,
+  },
+  {
+    slug: "libra",
+    title: "Libra",
+    category: "Library management system",
+    summary:
+      "A library management platform with separate experiences for students and librarians, covering catalog discovery, reservations, loans and library administration.",
+    tags: ["Product UI", "React", "Web app", "Dashboard", "UX"],
+    liveUrl: "https://libra-virid.vercel.app/",
+    cover: {
+      src: "/images/projects/libra/desktop.webp",
+      alt: "Libra start page: “The library, in one place.” with a student portal and a librarian console to choose from",
+    },
+    mobileCover: {
+      src: "/images/projects/libra/mobile.webp",
+      alt: "Libra start page on a phone, with the student and librarian options stacked",
+    },
+    featured: true,
+  },
+  {
+    slug: "floralia",
+    title: "Floralia",
+    category: "E-commerce / business website",
+    summary:
+      "A flower shop website designed around product discovery, presentation and easy browsing.",
+    tags: ["UI/UX", "Frontend", "E-commerce", "Responsive design"],
+    liveUrl: "https://floralia.vercel.app/",
+    cover: {
+      src: "/images/projects/floralia/desktop.webp",
+      alt: "Floralia home page: “Fresh Flowers — Natural & Beautiful Blooms” beside a bunch of pink tulips, with a Shop now button",
+    },
+    mobileCover: {
+      src: "/images/projects/floralia/mobile.webp",
+      alt: "Floralia home page on a phone, with the shop’s headline over the tulip photo",
+    },
+    embed: true,
     featured: true,
   },
 
@@ -49,12 +111,11 @@ export const projects: Project[] = [
   //   title: "Project Name",
   //   category: "Business website",
   //   summary: "One line on what it is and who it's for.",
-  //   technologies: ["Next.js", "Tailwind CSS"],
-  //   role: ["Design", "Development"],
-  //   year: "2026",
-  //   cover: { src: "/images/projects/project-name/home.webp", alt: "Project Name home page" },
-  //   coverColor: "#1c4e9c",
+  //   tags: ["UI/UX", "Web design", "Next.js"],
   //   liveUrl: "https://…",
+  //   cover: { src: "/images/projects/project-name/desktop.webp", alt: "Project Name home page" },
+  //   mobileCover: { src: "/images/projects/project-name/mobile.webp", alt: "Project Name on a phone" },
+  //   embed: true, // only if the site allows being embedded
   //   featured: true,
   //   caseStudy: {
   //     overview: "Who the client is and what the website needed to do.",
