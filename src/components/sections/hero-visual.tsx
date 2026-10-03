@@ -17,6 +17,9 @@ type HeroVisualProps = {
 /** Small caption text that scales with the composition but stays readable. */
 const caption = "text-[clamp(0.5625rem,2.2cqw,0.6875rem)] font-semibold tracking-[0.12em] uppercase";
 
+/** The featured-project label is a real link, so its text never shrinks below 12px. */
+const labelCaption = "text-xs font-semibold tracking-[0.12em] uppercase";
+
 /*
  * Hero showcase: a browser window with the featured project, the same site
  * on a phone, and a few small "design file" cards (project label, palette
@@ -78,21 +81,21 @@ export function HeroVisual({ project, name }: HeroVisualProps) {
         {project ? (
           <Label
             {...labelLink}
-            className="group enter absolute top-0 left-0 w-[56cqw] [--enter-delay:720ms] rounded-[2.4cqw] @lg:w-[48cqw] border border-line bg-surface p-[2.6cqw] shadow-float transition-[border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/35 hover:shadow-lift"
+            className="group enter absolute top-0 left-0 w-[66cqw] [--enter-delay:720ms] rounded-[2.4cqw] @sm:w-[56cqw] @lg:w-[48cqw] border border-line bg-surface p-[2.6cqw] shadow-float transition-[border-color,box-shadow] duration-200 ease-out-soft hover:border-accent/35 hover:shadow-lift"
           >
             <div className="flex items-center gap-[2.4cqw]">
               <span aria-hidden="true" className="grid size-[9cqw] shrink-0 place-items-center rounded-[1.8cqw] bg-linear-135 from-accent to-accent-bright font-display text-[4.2cqw] font-bold text-white">
                 {project.title.charAt(0)}
               </span>
               <span className="min-w-0">
-                <span className={`block truncate text-muted ${caption}`}>Featured project</span>
-                <span className="mt-[0.6cqw] block truncate font-display text-[clamp(0.75rem,3.6cqw,1rem)] leading-tight font-semibold text-ink">
+                <span className={`block truncate text-muted ${labelCaption}`}>Featured project</span>
+                <span className="mt-[0.6cqw] block truncate font-display text-[clamp(0.875rem,3.6cqw,1rem)] leading-tight font-semibold text-ink">
                   {project.title}
                 </span>
               </span>
             </div>
             {liveUrl ? (
-              <span className="mt-[2.4cqw] flex items-center gap-[1cqw] border-t border-line pt-[2.2cqw] text-[clamp(0.6875rem,2.8cqw,0.875rem)] font-semibold text-accent-strong">
+              <span className="mt-[2.4cqw] flex items-center gap-[1cqw] border-t border-line pt-[2.2cqw] text-[clamp(0.8125rem,2.8cqw,0.875rem)] font-semibold text-accent-strong">
                 View live website
                 <Icon
                   name="arrow-up-right"

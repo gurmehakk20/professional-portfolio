@@ -15,7 +15,8 @@ import { ProjectCover } from "./project-cover";
  * The preview takes 7 of 12 columns on large screens and the full width below.
  */
 const desktopSizes = "(min-width: 1280px) 620px, (min-width: 1024px) 50vw, calc(100vw - 64px)";
-const phoneSizes = "(min-width: 1280px) 150px, (min-width: 1024px) 12vw, 20vw";
+const phoneSizes =
+  "(min-width: 1280px) 150px, (min-width: 1024px) 12vw, (min-width: 640px) 20vw, 28vw";
 
 type ProjectShowcaseProps = {
   projects: Project[];
@@ -141,7 +142,8 @@ function ShowcasePreview({ project }: { project: Project }) {
     // The padding is on an inner box: container units resolve against the
     // nearest *ancestor* container, so they can't size the container itself.
     <div className="@container">
-      <div className="relative pr-[8cqw] pb-[8cqw]">
+      {/* On phones the phone view is larger — it's the most relevant view there. */}
+      <div className="relative pr-[9cqw] pb-[11cqw] sm:pr-[8cqw] sm:pb-[8cqw]">
         <BrowserFrame
           url={displayHost(liveUrl)}
           className="transition-[translate,scale,border-color,box-shadow] duration-500 ease-out-soft group-hover/project:border-accent/30 group-hover/project:shadow-lift motion-safe:group-hover/project:-translate-y-0.5 motion-safe:group-hover/project:scale-[1.01]"
@@ -161,7 +163,7 @@ function ShowcasePreview({ project }: { project: Project }) {
         </BrowserFrame>
 
         {mobileCover ? (
-          <div className="absolute right-0 bottom-0 aspect-[9/19.5] w-[22cqw] overflow-hidden rounded-[3.2cqw] border-[0.9cqw] border-ink bg-surface shadow-frame transition-[translate] duration-500 ease-out-soft motion-safe:group-hover/project:-translate-y-1">
+          <div className="absolute right-0 bottom-0 aspect-[9/19.5] w-[29cqw] overflow-hidden sm:w-[22cqw] rounded-[3.2cqw] border-[0.9cqw] border-ink bg-surface shadow-frame transition-[translate] duration-500 ease-out-soft motion-safe:group-hover/project:-translate-y-1">
             <Image
               src={mobileCover.src}
               alt={mobileCover.alt}

@@ -394,13 +394,26 @@
 
   /* 4. Ambient — transform only, so it runs on the compositor and costs next
      to nothing; browsers pause it when the hero is off screen or the tab is
-     in the background. */
-  .ambient-drift {
-    animation: drift 28s ease-in-out infinite alternate;
+     in the background. Tablets and desktops only: on phones the glows stay
+     still, so nothing animates continuously on a small battery. */
+  @media (min-width: 48rem) {
+    .ambient-drift {
+      animation: drift 28s ease-in-out infinite alternate;
+    }
+
+    .ambient-drift-alt {
+      animation: drift-alt 36s ease-in-out infinite alternate;
+    }
   }
 
-  .ambient-drift-alt {
-    animation: drift-alt 36s ease-in-out infinite alternate;
+  /* Phones: the same entrances and reveals, a little quicker. */
+  @media (max-width: 47.99rem) {
+    .enter,
+    .enter-pop,
+    [data-reveal-state="revealed"]:not([data-reveal="group"]),
+    [data-reveal="group"][data-reveal-state="revealed"] > * {
+      animation-duration: 550ms;
+    }
   }
 
   /* Smooth open/close for <details> (FAQ) where supported. */

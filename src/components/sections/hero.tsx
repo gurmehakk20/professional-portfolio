@@ -35,7 +35,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
       <Glow className="ambient-drift -top-40 -right-40 w-[48rem]" />
       <Glow color="cyan" className="ambient-drift-alt top-[38%] -left-56 w-[32rem]" />
 
-      <Container className="grid items-center gap-12 pt-10 pb-16 sm:pt-14 md:pb-20 lg:grid-cols-12 lg:gap-8 lg:pt-16 lg:pb-24 xl:gap-12">
+      <Container className="grid items-center gap-10 pt-8 pb-16 sm:gap-12 sm:pt-14 md:pb-20 lg:grid-cols-12 lg:gap-8 lg:pt-16 lg:pb-24 xl:gap-12">
         <div className="lg:col-span-7 xl:col-span-6">
           {eyebrow ? (
             <p className="enter inline-flex items-center gap-2.5 rounded-full border border-accent/15 bg-surface/80 py-1.5 pr-4 pl-2.5 text-eyebrow font-semibold text-accent-strong uppercase shadow-card">
@@ -57,7 +57,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
 
           <p className="enter mt-6 max-w-xl text-lead text-body [--enter-delay:160ms]">{description}</p>
 
-          <div className="enter mt-9 flex max-w-md flex-wrap gap-3 [--enter-delay:240ms] sm:max-w-none">
+          <div className="enter mt-8 flex max-w-md flex-wrap gap-3 [--enter-delay:240ms] sm:mt-9 sm:max-w-none">
             <ButtonLink
               href={primaryCta.href}
               size="lg"
@@ -79,7 +79,7 @@ export function Hero({ content, availability, project, name }: HeroProps) {
           </div>
 
           {availability?.show ? (
-            <p className="enter mt-8 flex items-center gap-3 text-sm text-muted [--enter-delay:320ms]">
+            <p className="enter mt-6 flex items-center gap-3 text-sm text-muted [--enter-delay:320ms] sm:mt-8">
               <span
                 aria-hidden="true"
                 className="ml-1 size-2 shrink-0 rounded-full bg-cyan ring-4 ring-cyan/20"
