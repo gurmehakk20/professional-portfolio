@@ -12,10 +12,17 @@ import type { SiteConfig } from "./types";
 /**
  * Canonical production URL (no trailing slash).
  * Set NEXT_PUBLIC_SITE_URL in your hosting environment (e.g. https://gurmehak.dev).
- * It's read at build time, so rebuild after changing it.
+ * On Vercel it falls back to the project's production domain (your custom
+ * domain once you add one, otherwise the .vercel.app address), so canonical
+ * URLs and search indexing work even before it's set. It's read at build
+ * time, so rebuild after changing it.
  */
 const PLACEHOLDER_URL = "https://www.example.com";
-const url = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || PLACEHOLDER_URL).replace(/\/+$/, "");
+const vercelDomain = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL?.trim();
+const url = (
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+  (vercelDomain ? `https://${vercelDomain}` : PLACEHOLDER_URL)
+).replace(/\/+$/, "");
 
 if (!/^https?:\/\//.test(url)) {
   throw new Error(`NEXT_PUBLIC_SITE_URL must start with https:// (got "${url}").`);
@@ -29,7 +36,7 @@ export const site: SiteConfig = {
   tagline: "Web Design & Development",
   title: "Gurmehak — Web Design & Development",
   description:
-    "Independent web designer and developer building modern, responsive, conversion-aware websites with React and Next.js for businesses, startups and agencies.",
+    "Gurmehak designs and develops fast, responsive websites for businesses, clinics and growing brands.",
   url,
   locale: "en_GB",
   author: "Gurmehak",

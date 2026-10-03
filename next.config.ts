@@ -28,7 +28,12 @@ const nextConfig: NextConfig = {
 
 export default function config(phase: string): NextConfig {
   // A reminder during `npm run build` until the real site URL is set (see src/content/site.ts).
-  if (phase === PHASE_PRODUCTION_BUILD && !process.env.NEXT_PUBLIC_SITE_URL?.trim()) {
+  // On Vercel the site falls back to the project's production domain instead.
+  const hasSiteUrl = Boolean(
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+      process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL?.trim(),
+  );
+  if (phase === PHASE_PRODUCTION_BUILD && !hasSiteUrl) {
     console.warn(
       "\n⚠ NEXT_PUBLIC_SITE_URL is not set. Canonical URLs, sitemap.xml, robots.txt, structured data " +
         "and link-preview images will point to https://www.example.com, and search engines are asked " +
