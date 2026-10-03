@@ -32,15 +32,17 @@ npm run dev        # http://localhost:3000
 Fields marked `TODO` in `src/content/` need your real details. Contact details and profiles left
 empty (`""`) are simply hidden, so the site never shows placeholder information.
 
-- [ ] **Site URL** — set `NEXT_PUBLIC_SITE_URL` in your hosting environment (e.g. `https://gurmehak.dev`).
-      It's used for canonical URLs, the sitemap and social previews. Until it's set, the build
-      prints a warning and every page asks search engines not to index the site. Indexing
-      switches on by itself once you set it and rebuild.
+- [x] **Site URL** — used for canonical URLs, the sitemap and social previews. On Vercel it
+      defaults to the project's production domain (your custom domain once you add one). To use
+      another address, or when hosting elsewhere, set `NEXT_PUBLIC_SITE_URL` (e.g.
+      `https://gurmehak.dev`). With neither, the build prints a warning and every page asks search
+      engines not to index the site.
 - [x] **Contact details** — email, WhatsApp number and profiles (LinkedIn, GitHub) are set in
       `src/content/site.ts`. Leave any of them empty (`""`) to hide it; with no email or WhatsApp
       the build warns and the contact form is hidden.
-- [ ] **Projects** — confirm Arka Dental's details and add your other projects and screenshots in
+- [x] **Projects** — Arka Dental, Aarogya Care, Libra and Floralia, with screenshots, are in
       `src/content/projects.ts` (see [Adding or updating a project](#adding-or-updating-a-project)).
+      Re-capture a screenshot when a project's site changes.
 - [ ] **Services** — review the services, inclusions and timelines in `src/content/services.ts`.
 - [ ] **FAQ** — make sure every answer in `src/content/faq.ts` matches how you work
       (the first answer repeats the service timelines).
@@ -107,7 +109,7 @@ links lead to the same place, so the next step is always obvious without the pag
   (fine grid, dots and soft colour glows). Utilities: `bg-grid`, `bg-dots`, `text-gradient`,
   `theme-dark`. Use them sparingly.
 - **Hero**: the phrase in `titleHighlight` (`src/content/home.ts`) is shown in the blue gradient.
-  The showcase uses your first featured project and shows its cover once you add a screenshot.
+  The showcase uses your first featured project: its screenshots, and a "View live website" link.
 - **Header**: transparent over the top of the page, then a solid bar with a soft shadow once you
   scroll (`.site-header` in `globals.css`).
 - **Motion** (the "Motion" section of `globals.css` and `src/components/layout/motion.tsx`):
@@ -140,28 +142,37 @@ Small settings that show or hide parts of the site:
 1. Add an entry to the `projects` array in `src/content/projects.ts`. There's a commented
    template at the bottom of the file to copy.
 2. Give it a unique `slug` — this becomes the page address, e.g. `/work/arka-dental`.
-3. Fill in the card details: `title`, `category` and a one-line `summary`. `technologies`,
-   `role` and `year` are optional and appear when set.
-4. `liveUrl` adds a "Visit live site" link (and shows the address in the browser frame).
-5. `caseStudy` (overview, challenge, approach, features, screenshots) gives the project its own
-   page at `/work/<slug>`, adds it to the sitemap and makes its card link there. Without it, the
-   card links to the live site instead — or, with neither, is shown without a link.
-6. Without a `cover` screenshot, a designed cover with the project's name and category is shown.
+3. Fill in the details: `title`, `category`, a one-line `summary` and `tags` (what the work
+   covered, e.g. `["UI/UX", "Web design", "Next.js"]`).
+4. `liveUrl` adds a "View live website" button (opening in a new tab) and shows the address in
+   the browser frame. The whole project is clickable.
+5. `cover` and `mobileCover` are the desktop and phone screenshots (see below).
+6. `embed: true` shows the live site inside the preview on desktop, once it scrolls into view —
+   the screenshot shows until then, and always on phones. Only set it for sites that allow being
+   embedded: check with `curl -sI <url>` that there's no `X-Frame-Options` header and no
+   `frame-ancestors` in `Content-Security-Policy` (Libra has both, so it uses its screenshot).
+7. `caseStudy` (overview, challenge, approach, features, screenshots) gives the project its own
+   page at `/work/<slug>` and adds it to the sitemap; the project then links to it too.
+8. Without a `cover` screenshot, a designed cover with the project's name and category is shown.
    Set `coverColor` (e.g. the client's brand colour) to tint it.
-7. Projects are numbered 01, 02… in file order. Set `featured: true` to choose which appear on
-   the home page (if none is featured, the first three appear). "View all work" appears on the
-   home page once there are more projects than featured ones.
+9. Projects are numbered 01, 02… in file order, and alternate sides on large screens. Set
+   `featured: true` to choose which appear on the home page (if none is featured, the first
+   three appear). "View all work" appears on the home page once there are more projects than
+   featured ones.
 
 Only describe work and outcomes you can stand behind. Don't add invented metrics or testimonials.
 
 ### Adding screenshots
 
-1. Save images in `public/images/projects/<slug>/`. WebP or AVIF, about 2000px wide, works best.
-   Images are shown in a 16:10 frame, aligned to the top, so full-page captures crop neatly.
+1. Save images in `public/images/projects/<slug>/` as WebP or AVIF:
+   - `desktop.webp`: the home page at 1440×900, captured at 1.5× (2160×1350). It's shown in a
+     16:10 browser frame, aligned to the top.
+   - `mobile.webp`: the same page on a 390×844 phone, captured at 2× (780×1688).
 2. Point to them from the project, and describe what each one shows:
 
    ```ts
-   cover: { src: "/images/projects/arka-dental/home.webp", alt: "Arka Dental home page on desktop" },
+   cover: { src: "/images/projects/arka-dental/desktop.webp", alt: "Arka Dental home page" },
+   mobileCover: { src: "/images/projects/arka-dental/mobile.webp", alt: "Arka Dental on a phone" },
    caseStudy: {
      // …
      screenshots: [
@@ -179,7 +190,7 @@ Only describe work and outcomes you can stand behind. Don't add invented metrics
    },
    ```
 
-3. Phone screenshots: add `device: "mobile"` (a portrait capture, about 1170px wide). They're shown
+3. Case-study phone screenshots: add `device: "mobile"` (a portrait capture). They're shown
    whole inside a phone outline instead of being cropped.
 4. Until a project has a `cover`, its designed cover is shown instead.
 
@@ -265,7 +276,7 @@ src/
     layout/             Header, mobile menu, footer, in-page link focus and motion helpers
     sections/           Home page sections (hero, services, work, process, FAQ…)
     services/           Services page building blocks
-    projects/           Project cards, images and project page sections
+    projects/           Project showcase, live previews, images and project page sections
     contact/            Contact options and form
     ui/                 Small reusable pieces (buttons, sections, tags, icons…)
     seo/                Structured data
@@ -278,8 +289,8 @@ public/                 Static files (put project screenshots in public/images/)
 
 ## Deployment
 
-**Vercel (simplest):** import the repository, add the `NEXT_PUBLIC_SITE_URL` environment
-variable and deploy.
+**Vercel (simplest):** import the repository and deploy. The site uses the project's production
+domain automatically; set `NEXT_PUBLIC_SITE_URL` only to use a different address.
 
 **Anywhere else with Node.js:** run `npm run build`, then `npm start`. The site runs on port
 3000 by default.
