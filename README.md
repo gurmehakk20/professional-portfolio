@@ -196,6 +196,11 @@ Only describe work and outcomes you can stand behind. Don't add invented metrics
 
 Next.js automatically resizes images and serves modern formats, so upload one good-quality file.
 
+**When a project's site changes,** capture new screenshots and save them under a new name (e.g.
+`desktop-v2.webp`), then update the paths. Resized images are cached by their address — by
+Next.js, by browsers and by Vercel — so a new file with the old name can keep showing the old
+picture for hours.
+
 ### Adding or changing a service
 
 Edit the `services` array in `src/content/services.ts`. Each service feeds its row on the home

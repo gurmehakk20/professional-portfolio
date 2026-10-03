@@ -92,12 +92,12 @@ export const projects: Project[] = [
     tags: ["UI/UX", "Frontend", "E-commerce", "Responsive design"],
     liveUrl: "https://floralia.vercel.app/",
     cover: {
-      src: "/images/projects/floralia/desktop.webp",
-      alt: "Floralia home page: “Fresh Flowers — Natural & Beautiful Blooms” beside a bunch of pink tulips, with a Shop now button",
+      src: "/images/projects/floralia/desktop-v2.webp",
+      alt: "Floralia home page: “Flowers that say what words can’t.” beside a bouquet of pink tulips, with an Explore flowers button and occasions to shop by",
     },
     mobileCover: {
-      src: "/images/projects/floralia/mobile.webp",
-      alt: "Floralia home page on a phone, with the shop’s headline over the tulip photo",
+      src: "/images/projects/floralia/mobile-v2.webp",
+      alt: "Floralia home page on a phone, with the headline and Explore flowers button above the tulip photo",
     },
     embed: true,
     featured: true,
