@@ -4,10 +4,9 @@ import type { SiteConfig } from "./types";
  * Global site settings: brand, contact details, navigation, social links
  * and SEO defaults.
  *
- * ✏️  TODO before launch: fill in the fields marked TODO below.
  * Contact details and profiles left empty ("") are hidden on the site, so
  * nothing fake is ever shown — but people need at least an email address or
- * a WhatsApp number to reach you. The production build warns until one is set.
+ * a WhatsApp number to reach you. The production build warns if both are empty.
  */
 
 /**
@@ -38,10 +37,10 @@ export const site: SiteConfig = {
   jobTitle: "Web Designer & Developer",
 
   contact: {
-    email: "", // TODO: your email address, e.g. "hello@yourdomain.com"
+    email: "gurmehakkaur52@gmail.com", // Leave empty ("") to hide email everywhere
     whatsapp: {
-      number: "", // TODO: country code + number, digits only, e.g. "919876543210"
-      display: "", // TODO: how it's shown, e.g. "+91 98765 43210"
+      number: "917973086834", // Country code + number, digits only. Leave empty to hide WhatsApp.
+      display: "+91 79730 86834", // How the number is shown on the site
       message: "Hi Gurmehak, I'd like to talk about a website project.",
     },
     location: "Working with clients remotely", // Optional — e.g. "Based in Pune · Working remotely"
@@ -51,8 +50,8 @@ export const site: SiteConfig = {
   // Profiles shown in the footer and contact sections. Empty links are hidden.
   // Available icons: "linkedin", "github", "instagram", "dribbble", "behance", "x".
   socials: [
-    { label: "LinkedIn", href: "", icon: "linkedin" }, // TODO: e.g. "https://www.linkedin.com/in/your-name"
-    { label: "GitHub", href: "https://github.com/gurmehakk20", icon: "github" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/gurmehak-kaur2004/", icon: "linkedin" },
+    { label: "GitHub", href: "", icon: "github" }, // Hidden for now — e.g. "https://github.com/gurmehakk20"
   ],
 
   nav: [

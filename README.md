@@ -36,11 +36,9 @@ empty (`""`) are simply hidden, so the site never shows placeholder information.
       It's used for canonical URLs, the sitemap and social previews. Until it's set, the build
       prints a warning and every page asks search engines not to index the site. Indexing
       switches on by itself once you set it and rebuild.
-- [ ] **Contact details** — `email` and the `whatsapp` number in `src/content/site.ts`. Set at
-      least one: the build warns until you do, and the contact form only appears once there's
-      somewhere to send it. While developing, a dashed note marks where they'll appear.
-- [ ] **Profiles** — `socials` in `src/content/site.ts` (LinkedIn is waiting for its link;
-      GitHub is set).
+- [x] **Contact details** — email, WhatsApp number and profiles (LinkedIn, GitHub) are set in
+      `src/content/site.ts`. Leave any of them empty (`""`) to hide it; with no email or WhatsApp
+      the build warns and the contact form is hidden.
 - [ ] **Projects** — confirm Arka Dental's details and add your other projects and screenshots in
       `src/content/projects.ts` (see [Adding or updating a project](#adding-or-updating-a-project)).
 - [ ] **Services** — review the services, inclusions and timelines in `src/content/services.ts`.
