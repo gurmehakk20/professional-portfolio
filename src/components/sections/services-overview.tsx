@@ -4,13 +4,15 @@ import { Icon } from "@/components/ui/icon";
 import { Section, type SectionTone } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tag } from "@/components/ui/tag";
-import type { SectionIntro, Service } from "@/content/types";
+import type { SectionIntro, Service, StartingPrice } from "@/content/types";
 
 type ServicesOverviewProps = {
   intro: SectionIntro;
   services: Service[];
   /** Deliverables that come with every service, shown once under the list. */
   standard?: string[];
+  /** "Projects start from …", shown quietly under the list. */
+  startingPrice?: StartingPrice;
   id?: string;
   tone?: SectionTone;
   /** Section number shown before the eyebrow, e.g. "02". */
@@ -20,12 +22,14 @@ type ServicesOverviewProps = {
 /**
  * Home page services as an editorial list (not cards): each row says what the
  * service is, who it's for and the problem it solves, with its deliverables.
- * The whole row links to the service on /services.
+ * The whole row links to the service on /services. Underneath: an optional
+ * starting price (one line, not a price list) and what every project includes.
  */
 export function ServicesOverview({
   intro,
   services,
   standard = [],
+  startingPrice,
   id = "services",
   tone = "default",
   number,
@@ -120,6 +124,17 @@ export function ServicesOverview({
           </li>
         ))}
       </ol>
+
+      {startingPrice ? (
+        <div className="mt-10 border-l-2 border-accent pl-4 md:mt-12 md:pl-5">
+          <p className="font-display text-lg leading-snug font-semibold tracking-[-0.01em] text-ink">
+            Projects start from <span className="text-accent">{startingPrice.from}</span>
+          </p>
+          {startingPrice.note ? (
+            <p className="mt-1 max-w-xl text-sm text-muted">{startingPrice.note}</p>
+          ) : null}
+        </div>
+      ) : null}
 
       {standard.length > 0 ? (
         <div className="mt-8 flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-6">

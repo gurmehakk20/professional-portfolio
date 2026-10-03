@@ -24,6 +24,14 @@ export type SectionIntro = {
   description?: string;
 };
 
+/** "Projects start from …" — a single starting price, not a price list. */
+export type StartingPrice = {
+  /** e.g. "₹7,000". */
+  from: string;
+  /** What the final price depends on. */
+  note?: string;
+};
+
 /* ------------------------------------------------------------------ */
 /* Site                                                                */
 /* ------------------------------------------------------------------ */

@@ -18,7 +18,7 @@ import {
 } from "@/content/home";
 import { processIntro, processSteps } from "@/content/process";
 import { projects } from "@/content/projects";
-import { services, standardDeliverables } from "@/content/services";
+import { services, standardDeliverables, startingPrice } from "@/content/services";
 import { site } from "@/content/site";
 import { getFeaturedProjects } from "@/lib/projects";
 
@@ -45,6 +45,7 @@ export default function HomePage() {
         intro={servicesIntro}
         services={services}
         standard={standardDeliverables}
+        startingPrice={startingPrice}
         number="02"
       />
       <Principles intro={whyIntro} items={differentiators} tone="subtle" number="03" />

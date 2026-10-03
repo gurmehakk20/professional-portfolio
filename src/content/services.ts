@@ -1,4 +1,4 @@
-import type { PageIntro, SectionIntro, Service } from "./types";
+import type { PageIntro, SectionIntro, Service, StartingPrice } from "./types";
 
 /*
  * Services — used on the home page, the /services page and the contact
@@ -36,6 +36,15 @@ export const standardDeliverables: string[] = [
   "SEO foundations",
   "Deployment",
 ];
+
+/**
+ * A rough starting price, shown quietly under the services on the home page
+ * ("Projects start from ₹7,000"). Delete it to hide the line.
+ */
+export const startingPrice: StartingPrice = {
+  from: "₹7,000",
+  note: "Final pricing depends on project scope, pages, functionality and integrations.",
+};
 
 export const services: Service[] = [
   {
