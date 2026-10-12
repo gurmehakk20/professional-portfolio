@@ -1,3 +1,4 @@
+import { site } from "./site";
 import type { ContactPageContent } from "./types";
 
 /*
@@ -13,9 +14,8 @@ export const contactPage: ContactPageContent = {
   eyebrow: "Start a project",
   title: "Let's talk about your project",
   description:
-    "Tell me a little about your business and what you need. I'll reply with a few questions and clear next steps.",
-  metaDescription:
-    "Start a website project with Gurmehak — business websites, landing pages, redesigns and custom web builds.",
+    "Tell me a little about your business and what you need — custom-coded or WordPress. I'll reply with a few questions and clear next steps.",
+  metaDescription: `Start a website project with Gurmehak Kaur, a freelance web developer in ${site.city}: business websites, WordPress websites, landing pages, redesigns and custom builds.`,
 
   whatsapp: {
     title: "WhatsApp",
@@ -33,7 +33,9 @@ export const contactPage: ContactPageContent = {
     title: "Tell me about your project",
     description:
       "A few details are enough. Your message opens in WhatsApp or your email app, ready to send — nothing is stored on this website.",
+    extraOptions: [{ value: "redesign", label: "Redesign of my current website" }],
     otherOption: "Something else",
+    budgetOptions: ["Under ₹10,000", "₹10,000–₹20,000", "₹20,000–₹40,000", "Over ₹40,000", "Not sure yet"],
     submitWhatsApp: "Send on WhatsApp",
     submitEmail: "Send by email",
     emailSubject: "New website project",

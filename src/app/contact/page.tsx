@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   // The form sends through WhatsApp or email, so it needs at least one of them set up.
   const showForm = contactPage.form.enabled && (hasWhatsApp || hasEmail);
-  const serviceOptions = services.map((service) => ({ value: service.slug, label: service.name }));
+  const serviceOptions = [
+    ...services.map((service) => ({ value: service.slug, label: service.name })),
+    ...contactPage.form.extraOptions,
+  ];
 
   return (
     <>

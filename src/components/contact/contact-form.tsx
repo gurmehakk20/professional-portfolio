@@ -21,11 +21,14 @@ type ContactFormProps = {
 };
 
 type Channel = "whatsapp" | "email";
-type FieldName = "name" | "message";
+type FieldName = "name" | "email" | "message";
 type Sent = { channel: Channel; href: string; count: number };
 
 /** Value of the extra "Something else" option. */
 const OTHER = "other";
+
+/** A light check that an email address is complete — not a full validation. */
+const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 /**
  * A short enquiry form with no server behind it: it writes the message for
@@ -57,7 +60,8 @@ export function ContactForm({
   }, []);
 
   function clearErrorIfFixed(field: FieldName, value: string) {
-    if (errors[field] && value.trim()) {
+    const fixed = field === "email" ? !value.trim() || looksLikeEmail(value.trim()) : value.trim();
+    if (errors[field] && fixed) {
       setErrors((current) => ({ ...current, [field]: undefined }));
     }
   }
@@ -69,12 +73,16 @@ export function ContactForm({
     const read = (key: string) => String(data.get(key) ?? "").trim();
 
     const name = read("name");
+    const replyEmail = read("email");
     const message = read("message");
     const nextErrors: Partial<Record<FieldName, string>> = {};
     if (!name) nextErrors.name = "Please enter your name.";
-    if (!message) nextErrors.message = "Please write a short message.";
+    if (replyEmail && !looksLikeEmail(replyEmail)) {
+      nextErrors.email = "Please check your email address — it looks incomplete.";
+    }
+    if (!message) nextErrors.message = "Please write a short project description.";
 
-    if (nextErrors.name || nextErrors.message) {
+    if (nextErrors.name || nextErrors.email || nextErrors.message) {
       // Show the errors before moving focus, so they're announced with the field.
       flushSync(() => {
         setErrors(nextErrors);
@@ -92,8 +100,9 @@ export function ContactForm({
     const text = composeMessage({
       recipientName,
       name,
-      business: read("business"),
+      replyEmail,
       interest,
+      budget: read("budget"),
       message,
     });
 
@@ -163,21 +172,30 @@ export function ContactForm({
             />
           </Field>
 
-          <Field htmlFor={id("business")} label="Business or website" optional>
+          <Field
+            htmlFor={id("email")}
+            label="Email"
+            optional
+            error={errors.email}
+            errorId={id("email-error")}
+          >
             <input
-              id={id("business")}
-              name="business"
-              type="text"
-              autoComplete="organization"
-              className={cn(fieldClasses(), "h-12")}
+              id={id("email")}
+              name="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              onChange={(event) => clearErrorIfFixed("email", event.target.value)}
+              className={cn(fieldClasses("email"), "h-12")}
+              {...errorProps("email")}
             />
           </Field>
 
           <Field
             htmlFor={id("service")}
-            label="What do you need?"
+            label="Type of website"
             optional
-            className="sm:col-span-2"
+            className={content.budgetOptions.length > 0 ? undefined : "sm:col-span-2"}
           >
             <div className="relative">
               <select
@@ -202,9 +220,33 @@ export function ContactForm({
             </div>
           </Field>
 
+          {content.budgetOptions.length > 0 ? (
+            <Field htmlFor={id("budget")} label="Approximate budget" optional>
+              <div className="relative">
+                <select
+                  id={id("budget")}
+                  name="budget"
+                  defaultValue=""
+                  className={cn(
+                    fieldClasses(),
+                    "h-12 appearance-none pr-11 has-[option[value='']:checked]:text-muted [&_option]:text-ink",
+                  )}
+                >
+                  <option value="">Choose a range</option>
+                  {content.budgetOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-muted" />
+              </div>
+            </Field>
+          ) : null}
+
           <Field
             htmlFor={id("message")}
-            label="Message"
+            label="Project description"
             error={errors.message}
             errorId={id("message-error")}
             grow
@@ -329,22 +371,28 @@ function Field({
 function composeMessage({
   recipientName,
   name,
-  business,
+  replyEmail,
   interest,
+  budget,
   message,
 }: {
   recipientName: string;
   name: string;
-  business: string;
+  replyEmail: string;
   interest?: string;
+  budget: string;
   message: string;
 }) {
   const withoutFullStop = (value: string) => value.replace(/[.\s]+$/, "");
-  const from = business ? ` from ${withoutFullStop(business)}` : "";
-  const greeting = `Hi ${recipientName}, I'm ${withoutFullStop(name)}${from}.`;
-  return [greeting, interest ? `I'm interested in: ${interest}` : "", message]
+  const greeting = `Hi ${recipientName}, I'm ${withoutFullStop(name)}.`;
+  const details = [
+    interest ? `Type of website: ${interest}` : "",
+    budget ? `Approximate budget: ${budget}` : "",
+    replyEmail ? `My email: ${replyEmail}` : "",
+  ]
     .filter(Boolean)
-    .join("\n\n");
+    .join("\n");
+  return [greeting, details, message].filter(Boolean).join("\n\n");
 }
 
 /* Icons only this form uses (shared ones come from inline-icons). */

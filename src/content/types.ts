@@ -320,8 +320,12 @@ export type ContactPageContent = PageIntro & {
     enabled: boolean;
     title: string;
     description: string;
-    /** Extra option added after your services in "What do you need?". */
+    /** Extra options added after your services in "Type of website", e.g. a redesign. */
+    extraOptions: { value: string; label: string }[];
+    /** The last option in "Type of website". */
     otherOption: string;
+    /** Choices for the optional "Approximate budget" field. Leave empty to hide it. */
+    budgetOptions: string[];
     submitWhatsApp: string;
     submitEmail: string;
     /** Subject line used when the message is sent by email. */
