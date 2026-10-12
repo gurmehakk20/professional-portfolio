@@ -1,6 +1,7 @@
-# Gurmehak — Web Design & Development
+# Gurmehak Kaur — Web Developer & WordPress Website Designer
 
-Portfolio and sales website for an independent web design and development service.
+Portfolio and sales website for a freelance web developer offering custom-coded and WordPress
+websites.
 Built with **Next.js 16** (App Router), **TypeScript** and **Tailwind CSS 4**. Every page is
 statically generated. Client-side JavaScript is kept to the navigation (mobile menu and
 current-page highlight), the contact form and a small helper that moves keyboard focus to
@@ -43,9 +44,14 @@ empty (`""`) are simply hidden, so the site never shows placeholder information.
 - [x] **Projects** — Arka Dental, Aarogya Care, Libra and Floralia, with screenshots, are in
       `src/content/projects.ts` (see [Adding or updating a project](#adding-or-updating-a-project)).
       Re-capture a screenshot when a project's site changes.
-- [ ] **Services** — review the services, inclusions and timelines in `src/content/services.ts`.
+- [ ] **Location** — `city` in `src/content/site.ts` (currently Bengaluru). It appears in search
+      titles and descriptions, the footer and structured data, so it must be where you're based.
+- [ ] **Project labels** — each project's `kind` (`"concept"`, `"personal"` or `"client"`) in
+      `src/content/projects.ts`. Use `"client"` only for paid work.
+- [ ] **Services and prices** — review the services, inclusions, timelines and starting prices in
+      `src/content/services.ts`. The prices are a starting guide, not a rate card.
 - [ ] **FAQ** — make sure every answer in `src/content/faq.ts` matches how you work
-      (the first answer repeats the service timelines).
+      (the first two answers repeat the timelines and starting prices).
 - [ ] **Availability and reply time** — `availability` and `responseTime` in `src/content/site.ts`.
 - [ ] **Portrait** (optional) — see [Adding a portrait](#adding-a-portrait).
 - [ ] Check the social preview image at `/opengraph-image` after deploying.
@@ -60,14 +66,15 @@ messages, and the 404 and error pages) are written in their components.
 | To change…                                                                 | Edit                        |
 | -------------------------------------------------------------------------- | --------------------------- |
 | Name, tagline, SEO description, contact details, social links, navigation  | `src/content/site.ts`       |
-| Header button ("Let's talk"), availability note, footer line               | `src/content/site.ts`       |
-| Home page: hero, section headings, "Why work with me", about               | `src/content/home.ts`       |
+| City (search titles, footer, structured data), page title suffix           | `src/content/site.ts`       |
+| Header button ("Start a project"), availability note, footer line         | `src/content/site.ts`       |
+| Home page: hero, capabilities, section headings, WordPress section, about | `src/content/home.ts`       |
 | Closing "Have a project in mind?" section (every page except Contact)      | `src/content/home.ts` (`contactSection`) |
-| Services (home list, services page, contact form options)                  | `src/content/services.ts`   |
+| Services and starting prices (home list, services page, form options)     | `src/content/services.ts`   |
 | Projects (home, work page, case studies)                                   | `src/content/projects.ts`   |
-| The four-step process                                                      | `src/content/process.ts`    |
+| The five-step process                                                      | `src/content/process.ts`    |
 | Frequently asked questions                                                 | `src/content/faq.ts`        |
-| Contact page text and form                                                 | `src/content/contact.ts`    |
+| Contact page text, form options and budget ranges                          | `src/content/contact.ts`    |
 | Colours, type scale, shadows (see the note below)                          | `src/app/globals.css`       |
 | Fonts (see the note below)                                                 | `src/lib/fonts.ts`          |
 
@@ -83,10 +90,11 @@ files in `src/assets/fonts/`.
 
 ### Home page structure
 
-The home page answers a visitor's questions in order: **hero** (what do you do?) → **01 Selected
-work** (can you do it?) → **02 Services** (what can you build?) → **03 Why work with me** →
-**04 Process** (how does it work?) → **05 About** (who are you?) → **06 FAQ** → **07 Contact**
-(how do I start?). The order, background tones and numbers are set in `src/app/page.tsx`.
+The home page answers a visitor's questions in order: **hero** and **capabilities** (what do you
+do?) → **01 Selected work** (can you do it?) → **02 Services** (what can you build, from what
+price?) → **03 WordPress** (can you do WordPress?) → **04 About** (who are you?) → **05 Process**
+(how does it work?) → **06 FAQ** → **07 Contact** (how do I start?). The order, background tones
+and numbers are set in `src/app/page.tsx`.
 
 Primary buttons are kept for the main conversion points (hero and contact). Elsewhere, smaller
 links lead to the same place, so the next step is always obvious without the page feeling pushy.
@@ -122,8 +130,9 @@ links lead to the same place, so the next step is always obvious without the pag
   - Content is never hidden without JavaScript or before the page has loaded, and everything is
     switched off for visitors who prefer reduced motion.
 
-**Page titles** follow the pattern `Services | Gurmehak — Web Design & Development`: each page's
-own title, then `title` from `src/content/site.ts`. The home page uses that `title` on its own.
+**Page titles:** the home page uses `title` from `src/content/site.ts` (the full search title,
+with the city). Other pages use their own title followed by `titleSuffix`, e.g.
+`Services | Gurmehak Kaur`.
 
 ### Switches
 
@@ -135,15 +144,20 @@ Small settings that show or hide parts of the site:
   projects" note when you're fully booked.
 - Contact details and profiles in `src/content/site.ts` — leave any empty (`""`) to hide it
   everywhere (header menu, contact section, contact page, footer).
-- `pricing` on a service — prices stay hidden until you add them (see [Adding prices](#adding-prices)).
+- `pricing` on a service — its starting price on `/services` (see [Prices](#prices)).
+- `startingPrice` in `src/content/services.ts` — the one "Projects start from" line on the home
+  page. Delete it to hide the line.
+- `budgetOptions` in `src/content/contact.ts` — the form's budget ranges; an empty list hides
+  the field.
 
 ### Adding or updating a project
 
 1. Add an entry to the `projects` array in `src/content/projects.ts`. There's a commented
    template at the bottom of the file to copy.
 2. Give it a unique `slug` — this becomes the page address, e.g. `/work/arka-dental`.
-3. Fill in the details: `title`, `category`, a one-line `summary` and `tags` (what the work
-   covered, e.g. `["UI/UX", "Web design", "Next.js"]`).
+3. Fill in the details: `title`, `category`, `kind` (`"client"`, `"concept"` or `"personal"` —
+   shown as a small label, so visitors know what kind of work it is), a one-line `summary` and
+   `tags` (what the work covered, e.g. `["UI/UX", "Web design", "Next.js"]`).
 4. `liveUrl` adds a "View live website" button (opening in a new tab) and shows the address in
    the browser frame. The whole project is clickable.
 5. `cover` and `mobileCover` are the desktop and phone screenshots (see below).
@@ -204,23 +218,26 @@ picture for hours.
 ### Adding or changing a service
 
 Edit the `services` array in `src/content/services.ts`. Each service feeds its row on the home
-page, its section on `/services` and the "What do you need?" options in the contact form.
+page, its section on `/services` and the "Type of website" options in the contact form.
 Each one answers three client questions: what it is (`summary`), who it's for (`bestFor`, and
 the longer `audience` list) and what problem it solves (`problem`). `deliverables` are the short
-chips (e.g. "Custom UI"); `standardDeliverables` lists the ones every project gets.
+chips shown as "What you receive"; `standardDeliverables` lists what every project gets.
 `addOns`, `timeline` and `pricing` are optional. Leave them out and they disappear from the page.
 If you change a timeline, update the first answer in `src/content/faq.ts` too.
 
-The "Discuss your project" button links to `/contact?service=<slug>`, which pre-selects that
-service in the contact form.
+Each service's `cta` (e.g. "Enquire about a WordPress website") links to
+`/contact?service=<slug>`, which pre-selects that service in the contact form.
 
-### Adding prices
+### Prices
 
-Pricing is hidden until you add it. Uncomment or add `pricing` on a service:
+Each service can show a starting price on `/services` — leave `pricing` out to hide it:
 
 ```ts
-pricing: { label: "From ₹25,000", note: "Final quote depends on scope." },
+pricing: { label: "From ₹10,000", note: "Depends on the number of pages, content and features." },
 ```
+
+The home page shows a single line instead (`startingPrice`). If you change prices, update the
+"How much does a website cost?" answer in `src/content/faq.ts` too.
 
 ### Adding a portrait
 
@@ -228,7 +245,7 @@ Put the photo in `public/images/about/`, then set `image` in the `about` section
 `src/content/home.ts`:
 
 ```ts
-image: { src: "/images/about/portrait.jpg", alt: "Portrait of Gurmehak" },
+image: { src: "/images/about/portrait.jpg", alt: "Portrait of Gurmehak Kaur" },
 ```
 
 ### Adding a page
@@ -250,10 +267,12 @@ Icons are referenced by name, e.g. `icon: "stethoscope"`. The available names ar
 **Pages:** `/` (home), `/work`, `/work/[slug]` (one page per project), `/services`, `/contact`,
 plus a custom 404 page.
 
-**Contact form:** there's no server or database. The form writes a message from the visitor's
-details and opens WhatsApp, or their email app, with it ready to send. Nothing is stored.
-To receive form submissions directly later, you could send them to a service such as Formspree
-or Resend from a Next.js Server Action.
+**Contact form:** name, email (optional), type of website, approximate budget (optional) and a
+project description. There's no server or database: the form writes a message from those details
+and opens WhatsApp, or the visitor's email app, with it ready to send to you. Nothing is stored.
+To receive submissions without the visitor's app (e.g. straight to your inbox), you'd need an
+account with a form or email service such as Formspree or Resend, called from a Next.js Server
+Action with the API key kept in an environment variable.
 
 **SEO:** each page has its own title, description and canonical URL. Also generated:
 `/sitemap.xml`, `/robots.txt`, a web manifest, favicons, structured data (JSON-LD), and
