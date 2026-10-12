@@ -17,13 +17,18 @@ export const faqs: FaqItem[] = [
   {
     question: "How long does a website take?",
     answer:
-      "It depends on the size of the project and how quickly the content is ready. A landing page usually takes one to two weeks, a business website three to five weeks and a redesign three to six. Custom builds depend on scope.\n\nYou'll get a clear timeline before any work begins.",
+      "It depends on the size of the project and how quickly the content is ready. A landing page usually takes one to two weeks and a business website three to five. WordPress websites and custom builds depend on scope.\n\nYou'll get a clear timeline before any work begins.",
   },
-  // If you add `pricing` to your services, you can mention it here too.
+  // Keep these prices in step with `pricing` in services.ts.
   {
     question: "How much does a website cost?",
     answer:
-      "It depends on the pages and features you need. After a short conversation about your project, I'll send a clear quote with the scope and timeline, so you know exactly what you're agreeing to before we start.",
+      "Projects start from ₹7,000 for a landing page, ₹10,000 for a business website and ₹18,000 for a custom-coded website. WordPress websites are quoted on scope.\n\nThe final price depends on the number of pages, design complexity, functionality, content, integrations and timeline. After a short conversation, I'll send a clear quote, so you know exactly what you're agreeing to before we start.",
+  },
+  {
+    question: "Should I choose WordPress or a custom-coded website?",
+    answer:
+      "It depends on what you need. WordPress is a good fit if you'd like to update the content yourself and standard features cover your needs. A custom-coded site suits a distinctive design, specific functionality, or when speed and a lean codebase matter most.\n\nTell me about your project and I'll recommend the approach that fits.",
   },
   {
     question: "Do you work with existing designs?",

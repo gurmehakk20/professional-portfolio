@@ -1,8 +1,9 @@
+import { site } from "./site";
 import type { PageIntro, SectionIntro, Service, StartingPrice } from "./types";
 
 /*
  * Services — used on the home page, the /services page and the contact
- * form's "What do you need?" options.
+ * form's "Type of website" options.
  *
  * Each service answers three questions for a client: what it is (`summary`),
  * who it's for (`bestFor` / `audience`) and what problem it solves (`problem`).
@@ -15,11 +16,10 @@ import type { PageIntro, SectionIntro, Service, StartingPrice } from "./types";
 
 export const servicesPage: PageIntro = {
   eyebrow: "Services",
-  title: "Four ways I can help your business",
+  title: "Web design and development services",
   description:
-    "Each service shows who it's for, the problem it solves and what's included. Not sure which you need? Ask — I'll point you in the right direction.",
-  metaDescription:
-    "Business websites, landing pages, website redesigns and custom web experiences — designed and built with React and Next.js.",
+    "Business websites, WordPress websites, and custom-coded websites and landing pages — each with who it's for, what's included and a starting price. Not sure which you need? Ask and I'll recommend one.",
+  metaDescription: `Website design and development from a freelance web developer in ${site.city}: business websites, WordPress websites, custom-coded websites and landing pages, with starting prices.`,
 };
 
 /** Deliverables that come with every service, shown once rather than repeated per service. */
@@ -46,21 +46,31 @@ export const startingPrice: StartingPrice = {
   note: "Final pricing depends on project scope, pages, functionality and integrations.",
 };
 
+
+/*
+ * Starting prices are a guide, not a fixed rate card — edit them freely.
+ * They appear on the services page; the home page shows only `startingPrice`.
+ */
 export const services: Service[] = [
   {
     slug: "business-websites",
     name: "Business Websites",
     icon: "briefcase",
     summary:
-      "A complete multi-page website that explains what you do, shows why people should trust you and makes it easy to get in touch.",
-    bestFor: "Small businesses, clinics and professional services",
+      "A professional multi-page website that explains what you do, shows why people can trust you and makes it easy to get in touch.",
+    bestFor: "Local businesses, clinics and service providers",
     problem:
-      "Customers look you up before they call. A dated or confusing website quietly sends them elsewhere — a clear one earns their trust.",
-    deliverables: ["Custom UI", "Contact & WhatsApp integration", "Post-launch support"],
+      "Customers look you up before they call. A dated or confusing website quietly sends them elsewhere — a clear one makes it easy to enquire.",
+    deliverables: [
+      "Responsive multi-page website",
+      "Enquiry form, WhatsApp & click-to-call",
+      "Basic SEO setup",
+      "Handover walkthrough",
+    ],
     description:
-      "Clear pages for what you offer, who you are and how to reach you — designed around your brand and built to work smoothly on every device.",
+      "Service pages, an about page, contact details and clear calls to action — designed around your brand and built with whichever approach suits you: custom-coded, or on WordPress if you'd like to update it yourself.",
     audience: [
-      "Small businesses and local services",
+      "Local businesses and service providers",
       "Clinics, consultancies and professional practices",
       "Businesses with an outdated website — or none at all",
     ],
@@ -69,85 +79,82 @@ export const services: Service[] = [
       "Design tailored to your brand",
       "Enquiry form, WhatsApp and click-to-call",
       "Google Maps and business details",
+      "A responsive redesign, if you already have a site",
     ],
     addOns: ["Copywriting support", "Blog or news section", "Analytics setup"],
     timeline: "Typically 3–5 weeks",
-    // pricing: { label: "From ₹XX,XXX", note: "Final quote depends on scope." },
+    pricing: {
+      label: "From ₹10,000",
+      note: "Depends on the number of pages, content and features.",
+    },
+    cta: { label: "Enquire about a business website", href: "/contact?service=business-websites" },
   },
   {
-    slug: "landing-pages",
-    name: "Landing Pages",
-    icon: "layout",
-    summary: "A single, focused page built around one offer and one clear next step.",
-    bestFor: "Launches, campaigns, startups and paid ads",
-    problem:
-      "Sending people to a busy homepage loses them. A focused page keeps them on one message and one action.",
-    deliverables: ["Custom UI", "Contact & WhatsApp integration"],
-    description:
-      "One page that explains one offer and guides visitors towards one action — ideal for a new service, a product launch, a campaign or an event.",
-    audience: [
-      "Businesses promoting a single service or offer",
-      "Startups launching a product",
-      "Campaigns and ads that need a dedicated destination",
-    ],
-    includes: [
-      "One focused, well-structured page",
-      "One clear next step, with easy ways to enquire",
-      "Sections for benefits, details and FAQs",
-      "Fast loading on mobile networks",
-    ],
-    addOns: ["Analytics and conversion tracking", "Additional page variations"],
-    timeline: "Typically 1–2 weeks",
-  },
-  {
-    slug: "website-redesigns",
-    name: "Website Redesigns",
-    icon: "refresh",
+    slug: "wordpress-websites",
+    name: "WordPress Websites",
+    icon: "panels",
     summary:
-      "A modern, faster version of your existing website — keeping the content and links that already work.",
-    bestFor: "Websites that look dated, load slowly or struggle on phones",
+      "A flexible website you can manage and update yourself, built on WordPress with a theme customised to your brand.",
+    bestFor: "Businesses that want to edit their own content",
     problem:
-      "An outdated site makes a good business look behind the times. A redesign brings your website up to the standard of your work.",
-    deliverables: ["Custom UI", "Content migration", "Post-launch support"],
+      "Waiting on a developer for every small change slows you down. Set up properly, WordPress lets you update text, images and pages yourself.",
+    deliverables: [
+      "Customised theme",
+      "Editable pages and content",
+      "Basic SEO and performance setup",
+      "Handover walkthrough",
+    ],
     description:
-      "A fresh structure, a modern look and pages that load quickly on phones — without starting from zero or losing what already works.",
+      "Business and professional websites on WordPress: theme customisation, page layouts, responsive implementation and content management set up so you can keep the site up to date.",
     audience: [
-      "Businesses with an outdated or hard-to-use website",
-      "Websites that don't work well on mobile",
-      "Sites that are slow or difficult to update",
+      "Businesses that want to update their own website",
+      "Content-driven sites — blogs, news and resources",
+      "Existing WordPress sites that need a responsive redesign",
     ],
     includes: [
-      "Review of your current website",
-      "Improved structure and navigation",
-      "Fresh, modern visual design",
-      "Your existing content moved across, with old links still working",
+      "WordPress setup and theme customisation",
+      "Page building and layouts",
+      "Responsive implementation and testing",
+      "Content editing and CMS configuration",
+      "Basic SEO setup and performance optimisation",
     ],
-    addOns: ["Copy refresh", "Photography direction"],
-    timeline: "Typically 3–6 weeks",
+    addOns: ["Maintenance and updates", "Content moved from your current site", "Blog setup"],
+    pricing: {
+      label: "Quoted on scope",
+      note: "Depends on the pages, theme work, plugins and content involved.",
+    },
+    cta: { label: "Enquire about a WordPress website", href: "/contact?service=wordpress-websites" },
   },
   {
-    slug: "custom-web-experiences",
-    name: "Custom Web Experiences",
+    slug: "custom-websites",
+    name: "Custom Websites & Landing Pages",
     icon: "code",
     summary:
-      "Interactive, product-style web builds in React and Next.js — from booking flows to bespoke marketing sites.",
-    bestFor: "Startups, product teams and agencies",
+      "Custom-coded marketing websites, landing pages and interactive front ends, built to a specific brief.",
+    bestFor: "Startups, campaigns, product teams and agencies",
     problem:
-      "When a template can't do what you need, it has to be built properly: fast, reliable and easy to extend later.",
-    deliverables: ["Custom UI", "React & Next.js", "Post-launch support"],
+      "When a template can't do what you need — a distinctive design, a focused campaign page or custom functionality — it has to be built properly.",
+    deliverables: ["Custom UI", "React & Next.js", "Fast, responsive build", "Clean, handover-ready code"],
     description:
-      "Custom functionality and interactive interfaces, built with React and Next.js. I can work from your designs or design it with you, and I'm happy to work white-label for agencies.",
+      "Landing pages for a launch or campaign, custom marketing sites, interactive features and front ends built from your designs. I'm happy to work white-label for agencies, and to take on custom web applications when the scope fits.",
     audience: [
-      "Startups building a product or marketing site",
+      "Startups launching a product or campaign",
       "Agencies looking for a freelance or white-label developer",
       "Businesses that need features a template can't handle",
     ],
     includes: [
-      "Front-end development in React and Next.js",
-      "Integrations with the tools and services you use",
-      "Clean, maintainable code that's easy to hand over",
+      "Custom design, or a build from your designs (e.g. Figma)",
+      "Frontend development in React and Next.js",
+      "Landing pages focused on one clear action",
+      "Integrations with the tools you use",
       "Deployment and handover",
     ],
-    addOns: ["White-label delivery for agencies", "Ongoing development support"],
+    addOns: ["White-label delivery for agencies", "Analytics and conversion tracking", "Ongoing development support"],
+    timeline: "Landing pages typically 1–2 weeks; custom builds depend on scope",
+    pricing: {
+      label: "Landing pages from ₹7,000 · Custom-coded sites from ₹18,000",
+      note: "Depends on design complexity, functionality and integrations.",
+    },
+    cta: { label: "Enquire about a custom build", href: "/contact?service=custom-websites" },
   },
 ];

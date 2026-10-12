@@ -21,7 +21,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
   const { audience, includes, timeline, pricing } = service;
   const addOns = service.addOns ?? [];
   const cta = service.cta ?? {
-    label: "Discuss your project",
+    label: `Enquire about ${service.name}`,
     href: `/contact?service=${service.slug}`,
   };
   const hasDetails = audience.length > 0 || includes.length > 0 || addOns.length > 0;
@@ -58,20 +58,25 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
           </p>
 
           {service.deliverables.length > 0 ? (
-            <ul
-              role="list"
-              aria-label={`${service.name} includes`}
-              className="mt-6 flex flex-wrap gap-2"
-            >
-              {service.deliverables.map((deliverable) => (
-                <li key={deliverable}>
-                  <Tag tone="accent">
-                    <Icon name="check" size={12} strokeWidth={2.5} className="mr-1 -ml-0.5" />
-                    {deliverable}
-                  </Tag>
-                </li>
-              ))}
-            </ul>
+            <>
+              <h3 id={`${service.slug}-receive`} className="mt-6 text-sm font-semibold text-ink">
+                What you receive
+              </h3>
+              <ul
+                role="list"
+                aria-labelledby={`${service.slug}-receive`}
+                className="mt-3 flex flex-wrap gap-2"
+              >
+                {service.deliverables.map((deliverable) => (
+                  <li key={deliverable}>
+                    <Tag tone="accent">
+                      <Icon name="check" size={12} strokeWidth={2.5} className="mr-1 -ml-0.5" />
+                      {deliverable}
+                    </Tag>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : null}
 
           {timeline || pricing ? (
@@ -87,7 +92,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
               ) : null}
               {pricing ? (
                 <div>
-                  <dt className="text-sm text-muted">Pricing</dt>
+                  <dt className="text-sm text-muted">Starting price</dt>
                   <dd className="mt-1 font-semibold text-ink">{pricing.label}</dd>
                   {pricing.note ? <dd className="text-sm text-muted">{pricing.note}</dd> : null}
                 </div>
@@ -159,9 +164,14 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
 
         {/* After the details on phones; under the intro on desktop. */}
         <div className="lg:col-span-5 lg:col-start-1 lg:row-start-2">
-          <ButtonLink href={cta.href} trailingIcon="arrow-right">
+          {/* The label names the service, e.g. "Enquire about a WordPress website".
+              On narrow phones it may wrap onto two lines rather than overflow. */}
+          <ButtonLink
+            href={cta.href}
+            trailingIcon="arrow-right"
+            className="max-sm:h-auto max-sm:min-h-11 max-sm:py-2.5 max-sm:text-center max-sm:whitespace-normal"
+          >
             {cta.label}
-            <span className="sr-only">: {service.name}</span>
           </ButtonLink>
         </div>
       </div>
