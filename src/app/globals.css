@@ -386,7 +386,7 @@
     transform: scaleY(0);
   }
 
-  @media (min-width: 64rem) {
+  @media (min-width: 80rem) {
     [data-reveal-state="pending"] .process-line {
       transform: scaleX(0);
     }

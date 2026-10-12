@@ -14,11 +14,11 @@ type ProcessProps = {
 
 /**
  * "Process" — the stages of a project on a night-blue band, numbered
- * automatically (01, 02…). Phones and tablets show a vertical timeline; large
- * screens show the steps side by side. As the list scrolls into view the steps
- * appear in turn, each number lights up and the line to the next step draws
- * in (see `.process-steps` in globals.css); with reduced motion everything is
- * simply shown complete.
+ * automatically (01, 02…). Phones, tablets and small laptops show a vertical
+ * timeline; wide screens (1280px+) show the steps side by side. As the list
+ * scrolls into view the steps appear in turn, each number lights up and the
+ * line to the next step draws in (see `.process-steps` in globals.css); with
+ * reduced motion everything is simply shown complete.
  */
 export function Process({ intro, steps, id = "process", number }: ProcessProps) {
   if (steps.length === 0) return null;
@@ -43,31 +43,31 @@ export function Process({ intro, steps, id = "process", number }: ProcessProps) 
       <ol
         role="list"
         data-reveal="group"
-        className="process-steps mt-12 md:mt-16 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:gap-x-6"
+        className="process-steps mt-12 md:mt-16 xl:grid xl:auto-cols-fr xl:grid-flow-col xl:gap-x-6"
       >
         {steps.map((step, index) => (
-          <li key={step.title} className="group grid grid-cols-[auto_1fr] gap-x-5 lg:flex lg:flex-col">
+          <li key={step.title} className="group grid grid-cols-[auto_1fr] gap-x-5 xl:flex xl:flex-col">
             {/* The number, and the line that joins it to the next step. */}
             <div
               aria-hidden="true"
-              className="flex flex-col items-center gap-3 pb-3 lg:flex-row lg:gap-4 lg:pb-0"
+              className="flex flex-col items-center gap-3 pb-3 xl:flex-row xl:gap-4 xl:pb-0"
             >
               <span className="process-dot inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-accent-bright bg-accent-bright font-display text-sm font-semibold text-white tabular-nums shadow-[0_0_0_0_rgb(49_105_196/0)] transition-shadow duration-300 ease-out-soft group-hover:shadow-[0_0_0_6px_rgb(49_105_196/0.35)]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="relative w-px flex-1 overflow-hidden bg-white/12 group-last:hidden lg:-mr-6 lg:h-px lg:w-auto">
-                <span className="process-line absolute inset-0 origin-top bg-linear-to-b from-accent-bright to-accent-on-dark lg:origin-left lg:bg-linear-to-r" />
+              <span className="relative w-px flex-1 overflow-hidden bg-white/12 group-last:hidden xl:-mr-6 xl:h-px xl:w-auto">
+                <span className="process-line absolute inset-0 origin-top bg-linear-to-b from-accent-bright to-accent-on-dark xl:origin-left xl:bg-linear-to-r" />
               </span>
             </div>
 
-            <div className="pb-10 group-last:pb-0 lg:mt-7 lg:flex lg:flex-1 lg:flex-col lg:items-start lg:pr-4 lg:pb-0">
+            <div className="pb-10 group-last:pb-0 xl:mt-7 xl:flex xl:flex-1 xl:flex-col xl:items-start xl:pr-4 xl:pb-0">
               <h3 className="text-h3 font-semibold">
                 <span className="sr-only">Step {index + 1}: </span>
                 {step.title}
               </h3>
-              <p className="mt-2 lg:mb-5">{step.description}</p>
+              <p className="mt-2 xl:mb-5">{step.description}</p>
               {step.outcome ? (
-                <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs font-medium text-white lg:mt-auto">
+                <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs font-medium text-white xl:mt-auto">
                   <Icon name="check" size={12} strokeWidth={2.5} className="text-accent-on-dark" />
                   <span className="sr-only">Outcome: </span>
                   {step.outcome}

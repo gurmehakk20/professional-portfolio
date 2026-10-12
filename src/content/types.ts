@@ -118,10 +118,26 @@ export type HeroContent = {
   secondaryCta?: CtaLink;
 };
 
-export type Principle = {
+/** A short item with an icon: a capability, or a benefit in the WordPress section. */
+export type Capability = {
   title: string;
+  /** One short line. */
   description: string;
   icon: IconName;
+};
+
+/** The home page's WordPress section. */
+export type WordPressSpotlightContent = SectionIntro & {
+  /** Why WordPress can be the right choice. */
+  benefits: Capability[];
+  /** "Which should you choose?" — when each approach fits. */
+  comparison: {
+    title: string;
+    options: { label: string; points: string[] }[];
+    /** A closing line, e.g. that the best choice depends on the project. */
+    note: string;
+  };
+  cta: CtaLink;
 };
 
 export type AboutContent = SectionIntro & {
