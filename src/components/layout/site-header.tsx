@@ -32,7 +32,8 @@ export function SiteHeader() {
           <ButtonLink
             href={site.cta.href}
             size="sm"
-            className="max-md:h-11"
+            // Below 360px there isn't room beside the menu button; the menu has the same link.
+            className="max-md:h-11 max-[359px]:hidden"
           >
             {site.cta.label}
           </ButtonLink>

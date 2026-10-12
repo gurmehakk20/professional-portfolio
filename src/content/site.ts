@@ -31,17 +31,21 @@ if (!/^https?:\/\//.test(url)) {
 /** True until the real site URL is set. While true, search engines are asked not to index the site. */
 export const isPlaceholderSiteUrl = url === PLACEHOLDER_URL;
 
+/** Where you're based. Used in search titles and descriptions — change it here and they all update. */
+const city = "Bengaluru";
+
 export const site: SiteConfig = {
   name: "Gurmehak",
-  tagline: "Web Design & Development",
-  title: "Gurmehak — Web Design & Development",
-  description:
-    "Gurmehak designs and develops fast, responsive websites for businesses, clinics and growing brands.",
+  tagline: "Web Developer & WordPress Website Designer",
+  title: `Freelance Web Developer & WordPress Designer in ${city} | Gurmehak Kaur`,
+  titleSuffix: "Gurmehak Kaur",
+  city,
+  description: `Freelance web developer in ${city} building custom-coded and WordPress websites for small businesses, clinics, startups and agencies.`,
   url,
   locale: "en_GB",
   author: "Gurmehak",
-  fullName: "Gurmehak",
-  jobTitle: "Web Designer & Developer",
+  fullName: "Gurmehak Kaur",
+  jobTitle: "Web Developer & WordPress Website Designer",
 
   contact: {
     email: "gurmehakkaur52@gmail.com", // Leave empty ("") to hide email everywhere
@@ -50,7 +54,7 @@ export const site: SiteConfig = {
       display: "+91 79730 86834", // How the number is shown on the site
       message: "Hi Gurmehak, I'd like to talk about a website project.",
     },
-    location: "Working with clients remotely", // Optional — e.g. "Based in Pune · Working remotely"
+    location: `Based in ${city} · Working with clients remotely`, // Optional
     responseTime: "I usually reply within one working day.", // Optional — only keep if true
   },
 
@@ -62,14 +66,14 @@ export const site: SiteConfig = {
   ],
 
   nav: [
+    { label: "Home", href: "/" },
     { label: "Work", href: "/#work" },
     { label: "Services", href: "/services" },
-    { label: "Process", href: "/#process" },
     { label: "About", href: "/#about" },
     { label: "Contact", href: "/contact" },
   ],
 
-  cta: { label: "Let's talk", href: "/contact" },
+  cta: { label: "Start a project", href: "/contact" },
 
   availability: {
     show: true,
@@ -77,7 +81,7 @@ export const site: SiteConfig = {
   },
 
   footer: {
-    blurb: "Modern, easy-to-use websites for businesses, startups and professional services.",
+    blurb: "Custom-coded and WordPress websites for small businesses, clinics, startups and agencies.",
   },
 };
 

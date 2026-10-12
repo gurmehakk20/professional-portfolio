@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 import { ogImage, ogImageSize } from "@/lib/og";
 import { getCaseStudies, getProject } from "@/lib/projects";
 
-export const alt = `Website project by ${site.title}`;
+export const alt = `Website project by ${site.fullName}`;
 export const size = ogImageSize;
 export const contentType = "image/png";
 
@@ -25,6 +25,6 @@ export default async function ProjectOpengraphImage({
     eyebrow: project.category,
     title: project.title,
     titleSize: "lg",
-    subtitle: site.title,
+    subtitle: `${site.fullName} — ${site.tagline}`,
   });
 }

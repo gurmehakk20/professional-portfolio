@@ -5,7 +5,7 @@ import { brandColors } from "@/lib/brand";
 /** /manifest.webmanifest — name, colours and icons used when the site is saved to a home screen. */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: site.title,
+    name: `${site.fullName} — ${site.tagline}`,
     short_name: site.name,
     description: site.description,
     start_url: "/",

@@ -69,8 +69,12 @@ export type SiteConfig = {
   name: string;
   /** Short descriptor shown under the name in the footer. */
   tagline: string;
-  /** Default <title> for the home page and fallback for other pages. */
+  /** The home page's <title> (the full search-result title). */
   title: string;
+  /** Added after every other page's title, e.g. "Services | Gurmehak Kaur". */
+  titleSuffix: string;
+  /** The city you're based in — used in search titles, descriptions and structured data. */
+  city: string;
   /** Default meta description. */
   description: string;
   /** Canonical production URL with no trailing slash. */

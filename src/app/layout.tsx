@@ -12,8 +12,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  // e.g. "Services | Gurmehak — Web Design & Development"
-  title: { default: site.title, template: `%s | ${site.title}` },
+  // The home page uses the full search title; other pages read e.g. "Services | Gurmehak Kaur".
+  title: { default: site.title, template: `%s | ${site.titleSuffix}` },
   description: site.description,
   applicationName: site.name,
   authors: [{ name: site.fullName }],
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "./" },
   // Pages set only `title` and `description`; Open Graph and Twitter tags are
   // filled in from those, and the image comes from opengraph-image.tsx.
-  openGraph: { type: "website", siteName: site.name, locale: site.locale },
+  openGraph: { type: "website", siteName: site.fullName, locale: site.locale },
   formatDetection: { telephone: false },
   // Keep an unconfigured deploy out of search results until NEXT_PUBLIC_SITE_URL is set.
   ...(isPlaceholderSiteUrl ? { robots: { index: false, follow: false } } : {}),
@@ -38,8 +38,8 @@ const structuredData = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: site.name,
-      alternateName: site.title,
+      name: site.fullName,
+      alternateName: `${site.fullName} — ${site.tagline}`,
       url: site.url,
     },
     {
@@ -48,6 +48,8 @@ const structuredData = {
       alternateName: site.author,
       jobTitle: site.jobTitle,
       url: site.url,
+      address: { "@type": "PostalAddress", addressLocality: site.city, addressCountry: "IN" },
+      knowsAbout: ["Web development", "WordPress", "React", "Next.js", "Responsive web design"],
       ...(site.contact.email ? { email: `mailto:${site.contact.email}` } : {}),
       sameAs: socialLinks.map((social) => social.href),
     },
