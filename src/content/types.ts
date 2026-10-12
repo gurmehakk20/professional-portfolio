@@ -222,6 +222,12 @@ export type Project = {
   title: string;
   /** e.g. "Dental clinic website". */
   category: string;
+  /**
+   * What kind of work it is, shown as a small label so visitors aren't misled:
+   * "client" (paid work), "concept" (a site designed for a fictional or
+   * prospective business) or "personal" (a project of your own).
+   */
+  kind: "client" | "concept" | "personal";
   /** One line: what it is and who it's for. Shown on cards. */
   summary: string;
   /** What the work covered, shown under the summary, e.g. ["UI/UX", "Web design", "Next.js"]. */

@@ -18,6 +18,13 @@ const desktopSizes = "(min-width: 1280px) 620px, (min-width: 1024px) 50vw, calc(
 const phoneSizes =
   "(min-width: 1280px) 150px, (min-width: 1024px) 12vw, (min-width: 640px) 20vw, 28vw";
 
+/** Shown beside the number, so visitors know what kind of work each project is. */
+const kindLabels: Record<Project["kind"], string> = {
+  client: "Client project",
+  concept: "Concept project",
+  personal: "Personal project",
+};
+
 type ProjectShowcaseProps = {
   projects: Project[];
   /** Use "h2" when the list sits directly under the page's <h1>, e.g. on /work. */
@@ -76,12 +83,12 @@ function ShowcaseItem({ project, number, headingLevel: Heading, flip }: Showcase
       </div>
 
       <div className="lg:col-span-5">
-        <p
-          aria-hidden="true"
-          className="flex items-center gap-3 text-sm font-semibold text-accent tabular-nums"
-        >
-          {number}
-          <span className="h-px w-8 bg-line-strong" />
+        <p className="flex items-center gap-3 text-sm font-semibold">
+          <span aria-hidden="true" className="text-accent tabular-nums">
+            {number}
+          </span>
+          <span aria-hidden="true" className="h-px w-8 bg-line-strong" />
+          <span className="text-xs tracking-[0.12em] text-muted uppercase">{kindLabels[project.kind]}</span>
         </p>
         <Heading className="mt-4 text-[2rem] leading-[1.1] font-semibold tracking-[-0.03em] transition-colors duration-300 ease-out-soft group-hover/project:text-accent-strong sm:text-[2.25rem] lg:text-[2.5rem]">
           {title}

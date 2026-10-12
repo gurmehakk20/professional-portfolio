@@ -6,7 +6,7 @@ import type { PageIntro, Project } from "./types";
  * They're numbered 01, 02… in the order listed here.
  *
  * Only describe work you can stand behind — never add invented results,
- * metrics or testimonials.
+ * metrics or testimonials. Set `kind` honestly: "client" only for paid work.
  *
  * Images (in /public/images/projects/<slug>/):
  *   - `cover`: the desktop home page, 16:10 (e.g. a 1440×900 capture at 1.5× = 2160×1350), WebP.
@@ -21,9 +21,9 @@ export const workPage: PageIntro = {
   eyebrow: "Work",
   title: "Selected work",
   description:
-    "Websites and web apps I've designed and built — each one opens live in a new tab.",
+    "Concept websites and personal projects I've designed and built — each one opens live in a new tab.",
   metaDescription:
-    "Selected website design and development projects by Gurmehak: clinic and healthcare websites, a library management system and an online flower shop.",
+    "Website projects by Gurmehak Kaur, a freelance web developer: concept websites for a dental clinic, a healthcare provider and a flower shop, and a library management system.",
 };
 
 export const projects: Project[] = [
@@ -31,6 +31,7 @@ export const projects: Project[] = [
     slug: "arka-dental",
     title: "Arka Dental",
     category: "Dental clinic website",
+    kind: "concept",
     summary:
       "A conversion-focused dental clinic website designed to make treatments, doctors, fees, location and appointment enquiries easy to find.",
     tags: ["UI/UX", "Web design", "Development", "Next.js", "Responsive design"],
@@ -50,6 +51,7 @@ export const projects: Project[] = [
     slug: "aarogya-care",
     title: "Aarogya Care",
     category: "Healthcare website",
+    kind: "concept",
     summary:
       "A modern healthcare website focused on clear service discovery, trust, accessibility and a simple patient-facing experience.",
     tags: ["UI/UX", "Healthcare", "Web design", "Responsive design"],
@@ -69,6 +71,7 @@ export const projects: Project[] = [
     slug: "libra",
     title: "Libra",
     category: "Library management system",
+    kind: "personal",
     summary:
       "A library management platform with separate experiences for students and librarians, covering catalog discovery, reservations, loans and library administration.",
     tags: ["Product UI", "React", "Web app", "Dashboard", "UX"],
@@ -87,9 +90,10 @@ export const projects: Project[] = [
     slug: "floralia",
     title: "Floralia",
     category: "E-commerce / business website",
+    kind: "concept",
     summary:
       "A flower shop website designed around product discovery, presentation and easy browsing.",
-    tags: ["UI/UX", "Frontend", "E-commerce", "Responsive design"],
+    tags: ["UI/UX", "Frontend", "React", "E-commerce", "Responsive design"],
     liveUrl: "https://floralia.vercel.app/",
     cover: {
       src: "/images/projects/floralia/desktop-v2.webp",
@@ -110,6 +114,7 @@ export const projects: Project[] = [
   //   slug: "project-name",
   //   title: "Project Name",
   //   category: "Business website",
+  //   kind: "client", // "client", "concept" or "personal"
   //   summary: "One line on what it is and who it's for.",
   //   tags: ["UI/UX", "Web design", "Next.js"],
   //   liveUrl: "https://…",
